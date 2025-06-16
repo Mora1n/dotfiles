@@ -1,0 +1,22 @@
+call plug#begin()
+Plug 'vim-airline/vim-airline'
+Plug 'jeffkreeftmeijer/vim-numbertoggle'
+Plug 'editorconfig/editorconfig-vim'
+Plug 'jiangmiao/auto-pairs'
+Plug 'kana/vim-smartinput'
+Plug 'raimondi/delimitmate'
+Plug 'tpope/vim-endwise'
+Plug 'tpope/vim-sleuth'
+Plug 'tpope/vim-surround'
+Plug 'sheerun/vim-polyglot'
+Plug 'gruvbox-community/gruvbox'
+call plug#end()
+
+se nu rnu
+se ts=4 sw=4
+se et
+se ic scs
+se ai
+se bg=dark
+
+let g:airline_theme='gruvbox'
