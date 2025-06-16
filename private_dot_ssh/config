@@ -1,0 +1,9 @@
+Host github-personal
+    HostName github.com
+    User git
+    Identityfile ~/.ssh/id_ed25519_github
+
+Host salome98
+    HostName localhost
+    RequestTTY yes
+    RemoteCommand singularity shell /home/morain/containers/salome-9.8.0.sif
