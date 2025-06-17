@@ -7,3 +7,8 @@ Host salome98
     HostName localhost
     RequestTTY yes
     RemoteCommand singularity shell /home/morain/containers/salome-9.8.0.sif
+
+Host lighthouse
+    HostName 49.235.100.166
+    User root
+    Identityfile ~/.ssh/lighthouse.pem
