@@ -112,14 +112,6 @@ if ! shopt -oq posix; then
   fi
 fi
 
-# >>> user bin >>>
-# realization by update-alternatives
-# <<< user bin <<<
-
-# >>> keyd >>>
-alias keyd="sudo systemctl enable keyd && sudo systemctl start keyd"
-# <<< keyd <<<
-
 # >>> arc >>>
 export PATH=$PATH:/${HOME}/phacility/arcanist/bin
 # <<< arc <<<
