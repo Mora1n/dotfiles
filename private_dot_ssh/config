@@ -5,6 +5,9 @@ Host github-personal
 
 Host salome98
     HostName localhost
+    User morain
+    IdentityFile ~/.ssh/id_ed25519_salome98
+    IdentitiesOnly yes
     RequestTTY yes
     RemoteCommand singularity shell /home/morain/containers/salome-9.8.0.sif
 
