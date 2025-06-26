@@ -40,6 +40,7 @@ set background=dark
 
 " Use Gruvbox theme in airline
 let g:airline_theme = 'gruvbox'
+colorscheme gruvbox
 
 " Airline provides mode display, hide built-in mode
 set noshowmode
@@ -61,7 +62,7 @@ set timeoutlen=500
 let s:vim_tmp = expand('~/.vim/tmp')
 
 " Swap files
-let &swapdir = s:vim_tmp . '/swap//'
+let &directory = s:vim_tmp . '/swap//'
 
 " Backup files
 let &backupdir = s:vim_tmp . '/backup//'
@@ -70,8 +71,8 @@ let &backupdir = s:vim_tmp . '/backup//'
 let &undodir   = s:vim_tmp . '/undo//'
 
 " Create these directories if they don't exist
-if !isdirectory(&swapdir)
-  call mkdir(&swapdir, 'p')
+if !isdirectory(&directory)
+  call mkdir(&directory, 'p')
 endif
 if !isdirectory(&backupdir)
   call mkdir(&backupdir, 'p')
