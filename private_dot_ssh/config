@@ -3,7 +3,7 @@ Host github-personal
     User git
     Identityfile ~/.ssh/id_ed25519_github
 
-Host salome98
+Host salome-9.8.0
     HostName localhost
     User morain
     IdentityFile ~/.ssh/id_ed25519_salome98
