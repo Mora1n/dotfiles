@@ -1,22 +1,97 @@
-call plug#begin()
-Plug 'vim-airline/vim-airline'
-Plug 'jeffkreeftmeijer/vim-numbertoggle'
-Plug 'editorconfig/editorconfig-vim'
-Plug 'jiangmiao/auto-pairs'
-Plug 'kana/vim-smartinput'
-Plug 'raimondi/delimitmate'
-Plug 'tpope/vim-endwise'
-Plug 'tpope/vim-sleuth'
-Plug 'tpope/vim-surround'
-Plug 'sheerun/vim-polyglot'
-Plug 'gruvbox-community/gruvbox'
+" --- Plugin Management (vim-plug) -------------
+call plug#begin('~/.vim/plugged')
+
+  Plug 'vim-airline/vim-airline'             " Fancy status line
+  Plug 'jeffkreeftmeijer/vim-numbertoggle'   " Toggle between absolute & relative line numbers
+  Plug 'editorconfig/editorconfig-vim'       " Support .editorconfig files
+  Plug 'raimondi/delimitmate'                " Smart auto-pairing of delimiters
+  Plug 'tpope/vim-endwise'                   " Auto-add 'end' in Ruby, HTML, etc.
+  Plug 'tpope/vim-sleuth'                    " Auto-detect indentation settings
+  Plug 'tpope/vim-surround'                  " Quickly change surrounding characters
+  Plug 'sheerun/vim-polyglot'                " Language pack for syntax & indent
+  Plug 'gruvbox-community/gruvbox'           " Gruvbox color scheme
+
 call plug#end()
 
-se nu rnu
-se ts=4 sw=4
-se et
-se ic scs
-se ai
-se bg=dark
+" --- Basic UI & Editing Enhancements -------------
+" Show line numbers: current line absolute, others relative
+set number
+set relativenumber
 
-let g:airline_theme='gruvbox'
+" Indentation settings: use spaces instead of tabs
+set tabstop=4       " A tab character equates to 4 spaces
+set shiftwidth=4    " Auto-indent uses 4 spaces
+set expandtab       " Convert tabs to spaces
+
+" Search behavior
+set ignorecase      " Case-insensitive search...
+set smartcase       " ...unless search contains uppercase
+
+" Keep indentation of current line
+set autoindent
+
+" Enable true color support if available
+if has('termguicolors')
+  set termguicolors
+endif
+
+" Use dark background for color schemes
+set background=dark
+
+" Use Gruvbox theme in airline
+let g:airline_theme = 'gruvbox'
+
+" Airline provides mode display, hide built-in mode
+set noshowmode
+
+" Highlight the current line
+set cursorline
+
+" Always show the sign column (for linting/git signs, etc.)
+set signcolumn=yes
+
+" Faster update time (for CursorHold events, plugins)
+set updatetime=300
+
+" Shorter timeout for mapped sequences
+set timeoutlen=500
+
+" --- Swap / Backup / Undo Files -------------
+" Define a base temp directory
+let s:vim_tmp = expand('~/.vim/tmp')
+
+" Swap files
+let &swapdir = s:vim_tmp . '/swap//'
+
+" Backup files
+let &backupdir = s:vim_tmp . '/backup//'
+
+" Persistent undo files
+let &undodir   = s:vim_tmp . '/undo//'
+
+" Create these directories if they don't exist
+if !isdirectory(&swapdir)
+  call mkdir(&swapdir, 'p')
+endif
+if !isdirectory(&backupdir)
+  call mkdir(&backupdir, 'p')
+endif
+if !isdirectory(&undodir)
+  call mkdir(&undodir, 'p')
+endif
+
+" Enable swap, backup, and persistent undo
+set swapfile
+set backup
+set undofile
+
+" --- Notes -------------
+" • vim-airline: sleek status/tabline
+" • vim-numbertoggle: auto-switch line number style
+" • editorconfig-vim: respect project coding standards
+" • delimitmate: auto-close quotes, brackets, etc.
+" • vim-endwise: auto-close blocks in certain languages
+" • vim-sleuth: automatic ts/sw detection
+" • vim-surround: easy manipulation of enclosing characters
+" • vim-polyglot: broad syntax support
+" • gruvbox: popular dark theme
