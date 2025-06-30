@@ -1,11 +1,16 @@
+set nocompatible
+
 " --- Plugin Management (vim-plug) -------------
+syntax enable
+filetype plugin indent on
+
 call plug#begin('~/.vim/plugged')
 
   Plug 'vim-airline/vim-airline'             " Fancy status line
-  Plug 'jeffkreeftmeijer/vim-numbertoggle'   " Toggle between absolute & relative line numbers
+  Plug 'jeffkreeftmeijer/vim-numbertoggle', { 'on': 'NumberToggle' }   " Toggle between absolute & relative line numbers
   Plug 'editorconfig/editorconfig-vim'       " Support .editorconfig files
-  Plug 'raimondi/delimitmate'                " Smart auto-pairing of delimiters
-  Plug 'tpope/vim-endwise'                   " Auto-add 'end' in Ruby, HTML, etc.
+  Plug 'raimondi/delimitmate', { 'for': [''] }                " Smart auto-pairing of delimiters
+  Plug 'tpope/vim-endwise', { 'for': ['ruby', 'html', 'eruby', 'haml', 'slim', 'jade', 'php', 'python', 'vim'] }                   " Auto-add 'end' in Ruby, HTML, etc.
   Plug 'tpope/vim-sleuth'                    " Auto-detect indentation settings
   Plug 'tpope/vim-surround'                  " Quickly change surrounding characters
   Plug 'sheerun/vim-polyglot'                " Language pack for syntax & indent
@@ -14,6 +19,12 @@ call plug#begin('~/.vim/plugged')
 call plug#end()
 
 " --- Basic UI & Editing Enhancements -------------
+set encoding=utf-8
+set hidden
+set nobackup
+set nowritebackup
+set cmdheight=1
+
 " Show line numbers: current line absolute, others relative
 set number
 set relativenumber
@@ -26,9 +37,16 @@ set expandtab       " Convert tabs to spaces
 " Search behavior
 set ignorecase      " Case-insensitive search...
 set smartcase       " ...unless search contains uppercase
+set incsearch       " Highlight matches as you type
+set hlsearch        " Highlight all matches
+set showmatch       " Show matching brackets
 
 " Keep indentation of current line
 set autoindent
+set smartindent     " Smarter auto-indentation
+set copyindent      " Copy indent from previous line
+set wrap            " Wrap long lines
+set backspace=indent,eol,start " Make backspace behave more intuitively
 
 " Enable true color support if available
 if has('termguicolors')
