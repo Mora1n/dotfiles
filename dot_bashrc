@@ -122,6 +122,7 @@ export PATH=$PATH:/usr/local/go/bin
     
 # >>> cargo >>>
 . "$HOME/.cargo/env"
+eval "$(starship init bash)"
 # <<< cargo <<<
 
 # >>> uv >>>
