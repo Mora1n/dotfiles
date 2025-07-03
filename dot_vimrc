@@ -1,3 +1,4 @@
+" Disable compatibility with old Vi
 set nocompatible
 
 " --- Plugin Management (vim-plug) -------------
@@ -7,88 +8,85 @@ filetype plugin indent on
 call plug#begin('~/.vim/plugged')
 
   Plug 'vim-airline/vim-airline'             " Fancy status line
-  Plug 'jeffkreeftmeijer/vim-numbertoggle', { 'on': 'NumberToggle' }   " Toggle between absolute & relative line numbers
+  Plug 'jeffkreeftmeijer/vim-numbertoggle', { 'on': 'NumberToggle' }
   Plug 'editorconfig/editorconfig-vim'       " Support .editorconfig files
-  Plug 'raimondi/delimitmate', { 'for': [''] }                " Smart auto-pairing of delimiters
-  Plug 'tpope/vim-endwise', { 'for': ['ruby', 'html', 'eruby', 'haml', 'slim', 'jade', 'php', 'python', 'vim'] }                   " Auto-add 'end' in Ruby, HTML, etc.
+  Plug 'raimondi/delimitmate', { 'for': [''] }   " Smart auto-pairing of delimiters
+  Plug 'tpope/vim-endwise', { 'for': ['ruby','html','eruby','haml','slim','jade','php','python','vim'] }
+                                              " Auto-add 'end' in certain filetypes
   Plug 'tpope/vim-sleuth'                    " Auto-detect indentation settings
   Plug 'tpope/vim-surround'                  " Quickly change surrounding characters
-  Plug 'sheerun/vim-polyglot'                " Language pack for syntax & indent
-  Plug 'gruvbox-community/gruvbox'           " Gruvbox color scheme
+  Plug 'sheerun/vim-polyglot'                " Comprehensive syntax & indent support
+  Plug 'Mora1n/vim-dracula-pro', { 'as': 'dracula_pro' }
 
 call plug#end()
 
 " --- Basic UI & Editing Enhancements -------------
-set encoding=utf-8
-set hidden
-set nobackup
-set nowritebackup
-set cmdheight=1
+set encoding=utf-8                         " Use UTF-8 encoding
+set hidden                                 " Enable background buffers
+set nobackup                               " Disable backup files
+set nowritebackup                          " Disable writebackup
+set cmdheight=1                            " One line for command area
 
-" Show line numbers: current line absolute, others relative
+" Show absolute number on current line, relative on others
 set number
 set relativenumber
 
-" Indentation settings: use spaces instead of tabs
-set tabstop=4       " A tab character equates to 4 spaces
-set shiftwidth=4    " Auto-indent uses 4 spaces
-set expandtab       " Convert tabs to spaces
+" Use spaces instead of tabs
+set tabstop=4
+set shiftwidth=4
+set expandtab
 
-" Search behavior
-set ignorecase      " Case-insensitive search...
-set smartcase       " ...unless search contains uppercase
-set incsearch       " Highlight matches as you type
+" Search settings
+set ignorecase      " Case-insensitive search
+set smartcase       " Case-sensitive if uppercase present
+set incsearch       " Incremental search
 set hlsearch        " Highlight all matches
-set showmatch       " Show matching brackets
+set showmatch       " Briefly jump to matching bracket
 
-" Keep indentation of current line
+" Indentation helpers
 set autoindent
-set smartindent     " Smarter auto-indentation
-set copyindent      " Copy indent from previous line
-set wrap            " Wrap long lines
-set backspace=indent,eol,start " Make backspace behave more intuitively
+set smartindent
+set copyindent
+set wrap
+set backspace=indent,eol,start
 
 " Enable true color support if available
 if has('termguicolors')
   set termguicolors
 endif
 
-" Use dark background for color schemes
+" Use a dark background
 set background=dark
 
-" Use Gruvbox theme in airline
-let g:airline_theme = 'gruvbox'
-colorscheme gruvbox
+" Load Dracula Pro colorscheme
+colorscheme dracula_pro
 
-" Airline provides mode display, hide built-in mode
+" Configure airline to use Dracula Pro
+let g:airline_theme = 'dracula_pro'
+
+" If using Lightline, uncomment:
+" let g:lightline = { 'colorscheme': 'dracula_pro' }
+
+" Hide the built-in mode since airline shows it
 set noshowmode
 
 " Highlight the current line
 set cursorline
 
-" Always show the sign column (for linting/git signs, etc.)
+" Always show the sign column (for linting, git, etc.)
 set signcolumn=yes
 
-" Faster update time (for CursorHold events, plugins)
-set updatetime=300
-
-" Shorter timeout for mapped sequences
-set timeoutlen=500
+" Performance tweaks
+set updatetime=300     " Faster CursorHold
+set timeoutlen=500     " Mapped sequence timeout
 
 " --- Swap / Backup / Undo Files -------------
-" Define a base temp directory
 let s:vim_tmp = expand('~/.vim/tmp')
+let &directory  = s:vim_tmp . '/swap//'
+let &backupdir  = s:vim_tmp . '/backup//'
+let &undodir    = s:vim_tmp . '/undo//'
 
-" Swap files
-let &directory = s:vim_tmp . '/swap//'
-
-" Backup files
-let &backupdir = s:vim_tmp . '/backup//'
-
-" Persistent undo files
-let &undodir   = s:vim_tmp . '/undo//'
-
-" Create these directories if they don't exist
+" Create directories if they do not exist
 if !isdirectory(&directory)
   call mkdir(&directory, 'p')
 endif
@@ -104,13 +102,13 @@ set swapfile
 set backup
 set undofile
 
-" --- Notes -------------
-" • vim-airline: sleek status/tabline
-" • vim-numbertoggle: auto-switch line number style
-" • editorconfig-vim: respect project coding standards
-" • delimitmate: auto-close quotes, brackets, etc.
-" • vim-endwise: auto-close blocks in certain languages
-" • vim-sleuth: automatic ts/sw detection
-" • vim-surround: easy manipulation of enclosing characters
-" • vim-polyglot: broad syntax support
-" • gruvbox: popular dark theme
+" --- Plugin Notes -------------
+" vim-airline: sleek status/tabline
+" vim-numbertoggle: toggle absolute/relative line numbers
+" editorconfig-vim: respect project coding styles
+" delimitmate: auto-close quotes, brackets, etc.
+" vim-endwise: auto-add 'end' in supported languages
+" vim-sleuth: detect tabstop & shiftwidth
+" vim-surround: manipulate surrounding characters
+" vim-polyglot: broad syntax and indent support
+" vim-dracula-pro: dracula pro color scheme for Vim
