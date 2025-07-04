@@ -113,7 +113,7 @@ if ! shopt -oq posix; then
 fi
 
 # >>> arc >>>
-export PATH=$PATH:/${HOME}/phacility/arcanist/bin
+export PATH=$PATH:${HOME}/phacility/arcanist/bin
 # <<< arc <<<
 
 # >>> go >>>
@@ -130,3 +130,7 @@ eval "$(starship init bash)"
 eval "$(uv generate-shell-completion bash)"
 eval "$(uvx --generate-shell-completion bash)"
 # <<< uv <<<
+
+# >>> npm >>>
+export PATH=$PATH:${HOME}/.npm-global/bin
+# <<< npm <<<
