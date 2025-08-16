@@ -112,6 +112,10 @@ if ! shopt -oq posix; then
   fi
 fi
 
+# >>> chezmoi >>>
+export PATH=$PATH:${HOME}/.local/bin
+# <<< chezmoi <<<
+
 # >>> arc >>>
 export PATH=$PATH:${HOME}/phacility/arcanist/bin
 # <<< arc <<<
