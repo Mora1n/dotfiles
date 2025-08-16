@@ -126,7 +126,6 @@ export PATH=$PATH:/usr/local/go/bin
     
 # >>> cargo >>>
 . "$HOME/.cargo/env"
-eval "$(starship init bash)"
 # <<< cargo <<<
 
 # >>> uv >>>
@@ -138,3 +137,7 @@ eval "$(uvx --generate-shell-completion bash)"
 # >>> npm >>>
 export PATH=$PATH:${HOME}/.npm-global/bin
 # <<< npm <<<
+
+# >>> starship >>>
+eval "$(starship init bash)"
+# <<< starship <<<
