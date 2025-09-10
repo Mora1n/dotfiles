@@ -3,6 +3,11 @@ Host github-personal
     User git
     Identityfile ~/.ssh/id_ed25519_github
 
+Host gitee
+    HostName gitee.com
+    User git
+    Identityfile ~/.ssh/id_ed25519_gitee
+
 Host salome-9.8.0
     HostName localhost
     User morain
