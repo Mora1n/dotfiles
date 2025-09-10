@@ -3,7 +3,7 @@ Host github-personal
     User git
     Identityfile ~/.ssh/id_ed25519_github
 
-Host gitee
+Host gitee-personal
     HostName gitee.com
     User git
     Identityfile ~/.ssh/id_ed25519_gitee

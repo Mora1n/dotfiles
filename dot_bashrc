@@ -137,5 +137,3 @@ export PATH=$PATH:${HOME}/.npm-global/bin
 # >>> starship >>>
 eval "$(starship init bash)"
 # <<< starship <<<
-
-export ENABLE_DEPRECATED_SPECIAL_OUTBOUNDS=true
