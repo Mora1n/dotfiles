@@ -7,7 +7,7 @@
 
 #--------------------------------------------------
 # [可选脚注]
-# → 关联issue: fixes #1, closes #2, resolves #3, relates to #4
+# → 关联issue: Fixes #1, Closes #2, Resolves #3, Relates to #4
 # → BREAKING CHANGE: 说明(不兼容的API/行为等)破坏性变更(若有)
 
 #--------------------------------------------------
