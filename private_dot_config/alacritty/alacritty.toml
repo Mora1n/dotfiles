@@ -1,2 +1,25 @@
+[env]
+TERM = "xterm-256color"
+
 [general]
 import = ["./dracula.toml"]
+
+[window]
+opacity = 0.6
+
+[window.dimensions]
+columns = 120
+lines = 30
+
+[font]
+size = 11.0
+normal = {family = "JetBrainsMono Nerd Font Mono", style = "Regular"}
+bold = {family = "JetBrainsMono Nerd Font Mono", style = "Bold"}
+italic = {family = "JetBrainsMono Nerd Font Mono", style = "Italic"}
+bold_italic = {family = "JetBrainsMono Nerd Font Mono", style = "Bold Italic"}
+
+[cursor]
+vi_mode_style.shape = "Block"
+
+[mouse]
+hide_when_typing = true
