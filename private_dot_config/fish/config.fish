@@ -7,4 +7,7 @@ if status is-interactive
     alias la='eza -a'
     alias ll='eza -l'
 
+    # no welcome message
+    set fish_greeting ""
+
 end
