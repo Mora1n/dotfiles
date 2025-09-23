@@ -1,5 +1,7 @@
 if status is-interactive
     # Commands to run in interactive sessions can go here
+
+    # Starship.rs
     starship init fish | source
 
     # eza aliases
@@ -9,5 +11,8 @@ if status is-interactive
 
     # no welcome message
     set fish_greeting ""
+
+    # vi mode
+    fish_vi_key_bindings
 
 end
