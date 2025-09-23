@@ -8,11 +8,11 @@ import = ["./dracula.toml"]
 
 [window]
 opacity = 0.6
-decorations = "none"
 
 [window.dimensions]
 columns = 120
 lines = 30
+
 
 
 [font]
