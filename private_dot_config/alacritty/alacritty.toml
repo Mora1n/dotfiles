@@ -11,7 +11,7 @@ opacity = 0.6
 decorations = "none"
 
 [window.dimensions]
-columns = 150
+columns = 120
 lines = 30
 
 
