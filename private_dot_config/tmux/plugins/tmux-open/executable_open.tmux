@@ -28,7 +28,7 @@ is_cygwin() {
 get_editor_from_the_env_var() {
 	if [ -z $EDITOR ]; then
 		# $EDITOR not set, fallback
-		echo "vi"
+		echo "nvim"
 	else
 		echo "$EDITOR"
 	fi
