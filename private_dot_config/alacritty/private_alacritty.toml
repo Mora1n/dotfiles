@@ -1,7 +1,7 @@
 # Terminal Configuration
 [terminal.shell]
-program = "/usr/bin/tmux"
-args = ["new-session"]
+program = "/bin/sh"
+args = ["-c", "tmux attach || tmux new"]
 
 # Environment Variables
 [env]
