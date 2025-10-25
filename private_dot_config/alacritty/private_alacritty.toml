@@ -9,7 +9,7 @@ TERM = "xterm-256color"
 
 # General Settings
 [general]
-import = ["./dracula.toml"]
+import = ["./themes/dracula-pro.toml"]
 
 # Scrolling Configuration
 [scrolling]
