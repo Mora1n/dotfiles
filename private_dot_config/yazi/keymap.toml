@@ -113,88 +113,58 @@ run  = "plugin confirm-quit"
 desc = "Quit with confirmation"
 
 # ═══════════════════════════════════════════════════════════
-#  标签页管理
+#  Vim 风格相对移动 (relative-motions 插件)
 # ═══════════════════════════════════════════════════════════
-
-# 创建新标签页
-[[mgr.prepend_keymap]]
-on   = "t"
-run  = "plugin smart-tab"
-desc = "Create a tab and enter the hovered directory"
-
-# 关闭当前标签页
-[[mgr.prepend_keymap]]
-on   = "T"
-run  = "tab_close 0"
-desc = "Close current tab"
-
-# 切换到下一个标签页
-[[mgr.prepend_keymap]]
-on   = "]"
-run  = "tab_switch 1 --relative"
-desc = "Switch to next tab"
-
-# 切换到上一个标签页
-[[mgr.prepend_keymap]]
-on   = "["
-run  = "tab_switch -1 --relative"
-desc = "Switch to previous tab"
-
-# 向右交换标签页位置
-[[mgr.prepend_keymap]]
-on   = "}"
-run  = "tab_swap 1"
-desc = "Swap tab to the right"
-
-# 向左交换标签页位置
-[[mgr.prepend_keymap]]
-on   = "{"
-run  = "tab_swap -1"
-desc = "Swap tab to the left"
-
-# 快速跳转到标签页 1-9
-[[mgr.prepend_keymap]]
-on   = "1"
-run  = "tab_switch 0"
-desc = "Switch to tab 1"
-
-# 智能切换到第 2 个标签页（不存在则创建）
-[[mgr.prepend_keymap]]
-on   = "2"
-run  = "plugin smart-switch 1"
-desc = "Switch or create tab 2"
+# 说明：按数字键启动 vim 风格的相对移动
+# 用法示例：
+#   3j  - 向下移动3行
+#   5k  - 向上移动5行
+#   2t  - 创建2个标签页
+#   gg  - 跳转到指定行
+#   3yy - 复制3个文件
+# 完整命令列表见 relative-motions 插件文档
 
 [[mgr.prepend_keymap]]
-on   = "3"
-run  = "tab_switch 2"
-desc = "Switch to tab 3"
+on = [ "1" ]
+run = "plugin relative-motions 1"
+desc = "Move in relative steps"
 
 [[mgr.prepend_keymap]]
-on   = "4"
-run  = "tab_switch 3"
-desc = "Switch to tab 4"
+on = [ "2" ]
+run = "plugin relative-motions 2"
+desc = "Move in relative steps"
 
 [[mgr.prepend_keymap]]
-on   = "5"
-run  = "tab_switch 4"
-desc = "Switch to tab 5"
+on = [ "3" ]
+run = "plugin relative-motions 3"
+desc = "Move in relative steps"
 
 [[mgr.prepend_keymap]]
-on   = "6"
-run  = "tab_switch 5"
-desc = "Switch to tab 6"
+on = [ "4" ]
+run = "plugin relative-motions 4"
+desc = "Move in relative steps"
 
 [[mgr.prepend_keymap]]
-on   = "7"
-run  = "tab_switch 6"
-desc = "Switch to tab 7"
+on = [ "5" ]
+run = "plugin relative-motions 5"
+desc = "Move in relative steps"
 
 [[mgr.prepend_keymap]]
-on   = "8"
-run  = "tab_switch 7"
-desc = "Switch to tab 8"
+on = [ "6" ]
+run = "plugin relative-motions 6"
+desc = "Move in relative steps"
 
 [[mgr.prepend_keymap]]
-on   = "9"
-run  = "tab_switch 8"
-desc = "Switch to tab 9"
+on = [ "7" ]
+run = "plugin relative-motions 7"
+desc = "Move in relative steps"
+
+[[mgr.prepend_keymap]]
+on = [ "8" ]
+run = "plugin relative-motions 8"
+desc = "Move in relative steps"
+
+[[mgr.prepend_keymap]]
+on = [ "9" ]
+run = "plugin relative-motions 9"
+desc = "Move in relative steps"

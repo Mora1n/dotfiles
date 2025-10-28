@@ -11,7 +11,17 @@
 -- ═══════════════════════════════════════════════════════════
 
 -- 集成 Starship 提示符
+-- 在 Yazi 底部显示美化的命令提示符
 require("starship"):setup()
 
 -- 启用全边框显示
+-- 为 Yazi 界面添加完整的边框装饰
 require("full-border"):setup()
+
+-- ═══════════════════════════════════════════════════════════
+--  Vim 风格相对移动插件配置
+-- ═══════════════════════════════════════════════════════════
+require("relative-motions"):setup({
+    show_numbers = "relative_absolute",
+    show_motion = true
+})
