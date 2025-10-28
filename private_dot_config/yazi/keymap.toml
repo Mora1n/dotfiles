@@ -8,13 +8,15 @@
 
 # 在父目录中向上移动
 [[mgr.prepend_keymap]]
-on  = "K"
-run = "plugin parent-arrow -1"
+on   = "K"
+run  = "plugin parent-arrow -1"
+desc = "Parent directory up"
 
 # 在父目录中向下移动
 [[mgr.prepend_keymap]]
-on  = "J"
-run = "plugin parent-arrow 1"
+on   = "J"
+run  = "plugin parent-arrow 1"
+desc = "Parent directory down"
 
 # 智能进入：进入目录或打开文件
 [[mgr.prepend_keymap]]
@@ -130,41 +132,51 @@ run = "plugin relative-motions 1"
 desc = "Move in relative steps"
 
 [[mgr.prepend_keymap]]
-on = [ "2" ]
-run = "plugin relative-motions 2"
+on   = [ "2" ]
+run  = "plugin relative-motions 2"
 desc = "Move in relative steps"
 
 [[mgr.prepend_keymap]]
-on = [ "3" ]
-run = "plugin relative-motions 3"
+on   = [ "3" ]
+run  = "plugin relative-motions 3"
 desc = "Move in relative steps"
 
 [[mgr.prepend_keymap]]
-on = [ "4" ]
-run = "plugin relative-motions 4"
+on   = [ "4" ]
+run  = "plugin relative-motions 4"
 desc = "Move in relative steps"
 
 [[mgr.prepend_keymap]]
-on = [ "5" ]
-run = "plugin relative-motions 5"
+on   = [ "5" ]
+run  = "plugin relative-motions 5"
 desc = "Move in relative steps"
 
 [[mgr.prepend_keymap]]
-on = [ "6" ]
-run = "plugin relative-motions 6"
+on   = [ "6" ]
+run  = "plugin relative-motions 6"
 desc = "Move in relative steps"
 
 [[mgr.prepend_keymap]]
-on = [ "7" ]
-run = "plugin relative-motions 7"
+on   = [ "7" ]
+run  = "plugin relative-motions 7"
 desc = "Move in relative steps"
 
 [[mgr.prepend_keymap]]
-on = [ "8" ]
-run = "plugin relative-motions 8"
+on   = [ "8" ]
+run  = "plugin relative-motions 8"
 desc = "Move in relative steps"
 
 [[mgr.prepend_keymap]]
-on = [ "9" ]
-run = "plugin relative-motions 9"
+on   = [ "9" ]
+run  = "plugin relative-motions 9"
 desc = "Move in relative steps"
+
+# ═══════════════════════════════════════════════════════════
+#  设备挂载
+# ═══════════════════════════════════════════════════════════
+
+# 挂载/卸载设备
+[[mgr.prepend_keymap]]
+on   = "M"
+run  = "plugin mount"
+desc = "Mount/unmount devices"
