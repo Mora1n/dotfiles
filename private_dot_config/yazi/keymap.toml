@@ -1,0 +1,194 @@
+# ╭─────────────────────────────────────────────────────────╮
+# │                    Yazi 键位映射配置                    │
+# │              Yazi Keymap Configuration                  │
+# ╰─────────────────────────────────────────────────────────╯
+
+# ═══════════════════════════════════════════════════════════
+#  导航增强 Navigation Enhancements
+# ═══════════════════════════════════════════════════════════
+
+# 在父目录中向上移动
+# Move up in parent directory
+[[mgr.prepend_keymap]]
+on  = "K"
+run = "plugin parent-arrow -1"
+
+# 在父目录中向下移动
+# Move down in parent directory
+[[mgr.prepend_keymap]]
+on  = "J"
+run = "plugin parent-arrow 1"
+
+# 智能进入：进入目录或打开文件
+# Smart enter: Enter directory or open file
+[[mgr.prepend_keymap]]
+on   = "l"
+run  = "plugin smart-enter"
+desc = "Enter the child directory, or open the file"
+
+# ═══════════════════════════════════════════════════════════
+#  文件操作 File Operations
+# ═══════════════════════════════════════════════════════════
+
+# 修改文件权限
+# Change file permissions
+[[mgr.prepend_keymap]]
+on   = [ "c", "m" ]
+run  = "plugin chmod"
+desc = "Chmod on selected files"
+
+# 压缩文件
+# Compress files
+[[mgr.prepend_keymap]]
+on   = "C"
+run  = "plugin ouch"
+desc = "Compress with ouch"
+
+# 智能粘贴：粘贴到悬停目录或当前工作目录
+# Smart paste: Paste into hovered directory or CWD
+[[mgr.prepend_keymap]]
+on   = "p"
+run  = "plugin smart-paste"
+desc = "Paste into the hovered directory or CWD"
+
+# 智能过滤：快速过滤文件列表
+# Smart filter: Quickly filter file list
+[[mgr.prepend_keymap]]
+on   = "F"
+run  = "plugin smart-filter"
+desc = "Smart filter"
+
+# ═══════════════════════════════════════════════════════════
+#  Shell 集成 Shell Integration
+# ═══════════════════════════════════════════════════════════
+
+# 在当前位置打开 Shell (Unix/Linux/macOS)
+# Open shell here (Unix/Linux/macOS)
+[[mgr.prepend_keymap]]
+on   = "!"
+for  = "unix"
+run  = 'shell "$SHELL" --block'
+desc = "Open $SHELL here"
+
+# 在当前位置打开 PowerShell (Windows)
+# Open PowerShell here (Windows)
+[[mgr.prepend_keymap]]
+on   = "!"
+for  = "windows"
+run  = 'shell "powershell.exe" --block'
+desc = "Open PowerShell here"
+
+# ═══════════════════════════════════════════════════════════
+#  输入控制 Input Control
+# ═══════════════════════════════════════════════════════════
+
+# 取消输入
+# Cancel input
+[[input.prepend_keymap]]
+on   = "<Esc>"
+run  = "close"
+desc = "Cancel input"
+
+# ═══════════════════════════════════════════════════════════
+#  退出控制 Quit Control
+# ═══════════════════════════════════════════════════════════
+
+# 确认退出
+# Confirm quit
+[[mgr.prepend_keymap]]
+on   = "q"
+run  = "plugin confirm-quit"
+desc = "Quit with confirmation"
+
+# ═══════════════════════════════════════════════════════════
+#  标签页管理 Tab Management
+# ═══════════════════════════════════════════════════════════
+
+# 创建新标签页
+# Create new tab
+[[mgr.prepend_keymap]]
+on   = "t"
+run  = "tab_create --current"
+desc = "Create a new tab"
+
+# 关闭当前标签页
+# Close current tab
+[[mgr.prepend_keymap]]
+on   = "T"
+run  = "tab_close 0"
+desc = "Close current tab"
+
+# 切换到下一个标签页
+# Switch to next tab
+[[mgr.prepend_keymap]]
+on   = "]"
+run  = "tab_switch 1 --relative"
+desc = "Switch to next tab"
+
+# 切换到上一个标签页
+# Switch to previous tab
+[[mgr.prepend_keymap]]
+on   = "["
+run  = "tab_switch -1 --relative"
+desc = "Switch to previous tab"
+
+# 向右交换标签页位置
+# Swap tab to the right
+[[mgr.prepend_keymap]]
+on   = "}"
+run  = "tab_swap 1"
+desc = "Swap tab to the right"
+
+# 向左交换标签页位置
+# Swap tab to the left
+[[mgr.prepend_keymap]]
+on   = "{"
+run  = "tab_swap -1"
+desc = "Swap tab to the left"
+
+# 快速跳转到标签页 1-9
+# Quick jump to tab 1-9
+[[mgr.prepend_keymap]]
+on   = "1"
+run  = "tab_switch 0"
+desc = "Switch to tab 1"
+
+[[mgr.prepend_keymap]]
+on   = "2"
+run  = "tab_switch 1"
+desc = "Switch to tab 2"
+
+[[mgr.prepend_keymap]]
+on   = "3"
+run  = "tab_switch 2"
+desc = "Switch to tab 3"
+
+[[mgr.prepend_keymap]]
+on   = "4"
+run  = "tab_switch 3"
+desc = "Switch to tab 4"
+
+[[mgr.prepend_keymap]]
+on   = "5"
+run  = "tab_switch 4"
+desc = "Switch to tab 5"
+
+[[mgr.prepend_keymap]]
+on   = "6"
+run  = "tab_switch 5"
+desc = "Switch to tab 6"
+
+[[mgr.prepend_keymap]]
+on   = "7"
+run  = "tab_switch 6"
+desc = "Switch to tab 7"
+
+[[mgr.prepend_keymap]]
+on   = "8"
+run  = "tab_switch 7"
+desc = "Switch to tab 8"
+
+[[mgr.prepend_keymap]]
+on   = "9"
+run  = "tab_switch 8"
+desc = "Switch to tab 9"
