@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(fish:*)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}
