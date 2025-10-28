@@ -52,6 +52,11 @@ open_in_browser = [
 	{ run = 'start "" %*', desc = "Open in browser", for = "windows" },
 ]
 
+# 图片查看器 - 使用 qimgv 查看图片
+image_viewer = [
+	{ run = 'qimgv "$@"', orphan = true, desc = "Open with qimgv", for = "unix" },
+]
+
 # ═══════════════════════════════════════════════════════════
 #  默认打开方式
 # ═══════════════════════════════════════════════════════════
@@ -81,6 +86,19 @@ rules = [
 	# PDF 文件 - 使用系统默认程序打开
 	{ name = "*.pdf", use = "open_with_default" },
 	{ mime = "application/pdf", use = "open_with_default" },
+
+	# 图片文件 - 使用 qimgv 查看
+	{ mime = "image/*", use = "image_viewer" },
+	{ name = "*.jpg", use = "image_viewer" },
+	{ name = "*.jpeg", use = "image_viewer" },
+	{ name = "*.png", use = "image_viewer" },
+	{ name = "*.gif", use = "image_viewer" },
+	{ name = "*.bmp", use = "image_viewer" },
+	{ name = "*.webp", use = "image_viewer" },
+	{ name = "*.svg", use = "image_viewer" },
+	{ name = "*.ico", use = "image_viewer" },
+	{ name = "*.tiff", use = "image_viewer" },
+	{ name = "*.tif", use = "image_viewer" },
 
 	# 其他常见文本格式
 	{ name = "*.txt", use = "edit" },
