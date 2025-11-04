@@ -1,4 +1,4 @@
-feat: add alpha dashboard and expand treesitter parsers
+feat: remove .claude
 # Please enter the commit message for your changes. Lines starting
 # with '#' will be ignored, and an empty message aborts the commit.
 #
@@ -6,7 +6,5 @@ feat: add alpha dashboard and expand treesitter parsers
 # Your branch is up to date with 'origin/main'.
 #
 # Changes to be committed:
-#	modified:   README.md
-#	new file:   lua/plugins/dashboard.lua
-#	modified:   lua/plugins/treesitter.lua
+#	modified:   .gitignore
 #

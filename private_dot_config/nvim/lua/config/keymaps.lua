@@ -18,7 +18,7 @@ vim.keymap.set('n', '<C-Right>', ':vertical resize +2<CR>', { desc = 'Increase w
 -- Buffer navigation
 vim.keymap.set('n', '<S-h>', ':bprevious<CR>', { desc = 'Previous buffer' })
 vim.keymap.set('n', '<S-l>', ':bnext<CR>', { desc = 'Next buffer' })
-vim.keymap.set('n', '<leader>bd', ':bdelete<CR>', { desc = 'Delete buffer' })
+-- Note: <leader>bd is defined in lua/plugins/performance.lua (nvim-bufdel)
 
 -- Better indenting
 vim.keymap.set('v', '<', '<gv', { desc = 'Indent left and reselect' })

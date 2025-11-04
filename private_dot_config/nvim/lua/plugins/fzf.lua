@@ -8,7 +8,7 @@ return {
         height = 0.85,
         width = 0.80,
         preview = {
-          default = 'bat',
+          default = 'builtin', -- Use Neovim's built-in preview (fallback to cat if bat not found)
           border = 'border',
           wrap = 'nowrap',
           hidden = 'nohidden',
