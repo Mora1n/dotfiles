@@ -74,11 +74,17 @@ rules = [
 	{ mime = "text/x-yaml", use = "edit" },
 	{ mime = "application/toml", use = "edit" },
 	{ mime = "application/xml", use = "edit" },
+	{ mime = "application/javascript", use = "edit" },
+	{ mime = "application/x-sh", use = "edit" },
+	{ mime = "application/x-shellscript", use = "edit" },
 	{ mime = "inode/x-empty", use = "edit" },
 
 	# 按文件名匹配 YAML 文件
 	{ name = "*.yml", use = "edit" },
 	{ name = "*.yaml", use = "edit" },
+
+	# 按文件名匹配 TOML 文件
+	{ name = "*.toml", use = "edit" },
 
 	# Markdown 文件
 	{ name = "*.md", use = "edit" },
@@ -139,6 +145,19 @@ rules = [
 	{ name = ".gitattributes", use = "edit" },
 	{ name = "README", use = "edit" },
 	{ name = "LICENSE", use = "edit" },
+	{ name = "*.json", use = "edit" },
+	{ name = "*.xml", use = "edit" },
+	{ name = "*.csv", use = "edit" },
+	{ name = "*.env", use = "edit" },
+	{ name = ".env*", use = "edit" },
+	{ name = "*.properties", use = "edit" },
+	{ name = "*.gradle", use = "edit" },
+	{ name = "*.cmake", use = "edit" },
+	{ name = "CMakeLists.txt", use = "edit" },
+	{ name = "*.gitconfig", use = "edit" },
+	{ name = ".gitmodules", use = "edit" },
+	{ name = "*.editorconfig", use = "edit" },
+	{ name = ".editorconfig", use = "edit" },
 
 	# 压缩文件 - 使用解压工具 (按 MIME 类型)
 	{ mime = "application/*zip", use = "extract" },
