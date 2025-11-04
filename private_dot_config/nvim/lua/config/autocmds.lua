@@ -75,3 +75,18 @@ vim.api.nvim_create_autocmd('BufWritePre', {
   end,
   desc = 'Remove trailing whitespace on save',
 })
+
+-- Python-specific settings
+local python_settings = vim.api.nvim_create_augroup('PythonSettings', { clear = true })
+
+vim.api.nvim_create_autocmd('FileType', {
+  group = python_settings,
+  pattern = 'python',
+  callback = function()
+    vim.opt_local.tabstop = 4
+    vim.opt_local.shiftwidth = 4
+    vim.opt_local.softtabstop = 4
+    vim.opt_local.expandtab = true
+  end,
+  desc = 'Set Python indentation to 4 spaces',
+})
