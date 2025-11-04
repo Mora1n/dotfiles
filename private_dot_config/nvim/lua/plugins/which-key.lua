@@ -6,7 +6,7 @@ return {
 
     wk.setup({
       preset = 'modern',
-      delay = 200, -- delay before showing the popup (ms)
+      delay = 500, -- delay before showing the popup (ms)
       icons = {
         breadcrumb = '»', -- symbol used in the command line area
         separator = '➜', -- symbol used between a key and its label
