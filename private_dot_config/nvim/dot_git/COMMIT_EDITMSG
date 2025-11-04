@@ -1,1 +1,12 @@
-fix: rm init.lua in plugins/
+feat: add alpha dashboard and expand treesitter parsers
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+#
+# On branch main
+# Your branch is up to date with 'origin/main'.
+#
+# Changes to be committed:
+#	modified:   README.md
+#	new file:   lua/plugins/dashboard.lua
+#	modified:   lua/plugins/treesitter.lua
+#

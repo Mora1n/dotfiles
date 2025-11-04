@@ -1,1 +1,3 @@
-0000000000000000000000000000000000000000 a413407445ba7009a2637df38d301e3c568259a4 morain <morain.fu@gmail.com> 1755334322 -0400	clone: from github-personal:Mora1n/nvim.git
+0000000000000000000000000000000000000000 ab80834af47743c4f08c684f3e1cc9ceb037eaed morain <morain.fu@gmail.com> 1762265201 +0800	clone: from github-personal:Mora1n/nvim.git
+ab80834af47743c4f08c684f3e1cc9ceb037eaed be5606221f009ae92da580c7b40907bf4fa42af0 morain <morain.fu@gmail.com> 1762266591 +0800	commit: feat: add blink.cmp, native LSP, and extensive performance optimizations
+be5606221f009ae92da580c7b40907bf4fa42af0 e8430a2388224bde11e50920c4260388914787c6 morain <morain.fu@gmail.com> 1762267339 +0800	commit: feat: add alpha dashboard and expand treesitter parsers

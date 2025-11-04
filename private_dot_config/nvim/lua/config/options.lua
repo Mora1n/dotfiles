@@ -1,68 +1,100 @@
 -- [[ Setting options ]]
 -- See `:help option-list`
 
--- Line numbers
+-- Make line numbers default
 vim.opt.number = true
 vim.opt.relativenumber = true
 
--- Mouse & UI
+-- Enable mouse mode
 vim.opt.mouse = 'a'
-vim.opt.showmode = false
-vim.opt.cursorline = true
-vim.opt.signcolumn = 'yes'
-vim.opt.termguicolors = true
-vim.opt.background = 'dark'
 
--- Clipboard
+-- Don't show the mode, since it's already in the status line
+vim.opt.showmode = false
+
+-- Sync clipboard between OS and Neovim.
+--  Remove this option if you want your OS clipboard to remain independent.
+--  See `:help 'clipboard'`
 vim.opt.clipboard = 'unnamedplus'
 
--- Indentation
-vim.opt.tabstop = 4
-vim.opt.shiftwidth = 4
-vim.opt.expandtab = true
-vim.opt.autoindent = true
-vim.opt.smartindent = true
-vim.opt.copyindent = true
+-- Enable break indent
 vim.opt.breakindent = true
 
--- Search
+-- Save undo history
+vim.opt.undofile = true
+
+-- Case-insensitive searching UNLESS \C or capital letters are used
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
-vim.opt.hlsearch = true
-vim.opt.inccommand = 'split'
 
--- Splits
-vim.opt.splitright = true
-vim.opt.splitbelow = true
+-- Keep signcolumn on by default
+vim.opt.signcolumn = 'yes'
 
--- Scrolling
-vim.opt.scrolloff = 10
-vim.opt.sidescrolloff = 8
-
--- Timing
+-- Decrease update time
 vim.opt.updatetime = 250
 vim.opt.timeoutlen = 300
 
--- Files & Buffers
-vim.opt.undofile = true
-vim.opt.hidden = true
-vim.opt.backup = false
-vim.opt.writebackup = false
-vim.opt.swapfile = false
+-- Configure how new splits should be opened
+vim.opt.splitright = true
+vim.opt.splitbelow = true
 
--- Whitespace display
+-- Sets how neovim will display certain whitespace characters in the editor.
+--  See `:help 'listchars'`
 vim.opt.list = true
 vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
 
--- Line wrapping
-vim.opt.wrap = false
-vim.opt.linebreak = true
+-- Preview substitutions live, as you type them
+vim.opt.inccommand = 'split'
 
--- Completion
-vim.opt.completeopt = { 'menu', 'menuone', 'noselect' }
-vim.opt.pumheight = 10
+-- Show which line your cursor is on
+vim.opt.cursorline = true
 
--- Misc
-vim.opt.confirm = true
+-- Minimal number of screen lines to keep above and below the cursor.
+vim.opt.scrolloff = 10
+
+-- Use spaces instead of tabs
+vim.opt.tabstop = 4
+vim.opt.shiftwidth = 4
+vim.opt.expandtab = true
+
+-- Indentation helpers
+vim.opt.autoindent = true
+vim.opt.smartindent = true
+vim.opt.copyindent = true
+
+-- Other basic settings
 vim.opt.encoding = 'utf-8'
+vim.opt.hidden = true
+vim.opt.cmdheight = 1
+vim.opt.wrap = true
 vim.opt.backspace = 'indent,eol,start'
+
+-- Set highlight on search
+vim.opt.hlsearch = true
+
+-- True color support
+vim.opt.termguicolors = true
+
+-- Set dark background
+vim.opt.background = 'dark'
+
+-- Performance optimizations
+vim.opt.lazyredraw = false -- Don't redraw while executing macros (set to true if you experience lag)
+vim.opt.ttyfast = true -- Faster terminal connection
+vim.opt.laststatus = 3 -- Global statusline (faster)
+vim.opt.swapfile = false -- No swap files
+vim.opt.backup = false -- No backup files
+vim.opt.writebackup = false -- No backup before overwriting
+
+-- Additional performance settings
+vim.opt.history = 1000 -- Limit command history
+vim.opt.synmaxcol = 240 -- Max column for syntax highlight
+vim.opt.redrawtime = 1500 -- Time in ms for redrawing
+vim.opt.maxmempattern = 5000 -- Max memory for pattern matching
+
+-- Faster completion
+vim.opt.pumheight = 15 -- Popup menu height
+vim.opt.pumblend = 10 -- Popup menu transparency
+
+-- Faster file operations
+vim.opt.fsync = false -- Don't fsync after write (faster but less safe)
+
