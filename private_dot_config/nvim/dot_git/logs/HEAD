@@ -9,3 +9,4 @@ f2a0d5ca049901185d9b210711f6df225c8ba64e 83c75378667962cc754c1c80175c01f55940836
 db4f2eb37f0b718c9aec70e1b9c85f8ef6ee186b f0a20fe32aa623ca451197214e46d6239e20c641 morain <morain.fu@gmail.com> 1762320820 +0800	commit: feat: add insert mode keybindings
 f0a20fe32aa623ca451197214e46d6239e20c641 3127ae6e310536461d7b5702b0578bad19986202 morain <morain.fu@gmail.com> 1762322223 +0800	commit: fix: resolve nvim deprecation warnings and keymap conflicts
 3127ae6e310536461d7b5702b0578bad19986202 90373792370a3ba22c3c9c9eec276856077107cb morain <morain.fu@gmail.com> 1762334657 +0800	commit: fix: add blink.cmp menu columns config
+90373792370a3ba22c3c9c9eec276856077107cb 5e3a0f5e695800283dd7e550f8978ea8b436dc42 morain <morain.fu@gmail.com> 1762357879 +0800	commit: refactor: remove obsolete vim options

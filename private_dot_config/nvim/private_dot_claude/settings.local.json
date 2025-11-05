@@ -2,7 +2,11 @@
   "permissions": {
     "allow": [
       "Bash(nvim:*)",
-      "Bash(ty:*)"
+      "Bash(ty:*)",
+      "Bash(tree:*)",
+      "mcp__context7__resolve-library-id",
+      "WebSearch",
+      "mcp__context7__get-library-docs"
     ],
     "deny": [],
     "ask": []
