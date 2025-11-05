@@ -6,3 +6,4 @@ e8430a2388224bde11e50920c4260388914787c6 340fca77a81775d994a54d5c8550773f5c71851
 f2a0d5ca049901185d9b210711f6df225c8ba64e 83c75378667962cc754c1c80175c01f559408367 morain <morain.fu@gmail.com> 1762271062 +0800	commit: fix: switch blink.cmp keymap to super-tab preset
 83c75378667962cc754c1c80175c01f559408367 7ca908977ba3323520fb1f898743cd83b5328ba3 morain <morain.fu@gmail.com> 1762308111 +0800	commit: perf: optimize config
 7ca908977ba3323520fb1f898743cd83b5328ba3 db4f2eb37f0b718c9aec70e1b9c85f8ef6ee186b morain <morain.fu@gmail.com> 1762311362 +0800	commit: feat: configure ty LSP
+db4f2eb37f0b718c9aec70e1b9c85f8ef6ee186b f0a20fe32aa623ca451197214e46d6239e20c641 morain <morain.fu@gmail.com> 1762320820 +0800	commit: feat: add insert mode keybindings
