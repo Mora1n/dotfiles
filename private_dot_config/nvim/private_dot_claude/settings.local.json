@@ -6,7 +6,8 @@
       "Bash(tree:*)",
       "mcp__context7__resolve-library-id",
       "WebSearch",
-      "mcp__context7__get-library-docs"
+      "mcp__context7__get-library-docs",
+      "Bash(cat:*)"
     ],
     "deny": [],
     "ask": []
