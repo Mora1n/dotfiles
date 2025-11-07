@@ -1,31 +1,36 @@
-# <类型>: <描述> (最多50字，无标点，祈使句)
-fix: correct insert mode Home/End and Ctrl + arrow key mappings
-#--------------------------------------------------
-# [可选正文]
-# → 每行≤72字，用"-"开头列举关键原因
-# → 解释"为什么改"和"改了什么"，而非实现细节
-
-#--------------------------------------------------
-# [可选脚注]
-# → 关联issue: Fixes #1, Closes #2, Resolves #3, Relates to #4
-# → BREAKING CHANGE: 说明(不兼容的API/行为等)破坏性变更(若有)
-
-#--------------------------------------------------
-# [类型参考]
-# feat: 新功能
-# fix: 修复bug
-# docs: 文档变更
-# style: 代码格式调整（不影响代码运行的变动）
-# refactor: 重构（既不是新功能也不是修复bug）
-# test: 添加或修改测试代码
-# chore: 构建过程或辅助工具的变动
-
+refactor: optimize lazy.nvim config for better performance and maintainability
 # Please enter the commit message for your changes. Lines starting
 # with '#' will be ignored, and an empty message aborts the commit.
-#
+
+- Add shared utils module to reduce code duplication
+- Switch plugins to lazy-load on keys instead of events (fzf, comment, surround)
+- Simplify init.lua and remove redundant performance configs
+- Extract LSP keymaps and highlight setup to reusable functions
+- Consolidate plugin configs using opts pattern
+- Reduce total config lines by ~37% while maintaining functionality
+
 # On branch main
 # Your branch is up to date with 'origin/main'.
 #
 # Changes to be committed:
-#	modified:   keymaps.lua
+#	modified:   init.lua
+#	new file:   lua/config/utils.lua
+#	new file:   lua/plugins/.gitignore
+#	modified:   lua/plugins/autopairs.lua
+#	modified:   lua/plugins/blink-cmp.lua
+#	modified:   lua/plugins/comment.lua
+#	modified:   lua/plugins/dashboard.lua
+#	modified:   lua/plugins/dracula.lua
+#	modified:   lua/plugins/editorconfig.lua
+#	modified:   lua/plugins/faster.lua
+#	modified:   lua/plugins/flash.lua
+#	modified:   lua/plugins/fzf.lua
+#	new file:   lua/plugins/init.lua
+#	modified:   lua/plugins/lsp.lua
+#	modified:   lua/plugins/lualine.lua
+#	modified:   lua/plugins/performance.lua
+#	modified:   lua/plugins/sleuth.lua
+#	modified:   lua/plugins/surround.lua
+#	modified:   lua/plugins/treesitter.lua
+#	modified:   lua/plugins/which-key.lua
 #
