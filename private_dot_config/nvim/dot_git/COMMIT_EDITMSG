@@ -1,36 +1,10 @@
-refactor: optimize lazy.nvim config for better performance and maintainability
+fix: simplify Esc key behavior in blink-cmp
 # Please enter the commit message for your changes. Lines starting
 # with '#' will be ignored, and an empty message aborts the commit.
-
-- Add shared utils module to reduce code duplication
-- Switch plugins to lazy-load on keys instead of events (fzf, comment, surround)
-- Simplify init.lua and remove redundant performance configs
-- Extract LSP keymaps and highlight setup to reusable functions
-- Consolidate plugin configs using opts pattern
-- Reduce total config lines by ~37% while maintaining functionality
-
+#
 # On branch main
 # Your branch is up to date with 'origin/main'.
 #
 # Changes to be committed:
-#	modified:   init.lua
-#	new file:   lua/config/utils.lua
-#	new file:   lua/plugins/.gitignore
-#	modified:   lua/plugins/autopairs.lua
 #	modified:   lua/plugins/blink-cmp.lua
-#	modified:   lua/plugins/comment.lua
-#	modified:   lua/plugins/dashboard.lua
-#	modified:   lua/plugins/dracula.lua
-#	modified:   lua/plugins/editorconfig.lua
-#	modified:   lua/plugins/faster.lua
-#	modified:   lua/plugins/flash.lua
-#	modified:   lua/plugins/fzf.lua
-#	new file:   lua/plugins/init.lua
-#	modified:   lua/plugins/lsp.lua
-#	modified:   lua/plugins/lualine.lua
-#	modified:   lua/plugins/performance.lua
-#	modified:   lua/plugins/sleuth.lua
-#	modified:   lua/plugins/surround.lua
-#	modified:   lua/plugins/treesitter.lua
-#	modified:   lua/plugins/which-key.lua
 #
