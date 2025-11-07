@@ -1,5 +1,5 @@
 # <类型>: <描述> (最多50字，无标点，祈使句)
-feat: add which-key description for plugin
+fix: correct insert mode Home/End and Ctrl + arrow key mappings
 #--------------------------------------------------
 # [可选正文]
 # → 每行≤72字，用"-"开头列举关键原因
@@ -27,5 +27,5 @@ feat: add which-key description for plugin
 # Your branch is up to date with 'origin/main'.
 #
 # Changes to be committed:
-#	modified:   which-key.lua
+#	modified:   keymaps.lua
 #
