@@ -1,9 +1,0 @@
-{
-  "permissions": {
-    "allow": [
-      "Bash(./toggle.sh:*)"
-    ],
-    "deny": [],
-    "ask": []
-  }
-}
