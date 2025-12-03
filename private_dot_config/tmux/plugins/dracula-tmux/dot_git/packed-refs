@@ -1,0 +1,17 @@
+# pack-refs with: peeled fully-peeled sorted 
+91a24c3e9316139a0efa9323a1f28b5a2c0ff12a refs/remotes/origin/feat/custom-window-flags
+ad154a4e433e597572caaaaf080d71e0b6a3dce1 refs/remotes/origin/feat/network-gsm-support
+dca498cdcd87f5f07504a84422de8d5ebd536771 refs/remotes/origin/feat/padding
+f35a171815cf01fcfca956677ebc9c084fe1f8cd refs/remotes/origin/fix/battery-status
+91a1e09b3d8a773344908e5c84ed8da951e16001 refs/remotes/origin/master
+281c27838a6e76f4f8b4d9f5a25cfc07761c6cd1 refs/remotes/origin/revert-294-customize-colors
+8748783b6062a1936aa618bae5ef4d5e7452640d refs/tags/v1.0
+dbdc65d22b2d170452ad8a3c54128030e846b091 refs/tags/v1.0.1
+cd5e75141903099be74bf689357bd37af209cd0d refs/tags/v2.0.0
+b346d1030696620154309f71d5b14bc657294a98 refs/tags/v2.1.0
+79068c40b39351f683494e6afbf3ccd6bb6fb086 refs/tags/v2.2.0
+ff254288685df64592b028c77b8f499dbf0a5b82 refs/tags/v2.3.0
+75d7b4c4a00e26e8adacb074cb347917812d4cc3 refs/tags/v3.0.0
+^5eb04b9db918bdfbf6928fc3b59942efb7de6e54
+0a6c3857cae4e24945e65c7e4dd289414bf86c35 refs/tags/v3.1.0
+^3e1e7a1f4c06448520f403ef335593549d23af1a
