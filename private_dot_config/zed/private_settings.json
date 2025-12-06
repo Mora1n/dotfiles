@@ -89,7 +89,7 @@
   "terminal": {
     "detect_venv": {
       "on": {
-        "activate_script": "fish",
+        "activate_script": "default",
         "directories": [
           ".venv"
         ]
