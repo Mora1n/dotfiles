@@ -4,6 +4,7 @@
     "comment": true,
     "csv": true,
     "dockerfile": true,
+    "git-firefly": true,
     "html": true,
     "lua": true,
     "make": true,
