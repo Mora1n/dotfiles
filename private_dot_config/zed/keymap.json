@@ -1,45 +1,53 @@
-// Zed keymap
-//
-// For information on binding keys, see the Zed
-// documentation: https://zed.dev/docs/key-bindings
-//
-// To see the default key bindings run `zed: open default keymap`
-// from the command palette.
 [
   {
-    "context": "Workspace",
     "bindings": {
-      "ctrl-k h": "workspace::ToggleLeftDock"
-    }
-  },
-  {
-    "context": "Workspace",
-    "bindings": {
-      "ctrl-b": null
-    }
-  },
-  {
-    "context": "Workspace",
-    "bindings": {
+      "ctrl-1": "editor::ToggleFocus",
+      "ctrl-`": "terminal_panel::Toggle",
+      "ctrl-alt-b": null,
+      "ctrl-b": null,
+      "ctrl-j": null,
+      "ctrl-k h": "workspace::ToggleLeftDock",
+      "ctrl-k j": "workspace::ToggleBottomDock",
       "ctrl-k l": "workspace::ToggleRightDock"
-    }
+    },
+    "context": "Workspace"
   },
   {
-    "context": "Workspace",
     "bindings": {
-      "ctrl-k j": "workspace::ToggleBottomDock"
-    }
+      "ctrl-k f": "editor::Format",
+      "ctrl-shift-i": null
+    },
+    "context": "Editor"
   },
   {
-    "context": "Workspace",
     "bindings": {
-      "ctrl-j": null
-    }
+      "a": "project_panel::NewFile",
+      "d": [
+        "project_panel::Trash",
+        {
+          "skip_prompt": false
+        }
+      ],
+      "p": "project_panel::Paste",
+      "r": "project_panel::Rename",
+      "shift-a": "project_panel::NewDirectory",
+      "shift-d": [
+        "project_panel::Delete",
+        {
+          "skip_prompt": false
+        }
+      ],
+      "shift-r": null,
+      "x": "project_panel::Cut",
+      "y": "project_panel::Copy",
+      "y y": "project_panel::Duplicate"
+    },
+    "context": "(ProjectPanel && not_editing)"
   },
   {
-    "context": "Workspace",
     "bindings": {
-      "ctrl-alt-b": null
-    }
+      "shift-o": "project_panel::RevealInFileManager"
+    },
+    "context": "ProjectPanel"
   }
 ]
