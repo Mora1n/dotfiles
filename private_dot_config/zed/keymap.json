@@ -46,6 +46,7 @@
   },
   {
     "bindings": {
+      "shift-h": "project_panel::CollapseAllEntries",
       "shift-o": "project_panel::RevealInFileManager"
     },
     "context": "ProjectPanel"
