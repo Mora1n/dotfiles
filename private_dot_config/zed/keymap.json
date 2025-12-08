@@ -1,23 +1,9 @@
 [
   {
     "bindings": {
-      "ctrl-1": "editor::ToggleFocus",
-      "ctrl-`": "terminal_panel::Toggle",
-      "ctrl-alt-b": null,
-      "ctrl-b": null,
-      "ctrl-j": null,
-      "ctrl-k h": "workspace::ToggleLeftDock",
-      "ctrl-k j": "workspace::ToggleBottomDock",
-      "ctrl-k l": "workspace::ToggleRightDock"
+      "f11": "zed::ToggleFullScreen"
     },
-    "context": "Workspace"
-  },
-  {
-    "bindings": {
-      "ctrl-k f": "editor::Format",
-      "ctrl-shift-i": null
-    },
-    "context": "Editor"
+    "context": "!debugger_running"
   },
   {
     "bindings": {
@@ -46,9 +32,48 @@
   },
   {
     "bindings": {
+      "ctrl-k f": "editor::Format",
+      "ctrl-shift-i": null
+    },
+    "context": "Editor"
+  },
+  {
+    "bindings": {
       "shift-h": "project_panel::CollapseAllEntries",
       "shift-o": "project_panel::RevealInFileManager"
     },
     "context": "ProjectPanel"
+  },
+  {
+    "bindings": {
+      "ctrl-1": "editor::ToggleFocus",
+      "ctrl-`": "terminal_panel::Toggle",
+      "ctrl-alt-b": null,
+      "ctrl-b": null,
+      "ctrl-j": null,
+      "ctrl-k h": "workspace::ToggleLeftDock",
+      "ctrl-k j": "workspace::ToggleBottomDock",
+      "ctrl-k l": "workspace::ToggleRightDock"
+    },
+    "context": "Workspace"
+  },
+  {
+    "bindings": {
+      "ctrl-shift-y": "debugger::FocusConsole",
+      "f10": "debugger::StepOver",
+      "f11": "debugger::StepInto"
+    }
+  },
+  {
+    "bindings": {
+      "f10": [
+        "app_menu::OpenApplicationMenu",
+        "Zed"
+      ]
+    },
+    "context": "Workspace && !debugger_running"
+  },
+  {
+    "context": "Workspace && !debugger_running"
   }
 ]
