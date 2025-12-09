@@ -30,9 +30,6 @@
     ".ZedMono"
   ],
   "buffer_font_family": "JetBrainsMono Nerd Font Mono",
-  "buffer_font_features": {
-    "calt": true
-  },
   "buffer_font_size": 15,
   "colorize_brackets": true,
   "cursor_blink": true,
