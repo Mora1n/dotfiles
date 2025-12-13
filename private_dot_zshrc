@@ -108,6 +108,30 @@ zle -N zle-line-init
 # Reset to beam cursor after command execution
 preexec() { printf '\e[5 q'; }
 
+# Fix special keys in vi-mode (Home, End, Delete, etc.)
+# These keys send escape sequences that vi-mode misinterprets
+bindkey -v '^[[H' beginning-of-line      # Home
+bindkey -v '^[[F' end-of-line            # End
+bindkey -v '^[[3~' delete-char           # Delete
+bindkey -v '^[[1~' beginning-of-line     # Home (alternative)
+bindkey -v '^[[4~' end-of-line           # End (alternative)
+bindkey -v '^[[2~' overwrite-mode        # Insert
+
+# Fix for insert mode
+bindkey -M viins '^[[H' beginning-of-line
+bindkey -M viins '^[[F' end-of-line
+bindkey -M viins '^[[3~' delete-char
+bindkey -M viins '^[[1~' beginning-of-line
+bindkey -M viins '^[[4~' end-of-line
+bindkey -M viins '^[[2~' overwrite-mode
+
+# Fix for command mode
+bindkey -M vicmd '^[[H' beginning-of-line
+bindkey -M vicmd '^[[F' end-of-line
+bindkey -M vicmd '^[[3~' delete-char
+bindkey -M vicmd '^[[1~' beginning-of-line
+bindkey -M vicmd '^[[4~' end-of-line
+
 # ----------------------------------------------------------------------------
 # History Substring Search Configuration
 # ----------------------------------------------------------------------------

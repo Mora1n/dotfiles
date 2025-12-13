@@ -78,4 +78,4 @@ z CodeVault/Python
 ls
 clear
 time zsh -ic exit
-: 1765627688:0;source .zshrc
+source .zshrc
