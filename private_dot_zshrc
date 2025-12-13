@@ -7,9 +7,9 @@
 # ----------------------------------------------------------------------------
 
 # Set Zsh config directory
-ZDOTDIR=~/.config/zsh
-ZIM_HOME=${ZDOTDIR}/zim
-ZIM_CONFIG_FILE=${ZDOTDIR}/zimrc
+# ZDOTDIR=~/.config/zsh  # Commented out to use default ~ directory
+ZIM_HOME=~/.config/zsh/zim
+ZIM_CONFIG_FILE=~/.config/zsh/zimrc
 
 # zsh-autosuggestions performance optimizations (must be set before Zim init)
 ZSH_AUTOSUGGEST_MANUAL_REBIND=1                   # Skip automatic rebinding
@@ -164,6 +164,9 @@ source "$HOME/.cargo/env"
 source "$HOME/.local/bin/env"
 eval "$(uv generate-shell-completion zsh)"
 eval "$(uvx --generate-shell-completion zsh)"
+
+# zoxide (smart cd) initialization
+eval "$(zoxide init zsh)"
 
 # ----------------------------------------------------------------------------
 # Environment Variables
