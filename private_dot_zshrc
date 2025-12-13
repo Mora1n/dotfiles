@@ -1,0 +1,209 @@
+# ============================================================================
+# Zsh Configuration
+# ============================================================================
+
+# ----------------------------------------------------------------------------
+# ZDOTDIR and Zim Setup
+# ----------------------------------------------------------------------------
+
+# Set Zsh config directory
+ZDOTDIR=~/.config/zsh
+ZIM_HOME=${ZDOTDIR}/zim
+ZIM_CONFIG_FILE=${ZDOTDIR}/zimrc
+
+# zsh-autosuggestions performance optimizations (must be set before Zim init)
+ZSH_AUTOSUGGEST_MANUAL_REBIND=1                   # Skip automatic rebinding
+ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20                # Limit suggestion buffer size
+ZSH_AUTOSUGGEST_USE_ASYNC=1                       # Use async suggestions
+ZSH_AUTOSUGGEST_STRATEGY=(history completion)     # Strategy: history first, then completion
+
+# Download zimfw plugin manager if missing
+if [[ ! -e ${ZIM_HOME}/zimfw.zsh ]]; then
+  curl -fsSL --create-dirs -o ${ZIM_HOME}/zimfw.zsh \
+      https://github.com/zimfw/zimfw/releases/latest/download/zimfw.zsh
+fi
+
+# Install missing modules and update ${ZIM_HOME}/init.zsh if missing or outdated
+if [[ ! ${ZIM_HOME}/init.zsh -nt ${ZIM_CONFIG_FILE:-${ZDOTDIR:-${HOME}}/.zimrc} ]]; then
+  source ${ZIM_HOME}/zimfw.zsh init
+fi
+
+# Initialize modules
+source ${ZIM_HOME}/init.zsh
+
+# ----------------------------------------------------------------------------
+# History Configuration
+# ----------------------------------------------------------------------------
+
+# History settings
+HISTSIZE=1000                  # Number of commands to remember
+SAVEHIST=1000                  # Number of commands to save to file
+HISTFILE=~/.zhistory           # History file location
+
+# Enhanced history options
+setopt HIST_IGNORE_DUPS         # Don't record duplicate entries
+setopt HIST_IGNORE_SPACE        # Don't record commands starting with space
+setopt HIST_VERIFY              # Show command before executing from history
+setopt HIST_REDUCE_BLANKS       # Remove superfluous blanks
+setopt HIST_IGNORE_ALL_DUPS     # Delete old duplicate entries
+setopt INC_APPEND_HISTORY       # Write to history file immediately
+
+# ----------------------------------------------------------------------------
+# Completion Performance Optimization
+# ----------------------------------------------------------------------------
+
+# Use cache for completions
+zstyle ':completion:*' use-cache on
+zstyle ':completion:*' cache-path ~/.zcompcache
+
+# Enhanced fuzzy matching for Fish-like path completion
+zstyle ':completion:*' completer _complete _match _approximate
+zstyle ':completion:*:match:*' original only
+zstyle ':completion:*:approximate:*' max-errors 'reply=($((($#PREFIX+$#SUFFIX)/3))numeric)'
+
+# Aggressive substring matching (Fish-style)
+# Examples: cd /u/l/b -> /usr/local/bin, cd dwn -> Downloads
+zstyle ':completion:*' matcher-list '' \
+  'm:{a-zA-Z}={A-Za-z}' \
+  'r:|[._-]=* r:|=*' \
+  'r:|?=** m:{a-z\-}={A-Z\_}'
+
+# Auto menu selection for better UX
+setopt AUTO_MENU
+setopt COMPLETE_IN_WORD
+setopt ALWAYS_TO_END
+
+# Group results by category
+zstyle ':completion:*' group-name ''
+zstyle ':completion:*:descriptions' format '[%d]'
+
+# Colors in completion
+zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
+
+# ----------------------------------------------------------------------------
+# Vi-mode Configuration
+# ----------------------------------------------------------------------------
+
+# Enable vi-mode keybindings
+bindkey -v
+
+# Reduce ESC key delay (in hundredths of a second)
+export KEYTIMEOUT=1
+
+# Change cursor shape for different vi modes (using printf for efficiency)
+function zle-keymap-select {
+  case $KEYMAP in
+    vicmd) printf '\e[1 q';;      # Command mode: block cursor
+    viins|main) printf '\e[5 q';; # Insert mode: beam cursor
+  esac
+}
+zle -N zle-keymap-select
+
+# Initialize with beam cursor
+function zle-line-init {
+  printf '\e[5 q'
+}
+zle -N zle-line-init
+
+# Reset to beam cursor after command execution
+preexec() { printf '\e[5 q'; }
+
+# ----------------------------------------------------------------------------
+# History Substring Search Configuration
+# ----------------------------------------------------------------------------
+
+# Bind arrow keys for history substring search (works in both modes)
+bindkey '^[[A' history-substring-search-up      # Up arrow
+bindkey '^[[B' history-substring-search-down    # Down arrow
+
+# Vi-mode bindings for history substring search
+bindkey -M vicmd 'k' history-substring-search-up
+bindkey -M vicmd 'j' history-substring-search-down
+
+# ----------------------------------------------------------------------------
+# PATH Configuration
+# ----------------------------------------------------------------------------
+
+# Development tools PATH setup
+export PATH="${HOME}/phacility/arcanist/bin:${PATH}"  # Arcanist
+export PATH="/usr/local/go/bin:${PATH}"               # Go
+export PATH="${HOME}/.npm-global/bin:${PATH}"         # npm global packages
+
+# ----------------------------------------------------------------------------
+# Tool Initialization
+# ----------------------------------------------------------------------------
+
+# Cargo (Rust) environment
+source "$HOME/.cargo/env"
+
+# uv (Python package manager) environment and completions
+source "$HOME/.local/bin/env"
+eval "$(uv generate-shell-completion zsh)"
+eval "$(uvx --generate-shell-completion zsh)"
+
+# ----------------------------------------------------------------------------
+# Environment Variables
+# ----------------------------------------------------------------------------
+
+# GCC colored output
+export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
+
+# NVIDIA GPU hardware acceleration (fixes flickering issues)
+export GBM_BACKEND=nvidia-drm
+export __GLX_VENDOR_LIBRARY_NAME=nvidia
+
+# ----------------------------------------------------------------------------
+# Aliases
+# ----------------------------------------------------------------------------
+
+# eza (modern ls replacement) aliases
+alias ll='eza -l'
+alias la='eza -A'
+alias l='eza -F'
+
+# ----------------------------------------------------------------------------
+# Safety Functions
+# ----------------------------------------------------------------------------
+
+# Prevent accidental deletion of root directory
+rm() {
+    # Check if any argument contains "-r" or "-f" flags AND "/" path
+    for arg in "$@"; do
+        if [[ "$arg" =~ ^-.*[rf] ]] && [[ "$*" =~ (^|[[:space:]])/([[:space:]]|$) ]]; then
+            echo "Error: Deletion of root directory is prohibited" >&2
+            return 1
+        fi
+    done
+    command rm "$@"
+}
+
+# ----------------------------------------------------------------------------
+# Custom Functions
+# ----------------------------------------------------------------------------
+
+# Launch Zed editor in background (renamed from 'z' to avoid conflict with zoxide)
+zed() {
+    setsid zed "$@" > /dev/null 2>&1 &
+}
+
+# Yazi file manager with cd on exit
+# Usage: y [directory]
+# After exiting yazi, shell will cd to the last visited directory
+y() {
+    local tmp=$(mktemp -t "yazi-cwd.XXXXXX")
+    yazi "$@" --cwd-file="$tmp"
+    if [ -s "$tmp" ]; then
+        local cwd=$(cat "$tmp")
+        if [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
+            builtin cd -- "$cwd"
+        fi
+    fi
+    rm -f -- "$tmp"
+}
+
+# ----------------------------------------------------------------------------
+# Prompt
+# ----------------------------------------------------------------------------
+
+# Initialize Starship prompt (must be at the end)
+eval "$(starship init zsh)"

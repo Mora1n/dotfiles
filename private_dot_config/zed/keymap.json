@@ -75,5 +75,11 @@
   },
   {
     "context": "Workspace && !debugger_running"
+  },
+  {
+    "context": "(VimControl && !menu)",
+    "bindings": {
+      "g r": "editor::GoToNextReference"
+    }
   }
 ]
