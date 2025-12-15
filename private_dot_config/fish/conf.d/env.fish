@@ -1,1 +1,0 @@
-set -x APIROUTER_API_KEY cr_18f59357dee6bd4ef2a9875eaa6bfbbf1d57f811a1637b9ac1da70e4c240f05e
