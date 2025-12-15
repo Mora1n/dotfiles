@@ -208,11 +208,6 @@ rm() {
 # Custom Functions
 # ----------------------------------------------------------------------------
 
-# Launch Zed editor in background (renamed from 'z' to avoid conflict with zoxide)
-zed() {
-    setsid zed "$@" > /dev/null 2>&1 &
-}
-
 # Yazi file manager with cd on exit
 # Usage: y [directory]
 # After exiting yazi, shell will cd to the last visited directory
