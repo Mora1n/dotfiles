@@ -168,6 +168,9 @@ eval "$(uvx --generate-shell-completion zsh)"
 # zoxide (smart cd) initialization
 eval "$(zoxide init zsh)"
 
+# sing-box completion (installed to fpath)
+# Completion file: ${fpath[1]}/_sing-box
+
 # ----------------------------------------------------------------------------
 # Environment Variables
 # ----------------------------------------------------------------------------

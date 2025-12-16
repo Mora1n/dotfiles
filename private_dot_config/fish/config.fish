@@ -15,4 +15,6 @@ if status is-interactive
     # vi mode
     fish_vi_key_bindings
 
+    # sing-box completion (auto-loaded from ~/.config/fish/completions/sing-box.fish)
+
 end
