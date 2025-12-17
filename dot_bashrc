@@ -154,7 +154,3 @@ rm() {
     fi
     command rm "$@"
 }
-
-# NVIDIA GPU hardware acceleration support (fix VS Code flickering issue)
-export GBM_BACKEND=nvidia-drm
-export __GLX_VENDOR_LIBRARY_NAME=nvidia

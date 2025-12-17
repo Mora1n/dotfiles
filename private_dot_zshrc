@@ -174,13 +174,8 @@ eval "$(zoxide init zsh)"
 # ----------------------------------------------------------------------------
 # Environment Variables
 # ----------------------------------------------------------------------------
-
 # GCC colored output
 export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
-
-# NVIDIA GPU hardware acceleration (fixes flickering issues)
-export GBM_BACKEND=nvidia-drm
-export __GLX_VENDOR_LIBRARY_NAME=nvidia
 
 # ----------------------------------------------------------------------------
 # Aliases
