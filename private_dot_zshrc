@@ -7,9 +7,9 @@
 # ----------------------------------------------------------------------------
 
 # Set Zsh config directory
-# ZDOTDIR=~/.config/zsh  # Commented out to use default ~ directory
-ZIM_HOME=~/.config/zsh/zim
-ZIM_CONFIG_FILE=~/.config/zsh/zimrc
+ZDOTDIR=${HOME}
+ZIM_HOME=${HOME}/.config/.zim
+ZIM_CONFIG_FILE=${HOME}/.config/.zimrc
 
 # zsh-autosuggestions performance optimizations (must be set before Zim init)
 ZSH_AUTOSUGGEST_MANUAL_REBIND=1                   # Skip automatic rebinding
@@ -38,7 +38,7 @@ source ${ZIM_HOME}/init.zsh
 # History settings
 HISTSIZE=1000                  # Number of commands to remember
 SAVEHIST=1000                  # Number of commands to save to file
-HISTFILE=~/.zhistory           # History file location
+HISTFILE=${HOME}/.zhistory     # History file location
 
 # Enhanced history options
 setopt HIST_IGNORE_DUPS         # Don't record duplicate entries
@@ -52,147 +52,234 @@ setopt INC_APPEND_HISTORY       # Write to history file immediately
 # Completion Performance Optimization
 # ----------------------------------------------------------------------------
 
-# Use cache for completions
+# Completion cache settings
 zstyle ':completion:*' use-cache on
-zstyle ':completion:*' cache-path ~/.zcompcache
+zstyle ':completion:*' cache-path ${HOME}/.zcompcache
 
-# Enhanced fuzzy matching for Fish-like path completion
+# Fuzzy matching for Fish-like path completion
 zstyle ':completion:*' completer _complete _match _approximate
 zstyle ':completion:*:match:*' original only
 zstyle ':completion:*:approximate:*' max-errors 'reply=($((($#PREFIX+$#SUFFIX)/3))numeric)'
 
-# Aggressive substring matching (Fish-style)
-# Examples: cd /u/l/b -> /usr/local/bin, cd dwn -> Downloads
+# Substring matching (Fish-style)
+# Example: cd /u/l/b -> /usr/local/bin, cd dwn -> Downloads
 zstyle ':completion:*' matcher-list '' \
   'm:{a-zA-Z}={A-Za-z}' \
   'r:|[._-]=* r:|=*' \
   'r:|?=** m:{a-z\-}={A-Z\_}'
 
-# Auto menu selection for better UX
-setopt AUTO_MENU
-setopt COMPLETE_IN_WORD
-setopt ALWAYS_TO_END
+# Completion menu behavior
+setopt AUTO_MENU           # Auto show completion menu
+setopt COMPLETE_IN_WORD    # Complete from cursor position
+setopt ALWAYS_TO_END       # Move cursor to end after completion
 
-# Group results by category
-zstyle ':completion:*' group-name ''
-zstyle ':completion:*:descriptions' format '[%d]'
-
-# Colors in completion
-zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
+# Completion display settings
+zstyle ':completion:*' group-name ''                        # Group by category
+zstyle ':completion:*:descriptions' format '[%d]'           # Category header format
+zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}       # Colorize with LS_COLORS
 
 # ----------------------------------------------------------------------------
 # Vi-mode Configuration
 # ----------------------------------------------------------------------------
+# Using zsh-vi-mode plugin for enhanced vi-mode functionality
 
-# Enable vi-mode keybindings
-bindkey -v
-
-# Reduce ESC key delay (in hundredths of a second)
+# Reduce ESC key delay for faster mode switching (in hundredths of a second)
 export KEYTIMEOUT=1
 
-# Change cursor shape for different vi modes (using printf for efficiency)
-function zle-keymap-select {
-  case $KEYMAP in
-    vicmd) printf '\e[1 q';;      # Command mode: block cursor
-    viins|main) printf '\e[5 q';; # Insert mode: beam cursor
-  esac
-}
-zle -N zle-keymap-select
-
-# Initialize with beam cursor
-function zle-line-init {
-  printf '\e[5 q'
-}
-zle -N zle-line-init
-
-# Reset to beam cursor after command execution
-preexec() { printf '\e[5 q'; }
-
-# Fix special keys in vi-mode (Home, End, Delete, etc.)
-# These keys send escape sequences that vi-mode misinterprets
-bindkey -v '^[[H' beginning-of-line      # Home
-bindkey -v '^[[F' end-of-line            # End
-bindkey -v '^[[3~' delete-char           # Delete
-bindkey -v '^[[1~' beginning-of-line     # Home (alternative)
-bindkey -v '^[[4~' end-of-line           # End (alternative)
-bindkey -v '^[[2~' overwrite-mode        # Insert
-
-# Fix for insert mode
-bindkey -M viins '^[[H' beginning-of-line
-bindkey -M viins '^[[F' end-of-line
-bindkey -M viins '^[[3~' delete-char
-bindkey -M viins '^[[1~' beginning-of-line
-bindkey -M viins '^[[4~' end-of-line
-bindkey -M viins '^[[2~' overwrite-mode
-
-# Fix for command mode
-bindkey -M vicmd '^[[H' beginning-of-line
-bindkey -M vicmd '^[[F' end-of-line
-bindkey -M vicmd '^[[3~' delete-char
-bindkey -M vicmd '^[[1~' beginning-of-line
-bindkey -M vicmd '^[[4~' end-of-line
-
 # ----------------------------------------------------------------------------
-# History Substring Search Configuration
+# Custom ZLE Widgets
 # ----------------------------------------------------------------------------
 
-# Bind arrow keys for history substring search (works in both modes)
-bindkey '^[[A' history-substring-search-up      # Up arrow
-bindkey '^[[B' history-substring-search-down    # Down arrow
+# Movement widgets that clear selection before moving
+deselect-forward-char() {
+  zle deactivate-region 2>/dev/null
+  zle forward-char
+}
+zle -N deselect-forward-char
 
-# Vi-mode bindings for history substring search
-bindkey -M vicmd 'k' history-substring-search-up
-bindkey -M vicmd 'j' history-substring-search-down
+deselect-backward-char() {
+  zle deactivate-region 2>/dev/null
+  zle backward-char
+}
+zle -N deselect-backward-char
+
+deselect-forward-word() {
+  zle deactivate-region 2>/dev/null
+  zle forward-word
+}
+zle -N deselect-forward-word
+
+deselect-backward-word() {
+  zle deactivate-region 2>/dev/null
+  zle backward-word
+}
+zle -N deselect-backward-word
+
+deselect-beginning-of-line() {
+  zle deactivate-region 2>/dev/null
+  zle beginning-of-line
+}
+zle -N deselect-beginning-of-line
+
+deselect-end-of-line() {
+  zle deactivate-region 2>/dev/null
+  zle end-of-line
+}
+zle -N deselect-end-of-line
+
+# Visual selection widgets (Shift+Arrow keys)
+visual-select-forward() {
+  if [[ $REGION_ACTIVE -eq 0 ]]; then
+    zle set-mark-command
+  fi
+  zle forward-char
+}
+zle -N visual-select-forward
+
+visual-select-backward() {
+  if [[ $REGION_ACTIVE -eq 0 ]]; then
+    zle set-mark-command
+  fi
+  zle backward-char
+}
+zle -N visual-select-backward
+
+visual-select-up() {
+  if [[ $REGION_ACTIVE -eq 0 ]]; then
+    zle set-mark-command
+  fi
+  zle up-line-or-history
+}
+zle -N visual-select-up
+
+visual-select-down() {
+  if [[ $REGION_ACTIVE -eq 0 ]]; then
+    zle set-mark-command
+  fi
+  zle down-line-or-history
+}
+zle -N visual-select-down
+
+# Visual selection by word widgets (Ctrl+Shift+Arrow keys)
+visual-select-forward-word() {
+  if [[ $REGION_ACTIVE -eq 0 ]]; then
+    zle set-mark-command
+  fi
+  zle forward-word
+}
+zle -N visual-select-forward-word
+
+visual-select-backward-word() {
+  if [[ $REGION_ACTIVE -eq 0 ]]; then
+    zle set-mark-command
+  fi
+  zle backward-word
+}
+zle -N visual-select-backward-word
+
+# Visual selection to line start/end widgets (Shift+Home/End keys)
+visual-select-beginning-of-line() {
+  if [[ $REGION_ACTIVE -eq 0 ]]; then
+    zle set-mark-command
+  fi
+  zle beginning-of-line
+}
+zle -N visual-select-beginning-of-line
+
+visual-select-end-of-line() {
+  if [[ $REGION_ACTIVE -eq 0 ]]; then
+    zle set-mark-command
+  fi
+  zle end-of-line
+}
+zle -N visual-select-end-of-line
+
+# ----------------------------------------------------------------------------
+# Key Bindings (zsh-vi-mode integration)
+# ----------------------------------------------------------------------------
+# zsh-vi-mode resets keybindings after initialization
+# Use zvm_after_init hook to apply custom bindings
+
+function zvm_after_init() {
+  # History substring search
+  bindkey '^[[A' history-substring-search-up      # Up arrow
+  bindkey '^[[B' history-substring-search-down    # Down arrow
+  bindkey -M vicmd 'k' history-substring-search-up
+  bindkey -M vicmd 'j' history-substring-search-down
+
+  # Basic movement (clears selection)
+  bindkey -M viins '^[[C' deselect-forward-char   # Right arrow
+  bindkey -M viins '^[[D' deselect-backward-char  # Left arrow
+
+  # Word movement (clears selection)
+  bindkey -M viins '^[[1;5C' deselect-forward-word   # Ctrl+Right
+  bindkey -M viins '^[[1;5D' deselect-backward-word  # Ctrl+Left
+  bindkey -M viins '^[OC' deselect-forward-word      # Ctrl+Right (alt)
+  bindkey -M viins '^[OD' deselect-backward-word     # Ctrl+Left (alt)
+  bindkey -M viins '^[[5C' deselect-forward-word     # Ctrl+Right (alt)
+  bindkey -M viins '^[[5D' deselect-backward-word    # Ctrl+Left (alt)
+
+  # Line start/end movement (clears selection)
+  bindkey -M viins '^[[H' deselect-beginning-of-line   # Home
+  bindkey -M viins '^[[F' deselect-end-of-line         # End
+  bindkey -M viins '^[[1~' deselect-beginning-of-line  # Home (alt)
+  bindkey -M viins '^[[4~' deselect-end-of-line        # End (alt)
+
+  # Character selection
+  bindkey -M viins '^[[1;2C' visual-select-forward   # Shift+Right
+  bindkey -M viins '^[[1;2D' visual-select-backward  # Shift+Left
+  bindkey -M viins '^[[1;2A' visual-select-up        # Shift+Up
+  bindkey -M viins '^[[1;2B' visual-select-down      # Shift+Down
+
+  # Word selection
+  bindkey -M viins '^[[1;6C' visual-select-forward-word   # Ctrl+Shift+Right
+  bindkey -M viins '^[[1;6D' visual-select-backward-word  # Ctrl+Shift+Left
+
+  # Line selection
+  bindkey -M viins '^[[1;2H' visual-select-beginning-of-line  # Shift+Home
+  bindkey -M viins '^[[1;2F' visual-select-end-of-line        # Shift+End
+}
 
 # ----------------------------------------------------------------------------
 # PATH Configuration
 # ----------------------------------------------------------------------------
 
-# Development tools PATH setup
 export PATH="${HOME}/phacility/arcanist/bin:${PATH}"  # Arcanist
 export PATH="/usr/local/go/bin:${PATH}"               # Go
-export PATH="${HOME}/.npm-global/bin:${PATH}"         # npm global packages
+export PATH="${HOME}/.npm-global/bin:${PATH}"         # npm global
 
 # ----------------------------------------------------------------------------
 # Tool Initialization
 # ----------------------------------------------------------------------------
 
-# Cargo (Rust) environment
-source "$HOME/.cargo/env"
+source "$HOME/.cargo/env"                           # Cargo (Rust)
+source "$HOME/.local/bin/env"                       # uv environment
+eval "$(uv generate-shell-completion zsh)"          # uv completion
+eval "$(uvx --generate-shell-completion zsh)"       # uvx completion
+eval "$(zoxide init zsh)"                           # zoxide (smart cd)
 
-# uv (Python package manager) environment and completions
-source "$HOME/.local/bin/env"
-eval "$(uv generate-shell-completion zsh)"
-eval "$(uvx --generate-shell-completion zsh)"
-
-# zoxide (smart cd) initialization
-eval "$(zoxide init zsh)"
-
-# sing-box completion (installed to fpath)
-# Completion file: ${fpath[1]}/_sing-box
+# sing-box completion is installed to fpath: ${fpath[1]}/_sing-box
 
 # ----------------------------------------------------------------------------
 # Environment Variables
 # ----------------------------------------------------------------------------
-# GCC colored output
+
 export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 
 # ----------------------------------------------------------------------------
 # Aliases
 # ----------------------------------------------------------------------------
 
-# eza (modern ls replacement) aliases
-alias ll='eza -l'
-alias la='eza -A'
-alias l='eza -F'
+alias ll='eza -l'  # Long format
+alias la='eza -A'  # Show hidden files
+alias l='eza -F'   # Classify files
 
 # ----------------------------------------------------------------------------
-# Safety Functions
+# Custom Functions
 # ----------------------------------------------------------------------------
 
-# Prevent accidental deletion of root directory
+# Safety wrapper: prevent accidental deletion of root directory
 rm() {
-    # Check if any argument contains "-r" or "-f" flags AND "/" path
     for arg in "$@"; do
         if [[ "$arg" =~ ^-.*[rf] ]] && [[ "$*" =~ (^|[[:space:]])/([[:space:]]|$) ]]; then
             echo "Error: Deletion of root directory is prohibited" >&2
@@ -202,13 +289,9 @@ rm() {
     command rm "$@"
 }
 
-# ----------------------------------------------------------------------------
-# Custom Functions
-# ----------------------------------------------------------------------------
-
-# Yazi file manager with cd on exit
+# Yazi file manager with directory tracking
 # Usage: y [directory]
-# After exiting yazi, shell will cd to the last visited directory
+# Shell will cd to the last visited directory after exiting yazi
 y() {
     local tmp=$(mktemp -t "yazi-cwd.XXXXXX")
     yazi "$@" --cwd-file="$tmp"
@@ -225,5 +308,4 @@ y() {
 # Prompt
 # ----------------------------------------------------------------------------
 
-# Initialize Starship prompt (must be at the end)
-eval "$(starship init zsh)"
+eval "$(starship init zsh)"  # Must be at the end

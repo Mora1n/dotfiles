@@ -1,81 +1,8 @@
-l
-cd .zim
-cd ..
-cat zim
-cat zimrc
-cat .zimrc
-rm -rf *
-ls -a
-cat .zcompdump
-la
-sudo apt update
-apt list --upgradable
-sudo apt upgrade
-cd .config/zsh
-cd -
-cd zim
-cd Downloads
-mkdir tmp
-cd tmp
-claude
-z home
-echo $PATH
-ll -a
-\
-
-nvim zimrc
-zimfw install
-cd ObsidianVault/Work/ 
-cd
-yazi
-nvim .bashrc
-z fish/
-nvim y.fish
-z .config
-z zsh
-z zim/
-z zim-zoxide
-nvim init.zsh
-nvim zoxide.zsh
-z .
-cd conf.d
-cat rustup.fish
-cat fzf.fish
-cat env.fish
-rm -rf env.fish
-nvim fish_variables
-y
-zed .
-fzf --zsh
-chezmoi add ~/.config/fish
-echo $SHELL
-z .config/zed
-nvim settings.json
-chezmoi add ~/.config/zed
-z .config/fish
-ll
-z config.fish
-nvim config.fish
-z conf.d
-z functions
-z 
-git status
-git commit
-chezmoi add ~/.config/zsh
-chezmoi add .zshrc
-cat .zhistory
-z .config/zsh
-z zim
-z modules
-z ..
-nvim .zshrc
-z DO
-z
-ls CodeVault/Python/langgraph/langchain-academy/module-0-tutorial-zh.md
-z dev
-z code_aster
-z CodeVault/Python
-ls
-clear
-time zsh -ic exit
-source .zshrc
+: 1766046542:0;ll -a
+: 1766046547:0;rm .zshrc
+: 1766046547:0;ll
+: 1766046549:0;clear
+: 1766046550:0;ll
+: 1766046551:0;ll -a
+: 1766046588:0;chezmoi add ~/.zshrc
+: 1766046594:0;chezmoi add ~/.config/zsh

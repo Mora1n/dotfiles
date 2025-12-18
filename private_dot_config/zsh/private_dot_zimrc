@@ -21,6 +21,9 @@ zmodule utility
 # <-- Normally new modules should be added here. Check each module documentation
 # for any caveats.
 
+# Vi-mode plugin with better features and compatibility
+zmodule jeffreytse/zsh-vi-mode
+
 #
 # Prompt
 #
