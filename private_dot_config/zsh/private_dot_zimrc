@@ -27,9 +27,6 @@ zmodule fzf
 # zoxide - smart directory jumping
 # zmodule kiesman99/zim-zoxide  # Not needed, initialized directly in .zshrc
 
-# Vi-mode plugin with better features and compatibility
-zmodule jeffreytse/zsh-vi-mode
-
 #
 # Prompt
 #
