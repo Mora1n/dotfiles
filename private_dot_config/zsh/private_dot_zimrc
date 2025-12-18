@@ -21,6 +21,12 @@ zmodule utility
 # <-- Normally new modules should be added here. Check each module documentation
 # for any caveats.
 
+# fzf - fuzzy finder integration
+zmodule fzf
+
+# zoxide - smart directory jumping
+# zmodule kiesman99/zim-zoxide  # Not needed, initialized directly in .zshrc
+
 # Vi-mode plugin with better features and compatibility
 zmodule jeffreytse/zsh-vi-mode
 
@@ -29,11 +35,11 @@ zmodule jeffreytse/zsh-vi-mode
 #
 
 # Exposes how long the last command took to run to prompts.
-zmodule duration-info
+# zmodule duration-info
 # Exposes git repository status information to prompts.
-zmodule git-info
+# zmodule git-info
 # A heavily reduced, ASCII-only version of the Spaceship and Starship prompts.
-zmodule asciiship
+# zmodule asciiship
 
 #
 # Completion
@@ -50,7 +56,10 @@ zmodule completion
 #
 
 # Fish-like syntax highlighting for Zsh, must be sourced after completion.
-zmodule zsh-users/zsh-syntax-highlighting
+# zmodule zsh-users/zsh-syntax-highlighting
+# Fast syntax highlighting for Zsh (faster than zsh-syntax-highlighting)
+# Must be sourced after completion
+zmodule zdharma-continuum/fast-syntax-highlighting
 # Fish-like history search for Zsh, must be sourced after
 # zsh-users/zsh-syntax-highlighting. Bind keyboard shortcuts in your ~/.zshrc:
 # https://github.com/zsh-users/zsh-history-substring-search/blob/master/README.md#usage
