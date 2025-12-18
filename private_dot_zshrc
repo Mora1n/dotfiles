@@ -8,8 +8,8 @@
 
 # Set Zsh config directory
 ZDOTDIR=${HOME}
-ZIM_HOME=${HOME}/.config/.zim
-ZIM_CONFIG_FILE=${HOME}/.config/.zimrc
+ZIM_HOME=${HOME}/.config/zsh/.zim
+ZIM_CONFIG_FILE=${HOME}/.config/zsh/.zimrc
 
 # zsh-autosuggestions performance optimizations (must be set before Zim init)
 ZSH_AUTOSUGGEST_MANUAL_REBIND=1                   # Skip automatic rebinding
