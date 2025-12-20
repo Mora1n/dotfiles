@@ -240,6 +240,10 @@ command -v uvx &>/dev/null && eval "$(uvx --generate-shell-completion zsh)"
 
 # zoxide - only if command exists
 command -v zoxide &>/dev/null && eval "$(zoxide init zsh)"
+# nvm completions
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 # sing-box completion is installed to fpath: ${fpath[1]}/_sing-box
 
@@ -314,3 +318,4 @@ if command -v starship &>/dev/null; then
 
   unset starship_cache
 fi
+
