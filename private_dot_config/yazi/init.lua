@@ -1,21 +1,19 @@
 -- ╭─────────────────────────────────────────────────────────╮
--- │                    Yazi 初始化配置                      │
+-- │                  Yazi Initialization                    │
 -- ╰─────────────────────────────────────────────────────────╯
 
 -- ═══════════════════════════════════════════════════════════
---  UI 增强
+--  UI Enhancements
 -- ═══════════════════════════════════════════════════════════
 
--- 集成 Starship 提示符
--- 在 Yazi 底部显示美化的命令提示符
+-- Integrate Starship prompt at bottom
 require("starship"):setup()
 
--- 启用全边框显示
--- 为 Yazi 界面添加完整的边框装饰
+-- Enable full border display
 require("full-border"):setup()
 
 -- ═══════════════════════════════════════════════════════════
---  Vim 风格相对移动插件配置
+--  Vim-style Relative Motions
 -- ═══════════════════════════════════════════════════════════
 require("relative-motions"):setup({
     show_numbers = "relative_absolute",

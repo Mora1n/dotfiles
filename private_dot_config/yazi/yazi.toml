@@ -1,13 +1,13 @@
 # ╭─────────────────────────────────────────────────────────╮
-# │                    Yazi 主配置文件                      │
+# │                    Yazi Main Config                     │
 # ╰─────────────────────────────────────────────────────────╯
 
 # ═══════════════════════════════════════════════════════════
-#  插件配置
+#  Plugin Config
 # ═══════════════════════════════════════════════════════════
 
 [plugin]
-# 压缩文件预览器 - 使用 ouch 插件预览各种压缩格式
+# Archive previewer - preview compressed files using ouch
 prepend_previewers = [
 	{ mime = "application/*zip",            run = "ouch" },
 	{ mime = "application/x-tar",           run = "ouch" },
@@ -20,53 +20,52 @@ prepend_previewers = [
 	{ mime = "application/x-zstd",          run = "ouch" },
 	{ mime = "application/zstd",            run = "ouch" },
 	{ mime = "application/java-archive",    run = "ouch" },
-	# 目录预览器 - 使用 eza 显示目录树结构
+	# Directory previewer - show tree structure using eza
 	{ url = "*/", run = 'piper -- eza -TL=3 --color=always --icons=always --group-directories-first --no-quotes "$1"' },
 ]
 
 # ═══════════════════════════════════════════════════════════
-#  文件打开器配置
+#  Opener Config
 # ═══════════════════════════════════════════════════════════
 
 [opener]
-# 文本编辑器 - 使用 Neovim 编辑文本文件
+# Text editor
 edit = [
 	{ run = 'nvim "$@"', block = true, desc = "Edit with Neovim", for = "unix" },
 ]
 
-# 解压操作 - 使用 ouch 解压文件
+# Extract archives
 extract = [
 	{ run = 'ouch d -y %*',   desc = "Extract here with ouch", for = "windows" },
 	{ run = 'ouch d -y "$@"', desc = "Extract here with ouch", for = "unix" },
 ]
 
-# 使用系统默认程序打开
+# Open with system default
 open_with_default = [
 	{ run = 'xdg-open "$@"', desc = "Open with default app", for = "unix" },
 	{ run = 'open "$@"', desc = "Open with default app", for = "macos" },
 	{ run = 'start "" %*', desc = "Open with default app", for = "windows" },
 ]
 
-# 在浏览器中打开
+# Open in browser
 open_in_browser = [
 	{ run = 'xdg-open "$@"', desc = "Open in browser", for = "unix" },
 	{ run = 'open "$@"', desc = "Open in browser", for = "macos" },
 	{ run = 'start "" %*', desc = "Open in browser", for = "windows" },
 ]
 
-# 图片查看器
+# Image viewer
 image_viewer = [
-	{ run = 'qview "$@"', orphan = true, desc = "Open with qview", for = "unix" },
+	{ run = 'qimgv "$@"', orphan = true, desc = "Open with qimgv", for = "unix" },
 ]
 
 # ═══════════════════════════════════════════════════════════
-#  默认打开方式
+#  Default Opener Rules
 # ═══════════════════════════════════════════════════════════
 
-# 为文本文件设置默认编辑器
 [open]
 rules = [
-	# 文本文件 - 使用编辑器打开
+	# Text files
 	{ mime = "text/*", use = "edit" },
 	{ mime = "application/json", use = "edit" },
 	{ mime = "application/x-yaml", use = "edit" },
@@ -79,23 +78,23 @@ rules = [
 	{ mime = "application/x-shellscript", use = "edit" },
 	{ mime = "inode/x-empty", use = "edit" },
 
-	# 按文件名匹配 YAML 文件
+	# YAML files by name
 	{ name = "*.yml", use = "edit" },
 	{ name = "*.yaml", use = "edit" },
 
-	# 按文件名匹配 TOML 文件
+	# TOML files by name
 	{ name = "*.toml", use = "edit" },
 
-	# Markdown 文件
+	# Markdown files
 	{ name = "*.md", use = "edit" },
 	{ name = "*.markdown", use = "edit" },
 	{ mime = "text/markdown", use = "edit" },
 
-	# PDF 文件 - 使用系统默认程序打开
+	# PDF files
 	{ name = "*.pdf", use = "open_with_default" },
 	{ mime = "application/pdf", use = "open_with_default" },
 
-	# 图片文件 - 使用 qimgv 查看
+	# Image files
 	{ mime = "image/*", use = "image_viewer" },
 	{ name = "*.jpg", use = "image_viewer" },
 	{ name = "*.jpeg", use = "image_viewer" },
@@ -108,7 +107,7 @@ rules = [
 	{ name = "*.tiff", use = "image_viewer" },
 	{ name = "*.tif", use = "image_viewer" },
 
-	# 其他常见文本格式
+	# Common text formats
 	{ name = "*.txt", use = "edit" },
 	{ name = "*.conf", use = "edit" },
 	{ name = "*.config", use = "edit" },
@@ -159,7 +158,7 @@ rules = [
 	{ name = "*.editorconfig", use = "edit" },
 	{ name = ".editorconfig", use = "edit" },
 
-	# 压缩文件 - 使用解压工具 (按 MIME 类型)
+	# Archive files by MIME
 	{ mime = "application/*zip", use = "extract" },
 	{ mime = "application/x-tar", use = "extract" },
 	{ mime = "application/x-bzip2", use = "extract" },
@@ -172,7 +171,7 @@ rules = [
 	{ mime = "application/zstd", use = "extract" },
 	{ mime = "application/java-archive", use = "extract" },
 
-	# 按文件名匹配压缩文件
+	# Archive files by name
 	{ name = "*.zip", use = "extract" },
 	{ name = "*.tar", use = "extract" },
 	{ name = "*.tar.gz", use = "extract" },

@@ -1,64 +1,55 @@
 # ╭─────────────────────────────────────────────────────────╮
-# │                    Yazi 键位映射配置                    │
+# │                   Yazi Keymap Config                    │
 # ╰─────────────────────────────────────────────────────────╯
 
 # ═══════════════════════════════════════════════════════════
-#  导航增强
+#  Navigation
 # ═══════════════════════════════════════════════════════════
 
-# 在父目录中向上移动
 [[mgr.prepend_keymap]]
 on   = "K"
 run  = "plugin parent-arrow -1"
 desc = "Parent directory up"
 
-# 在父目录中向下移动
 [[mgr.prepend_keymap]]
 on   = "J"
 run  = "plugin parent-arrow 1"
 desc = "Parent directory down"
 
-# 智能进入：进入目录或打开文件
 [[mgr.prepend_keymap]]
 on   = "l"
 run  = "plugin smart-enter"
 desc = "Enter the child directory, or open the file"
 
 # ═══════════════════════════════════════════════════════════
-#  文件操作
+#  File Operations
 # ═══════════════════════════════════════════════════════════
 
-# 修改文件权限
 [[mgr.prepend_keymap]]
 on   = [ "c", "m" ]
 run  = "plugin chmod"
 desc = "Chmod on selected files"
 
-# 压缩文件
 [[mgr.prepend_keymap]]
 on   = "C"
 run  = "plugin ouch"
 desc = "Compress with ouch"
 
-# 智能粘贴：粘贴到悬停目录或当前工作目录
 [[mgr.prepend_keymap]]
 on   = "p"
 run  = "plugin smart-paste"
 desc = "Paste into the hovered directory or CWD"
 
-# 智能过滤：快速过滤文件列表
 [[mgr.prepend_keymap]]
 on   = "F"
 run  = "plugin smart-filter"
 desc = "Smart filter"
 
-# 使用系统默认程序打开文件
 [[mgr.prepend_keymap]]
 on   = "O"
 run  = "open --interactive"
 desc = "Open with..."
 
-# 使用系统默认程序直接打开（不显示菜单）
 [[mgr.prepend_keymap]]
 on   = [ "g", "o" ]
 for  = "unix"
@@ -78,10 +69,9 @@ run  = 'shell start "" %* --confirm'
 desc = "Open with default app"
 
 # ═══════════════════════════════════════════════════════════
-#  Shell 集成
+#  Shell Integration
 # ═══════════════════════════════════════════════════════════
 
-# 在当前位置打开 Shell
 [[mgr.prepend_keymap]]
 on   = "!"
 for  = "unix"
@@ -95,42 +85,33 @@ run  = 'shell "powershell.exe" --block'
 desc = "Open PowerShell here"
 
 # ═══════════════════════════════════════════════════════════
-#  输入控制
+#  Input Control
 # ═══════════════════════════════════════════════════════════
 
-# 取消输入
 [[input.prepend_keymap]]
 on   = "<Esc>"
 run  = "close"
 desc = "Cancel input"
 
 # ═══════════════════════════════════════════════════════════
-#  退出控制
+#  Quit Control
 # ═══════════════════════════════════════════════════════════
 
-# 确认退出
 [[mgr.prepend_keymap]]
 on   = "q"
 run  = "plugin confirm-quit"
 desc = "Quit with confirmation"
 
-# 关闭当前标签页
 [[mgr.prepend_keymap]]
 on   = "T"
 run  = "close"
 desc = "Close current tab"
 
 # ═══════════════════════════════════════════════════════════
-#  Vim 风格相对移动 (relative-motions 插件)
+#  Vim-style Relative Motions
 # ═══════════════════════════════════════════════════════════
-# 说明：按数字键启动 vim 风格的相对移动
-# 用法示例：
-#   3j  - 向下移动3行
-#   5k  - 向上移动5行
-#   2t  - 创建2个标签页
-#   gg  - 跳转到指定行
-#   3yy - 复制3个文件
-# 完整命令列表见 relative-motions 插件文档
+# Usage: Press number keys to trigger vim-style relative motions
+# Examples: 3j (down 3), 5k (up 5), 2t (create 2 tabs), gg (go to line)
 
 [[mgr.prepend_keymap]]
 on = [ "1" ]
@@ -178,10 +159,9 @@ run  = "plugin relative-motions 9"
 desc = "Move in relative steps"
 
 # ═══════════════════════════════════════════════════════════
-#  设备挂载
+#  Device Mounting
 # ═══════════════════════════════════════════════════════════
 
-# 挂载/卸载设备
 [[mgr.prepend_keymap]]
 on   = "M"
 run  = "plugin mount"
