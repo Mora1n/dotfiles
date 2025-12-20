@@ -54,9 +54,9 @@ open_in_browser = [
 	{ run = 'start "" %*', desc = "Open in browser", for = "windows" },
 ]
 
-# 图片查看器 - 使用 qimgv 查看图片
+# 图片查看器
 image_viewer = [
-	{ run = 'qimgv "$@"', orphan = true, desc = "Open with qimgv", for = "unix" },
+	{ run = 'qview "$@"', orphan = true, desc = "Open with qview", for = "unix" },
 ]
 
 # ═══════════════════════════════════════════════════════════

@@ -14,9 +14,16 @@ Host salome-9.8.0
     IdentityFile ~/.ssh/id_ed25519_salome98
     IdentitiesOnly yes
     RequestTTY yes
-    RemoteCommand singularity shell /home/morain/containers/salome-9.8.0.sif
+    RemoteCommand apptainer shell /home/morain/containers/salome-9.8.0.sif
 
 Host lighthouse
     HostName 49.235.100.166
     User root
     Identityfile ~/.ssh/lighthouse.pem
+
+Host gitlab-mossai
+    HostName 211.155.226.106
+    User git
+    Port 2222
+    Identityfile ~/.ssh/id_ed25519_mossai
+
