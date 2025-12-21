@@ -3,6 +3,11 @@
 # ============================================================================
 
 # ----------------------------------------------------------------------------
+# Performance Profiling (Uncomment to measure startup time)
+# ----------------------------------------------------------------------------
+# zmodload zsh/zprof
+
+# ----------------------------------------------------------------------------
 # ZDOTDIR and Zim Setup
 # ----------------------------------------------------------------------------
 
@@ -10,6 +15,9 @@
 ZDOTDIR=${HOME}
 ZIM_HOME=${HOME}/.config/zsh/.zim
 ZIM_CONFIG_FILE=${HOME}/.config/zsh/.zimrc
+
+# Add custom completions directory to fpath
+fpath=(${HOME}/.config/zsh/completions $fpath)
 
 # zsh-autosuggestions performance optimizations (must be set before Zim init)
 ZSH_AUTOSUGGEST_MANUAL_REBIND=1                   # Skip automatic rebinding
@@ -42,9 +50,16 @@ fi
 # Initialize modules
 source ${ZIM_HOME}/init.zsh
 
-# Compile zcompdump for faster loading (async in background)
+# ----------------------------------------------------------------------------
+# Completion Cache Compilation
+# ----------------------------------------------------------------------------
+# Compile zcompdump in background for faster loading on next startup
+# Note: Zim's completion module already handles compinit initialization
+
 {
   local zcompdump="${ZDOTDIR:-$HOME}/.zcompdump"
+
+  # Compile cache in background for next startup
   if [[ -s "$zcompdump" && (! -s "${zcompdump}.zwc" || "$zcompdump" -nt "${zcompdump}.zwc") ]]; then
     zcompile "$zcompdump" &!
   fi
@@ -157,6 +172,21 @@ if (( ${+functions[_zsh_autosuggest_bind_widget]} )); then
 fi
 
 # ----------------------------------------------------------------------------
+# fzf Configuration
+# ----------------------------------------------------------------------------
+
+# fzf performance and UI settings
+if command -v fzf &>/dev/null; then
+  export FZF_DEFAULT_OPTS='--height 40% --layout=reverse --border --bind=ctrl-k:kill-line'
+
+  # Use fd for faster file searching (if available)
+  if command -v fd &>/dev/null; then
+    export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'
+    export FZF_ALT_C_COMMAND='fd --type d --hidden --follow --exclude .git'
+  fi
+fi
+
+# ----------------------------------------------------------------------------
 # Key Bindings
 # ----------------------------------------------------------------------------
 # Note: bindkey -v resets many default bindings, so we need to restore them
@@ -240,12 +270,43 @@ command -v uvx &>/dev/null && eval "$(uvx --generate-shell-completion zsh)"
 
 # zoxide - only if command exists
 command -v zoxide &>/dev/null && eval "$(zoxide init zsh)"
-# nvm completions
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
-# sing-box completion is installed to fpath: ${fpath[1]}/_sing-box
+# ----------------------------------------------------------------------------
+# nvm - Lazy Loading (Performance Optimization)
+# ----------------------------------------------------------------------------
+# NVM adds 300-600ms to startup time. Use lazy loading to defer initialization
+# until actually needed (first use of nvm, node, npm, or npx commands).
+
+export NVM_DIR="$HOME/.nvm"
+
+# Lazy load nvm - only load when actually needed
+nvm() {
+  unset -f nvm node npm npx
+  [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+  [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
+  nvm "$@"
+}
+
+node() {
+  unset -f nvm node npm npx
+  [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+  [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
+  node "$@"
+}
+
+npm() {
+  unset -f nvm node npm npx
+  [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+  [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
+  npm "$@"
+}
+
+npx() {
+  unset -f nvm node npm npx
+  [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+  [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
+  npx "$@"
+}
 
 # ----------------------------------------------------------------------------
 # Environment Variables
@@ -295,6 +356,9 @@ y() {
 # Prompt (Async Starship Loading)
 # ----------------------------------------------------------------------------
 
+# Starship configuration file location
+export STARSHIP_CONFIG="${HOME}/.config/starship/starship.toml"
+
 if command -v starship &>/dev/null; then
   # Set a temporary minimal prompt first (instant)
   PS1='%F{cyan}%~%f %# '
@@ -318,4 +382,9 @@ if command -v starship &>/dev/null; then
 
   unset starship_cache
 fi
+
+# ----------------------------------------------------------------------------
+# Performance Profiling Results (Uncomment to display)
+# ----------------------------------------------------------------------------
+# zprof
 
