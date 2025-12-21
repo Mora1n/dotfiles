@@ -279,6 +279,33 @@ command -v zoxide &>/dev/null && eval "$(zoxide init zsh)"
 
 export NVM_DIR="$HOME/.nvm"
 
+# Add nvm's current version bin to PATH immediately (no performance cost)
+# This allows globally installed npm packages to work without loading nvm
+if [[ -s "$NVM_DIR/nvm.sh" ]]; then
+  # Read default version from .nvmrc or nvm alias
+  local nvm_default_version
+  if [[ -f "$NVM_DIR/alias/default" ]]; then
+    nvm_default_version=$(cat "$NVM_DIR/alias/default")
+  elif [[ -f "$HOME/.nvmrc" ]]; then
+    nvm_default_version=$(cat "$HOME/.nvmrc")
+  else
+    nvm_default_version="node"
+  fi
+
+  # Resolve version to actual directory
+  local nvm_version_path="$NVM_DIR/versions/node/$nvm_default_version"
+  if [[ ! -d "$nvm_version_path" && -L "$NVM_DIR/versions/node/$nvm_default_version" ]]; then
+    nvm_version_path=$(readlink "$NVM_DIR/versions/node/$nvm_default_version")
+  fi
+
+  # Add to PATH if directory exists
+  if [[ -d "$nvm_version_path/bin" ]]; then
+    export PATH="$nvm_version_path/bin:$PATH"
+  fi
+
+  unset nvm_default_version nvm_version_path
+fi
+
 # Lazy load nvm - only load when actually needed
 nvm() {
   unset -f nvm node npm npx
