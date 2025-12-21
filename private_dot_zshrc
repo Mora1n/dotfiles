@@ -281,58 +281,31 @@ export NVM_DIR="$HOME/.nvm"
 
 # Add nvm's current version bin to PATH immediately (no performance cost)
 # This allows globally installed npm packages to work without loading nvm
-if [[ -s "$NVM_DIR/nvm.sh" ]]; then
-  # Read default version from .nvmrc or nvm alias
-  local nvm_default_version
-  if [[ -f "$NVM_DIR/alias/default" ]]; then
-    nvm_default_version=$(cat "$NVM_DIR/alias/default")
-  elif [[ -f "$HOME/.nvmrc" ]]; then
-    nvm_default_version=$(cat "$HOME/.nvmrc")
-  else
-    nvm_default_version="node"
-  fi
+if [[ -d "$NVM_DIR/versions/node" ]]; then
+  local nvm_version_path
 
-  # Resolve version to actual directory
-  local nvm_version_path="$NVM_DIR/versions/node/$nvm_default_version"
-  if [[ ! -d "$nvm_version_path" && -L "$NVM_DIR/versions/node/$nvm_default_version" ]]; then
-    nvm_version_path=$(readlink "$NVM_DIR/versions/node/$nvm_default_version")
-  fi
+  # Read default version and find matching directory
+  local nvm_default=$([[ -f "$NVM_DIR/alias/default" ]] && cat "$NVM_DIR/alias/default" 2>/dev/null || [[ -f "$HOME/.nvmrc" ]] && cat "$HOME/.nvmrc" 2>/dev/null)
 
-  # Add to PATH if directory exists
-  if [[ -d "$nvm_version_path/bin" ]]; then
-    export PATH="$nvm_version_path/bin:$PATH"
-  fi
+  # Find version directory: match default or use latest
+  nvm_version_path=$([[ -n "$nvm_default" ]] &&
+    printf '%s\n' "$NVM_DIR/versions/node/v${nvm_default}"* 2>/dev/null | sort -V | tail -1 ||
+    printf '%s\n' "$NVM_DIR/versions/node/v"* 2>/dev/null | sort -V | tail -1)
 
-  unset nvm_default_version nvm_version_path
+  # Add to PATH if found
+  [[ -d "$nvm_version_path/bin" ]] && export PATH="$nvm_version_path/bin:$PATH"
+
+  unset nvm_version_path nvm_default
 fi
 
 # Lazy load nvm - only load when actually needed
+# Only create wrapper for 'nvm' command itself, not node/npm/npx
+# This allows node/npm/npx binaries in PATH to work directly
 nvm() {
-  unset -f nvm node npm npx
+  unset -f nvm
   [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
   [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
   nvm "$@"
-}
-
-node() {
-  unset -f nvm node npm npx
-  [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-  [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
-  node "$@"
-}
-
-npm() {
-  unset -f nvm node npm npx
-  [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-  [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
-  npm "$@"
-}
-
-npx() {
-  unset -f nvm node npm npx
-  [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-  [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
-  npx "$@"
 }
 
 # ----------------------------------------------------------------------------
