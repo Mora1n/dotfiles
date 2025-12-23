@@ -271,6 +271,9 @@ command -v uvx &>/dev/null && eval "$(uvx --generate-shell-completion zsh)"
 # zoxide - only if command exists
 command -v zoxide &>/dev/null && eval "$(zoxide init zsh)"
 
+# sing-box completions - only if command exists
+command -v sing-box &>/dev/null && eval "$(sing-box completion zsh)"
+
 # ----------------------------------------------------------------------------
 # nvm - Lazy Loading (Performance Optimization)
 # ----------------------------------------------------------------------------
