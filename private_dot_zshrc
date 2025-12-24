@@ -396,5 +396,3 @@ fi
 # zprof
 
 
-# Proxy settings (managed by proxy-toggle)
-[ -f "/etc/profile.d/proxy.sh" ] && . "/etc/profile.d/proxy.sh"
