@@ -252,7 +252,6 @@ bindkey -M viins '^[[1;2F' visual-select-end-of-line        # Shift+End
 
 export PATH="${HOME}/phacility/arcanist/bin:${PATH}"  # Arcanist
 export PATH="/usr/local/go/bin:${PATH}"               # Go
-export PATH="${HOME}/.npm-global/bin:${PATH}"         # npm global
 
 # ----------------------------------------------------------------------------
 # Tool Initialization
@@ -396,3 +395,6 @@ fi
 # ----------------------------------------------------------------------------
 # zprof
 
+
+# Proxy settings (managed by proxy-toggle)
+[ -f "/etc/profile.d/proxy.sh" ] && . "/etc/profile.d/proxy.sh"
