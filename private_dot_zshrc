@@ -322,6 +322,18 @@ export XMODIFIERS=@im=ibus
 export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 
 # ----------------------------------------------------------------------------
+# Dracula Pro Theme Colors
+# ----------------------------------------------------------------------------
+
+# 加载 dircolors 配置
+if [[ -f "${HOME}/.config/zsh/.dir_colors" ]]; then
+  eval "$(dircolors -b ${HOME}/.config/zsh/.dir_colors)"
+fi
+
+# eza 颜色配置 (与 LS_COLORS 保持一致)
+export EZA_COLORS="ex=1;32"  # 可执行文件使用亮绿色
+
+# ----------------------------------------------------------------------------
 # Aliases
 # ----------------------------------------------------------------------------
 
@@ -395,4 +407,5 @@ fi
 # ----------------------------------------------------------------------------
 # zprof
 
-
+# Proxy settings (managed by proxy-toggle)
+[ -f "/etc/profile.d/proxy.sh" ] && . "/etc/profile.d/proxy.sh"
