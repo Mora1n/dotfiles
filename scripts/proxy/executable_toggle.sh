@@ -660,8 +660,30 @@ remove_user_rc_file() {
     local old_mode
     old_mode=$(stat -c %a "$rc_file" 2>/dev/null || echo 0644)
 
-    # Remove managed tag line and the following source line
-    awk -v tag="$MANAGED_TAG" 'skip{skip=0; next} index($0, tag){skip=1; next} {print}' "$rc_file" > "$tmp"
+    # Remove empty line before tag, managed tag line, and the following source line
+    awk -v tag="$MANAGED_TAG" '
+        skip{skip=0; next}
+        index($0, tag){
+            # Found tag line, check if previous line was empty
+            if (prev_empty) {
+                # Remove the empty line we stored
+                lines_count--
+            }
+            skip=1
+            next
+        }
+        {
+            # Store current line
+            lines[lines_count++] = $0
+            # Track if current line is empty
+            prev_empty = (length($0) == 0)
+        }
+        END {
+            for (i=0; i<lines_count; i++) {
+                print lines[i]
+            }
+        }
+    ' "$rc_file" > "$tmp"
     if mv "$tmp" "$rc_file" 2>/dev/null; then
         # Restore ownership/permissions
         if [[ -n "$user" ]]; then
