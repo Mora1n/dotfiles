@@ -19,7 +19,7 @@ multiplier = 3
 # Window Configuration
 [window]
 startup_mode = "Maximized"
-opacity = 0.8
+opacity = 0.9
 decorations = "None"
 
 [window.dimensions]
