@@ -1,0 +1,17 @@
+[Desktop Entry]
+Name=WindTerm
+Comment=A professional cross-platform SSH/Sftp/Shell/Telnet/Serial terminal
+GenericName=SSH/Terminal Client
+Exec=windterm
+Type=Application
+Icon=windterm.png
+StartupNotify=false
+StartupWMClass=WindTerm
+Categories=Network;RemoteAccess;
+Terminal=false
+Keywords=ssh;terminal;windterm;
+
+[Desktop Action new-empty-window]
+Name=New Empty Window
+Icon=windterm.png
+Exec=windterm
