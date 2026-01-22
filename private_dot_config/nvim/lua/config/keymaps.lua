@@ -1,5 +1,8 @@
 -- [[ Basic Keymaps ]]
 
+-- Disable Space default behavior to prevent cursor movement
+vim.keymap.set('n', '<Space>', '<Nop>', { noremap = true, silent = true })
+
 -- Detect VSCode environment
 local is_vscode = vim.g.vscode ~= nil
 
@@ -55,6 +58,9 @@ if not is_vscode then
   vim.keymap.set('n', '<C-Left>', ':vertical resize -2<CR>', { desc = 'Decrease window width' })
   vim.keymap.set('n', '<C-Right>', ':vertical resize +2<CR>', { desc = 'Increase window width' })
 
+  -- Clear search highlight
+  vim.keymap.set('n', '<C-l>', ':nohlsearch<CR>', { desc = 'Clear search highlight' })
+
   -- Split windows
   vim.keymap.set('n', '<leader>wv', ':vsplit<CR>', { desc = 'Split window vertically' })
   vim.keymap.set('n', '<leader>ws', ':split<CR>', { desc = 'Split window horizontally' })
@@ -79,6 +85,11 @@ if not is_vscode then
   vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next diagnostic' })
   vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Show diagnostic error' })
   vim.keymap.set('n', '<leader>xl', vim.diagnostic.setloclist, { desc = 'Open diagnostic list' })
+
+  -- Code formatting
+  vim.keymap.set('n', '<leader>cf', function()
+    vim.lsp.buf.format({ async = true })
+  end, { desc = 'Format code' })
 end
 
 -- ============================================================================

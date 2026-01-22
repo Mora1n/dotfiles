@@ -13,6 +13,9 @@ return {
     { '<leader>fr', '<cmd>FzfLua resume<cr>', desc = 'Resume last search' },
     { '<leader>f/', '<cmd>FzfLua lgrep_curbuf<cr>', desc = 'Search in current buffer' },
     { '<leader>fh', '<cmd>FzfLua help_tags<cr>', desc = 'Help tags' },
+    { '<leader>fc', '<cmd>FzfLua command_history<cr>', desc = 'Command history' },
+    { '<leader>fgc', '<cmd>FzfLua git_commits<cr>', desc = 'Git commits' },
+    { '<leader>fs', '<cmd>FzfLua lsp_workspace_symbols<cr>', desc = 'LSP workspace symbols' },
   },
   enabled = utils.not_vscode,
   opts = {

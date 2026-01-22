@@ -40,9 +40,9 @@ return {
       providers = {
         buffer = {
           opts = {
-            max_sync_buffer_size = 10000,
-            max_async_buffer_size = 100000,
-            max_total_buffer_size = 200000,
+            max_sync_buffer_size = 20000,
+            max_async_buffer_size = 200000,
+            max_total_buffer_size = 500000,
           },
         },
       },
@@ -55,6 +55,7 @@ return {
       implementation = 'prefer_rust_with_warning',
       frecency = { enabled = true },
       use_proximity = true,
+      sorts = { 'exact', 'score', 'sort_text' },
     },
   },
 }

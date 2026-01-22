@@ -44,29 +44,29 @@ return {
 
       -- Window management
       { '<leader>w', group = 'Window' },
-      { '<leader>wv', desc = 'Split vertically' },
-      { '<leader>ws', desc = 'Split horizontally' },
-      { '<leader>wc', desc = 'Close window' },
+      { '<leader>wv', desc = 'Split window vertically' },
+      { '<leader>ws', desc = 'Split window horizontally' },
+      { '<leader>wc', desc = 'Close current window' },
       { '<leader>wo', desc = 'Close other windows' },
-      { '<leader>w=', desc = 'Equalize sizes' },
+      { '<leader>w=', desc = 'Equalize window sizes' },
 
       -- LSP
       { '<leader>c', group = 'Code' },
-      { '<leader>ca', desc = 'Code action' },
-      { '<leader>cf', desc = 'Format' },
-      { '<leader>rn', desc = 'Rename' },
-      { 'gd', desc = 'Go to definition' },
-      { 'gD', desc = 'Go to declaration' },
-      { 'gr', desc = 'Go to references' },
-      { 'gi', desc = 'Go to implementation' },
-      { 'K', desc = 'Hover documentation' },
+      { '<leader>ca', desc = 'Code action (LSP)' },
+      { '<leader>cf', desc = 'Format (LSP)' },
+      { '<leader>rn', desc = 'Rename (LSP)' },
+      { 'gd', desc = 'Go to definition (LSP)' },
+      { 'gD', desc = 'Go to declaration (LSP)' },
+      { 'gr', desc = 'Go to references (LSP)' },
+      { 'gi', desc = 'Go to implementation (LSP)' },
+      { 'K', desc = 'Hover documentation (LSP)' },
 
       -- Diagnostics
       { '<leader>x', group = 'Diagnostics' },
       { '<leader>xl', desc = 'Open diagnostic list' },
       { '<leader>e', desc = 'Show diagnostic error' },
-      { '[d', desc = 'Previous diagnostic' },
-      { ']d', desc = 'Next diagnostic' },
+      { '[d', desc = 'Go to previous diagnostic' },
+      { ']d', desc = 'Go to next diagnostic' },
 
       -- Yank/Clipboard operations
       { '<leader>y', desc = 'Yank to clipboard', mode = { 'n', 'v' } },
@@ -79,7 +79,7 @@ return {
       -- Line operations
       { '<leader>o', desc = 'Insert blank line below' },
       { '<leader>O', desc = 'Insert blank line above' },
-      { 'J', desc = 'Join lines (keep cursor)' },
+      { 'J', desc = 'Join lines and keep cursor position' },
 
       -- Quit
       { '<leader>q', desc = 'Quit' },
@@ -95,11 +95,8 @@ return {
       { 'gcA', desc = 'Comment end of line' },
       { '<C-_>', desc = 'Toggle comment (Ctrl+/)', mode = { 'n', 'x', 'i' } },
 
-      -- Window navigation (Ctrl+hjkl)
-      { '<C-h>', desc = 'Move to left window' },
-      { '<C-j>', desc = 'Move to bottom window' },
-      { '<C-k>', desc = 'Move to top window' },
-      { '<C-l>', desc = 'Clear highlight and move right' },
+      -- Clear search highlight
+      { '<C-l>', desc = 'Clear search highlight' },
 
       -- Window resize (Ctrl+arrows)
       { '<C-Up>', desc = 'Increase window height' },
@@ -133,7 +130,7 @@ return {
       { '<C-BS>', desc = 'Delete word backward', mode = 'i' },
 
       -- Select mode
-      { '<BS>', desc = 'Delete selection and insert', mode = 's' },
+      { '<BS>', desc = 'Delete selection and enter insert', mode = 's' },
 
       -- Flash.nvim keybindings
       { 's', desc = 'Flash jump', mode = { 'n', 'x', 'o' } },

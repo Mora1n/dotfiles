@@ -16,3 +16,4 @@ d71c34c9d72d0236e1cfd735c119a9c8c92c3d3a 2a8880bc4dea5234125a8eb4e9c073ac49284f1
 9f2d85c8c7c6ccb6cf16893476ec28e34372377f e121552d92f36bb01f26e85c4f34098eaa9051bd morain <morain.fu@gmail.com> 1762487912 +0800	commit: fix: correct insert mode Home/End and Ctrl + arrow key mappings
 e121552d92f36bb01f26e85c4f34098eaa9051bd 97f16f1baec16bde08ff13935bcabae86a35c033 morain <morain.fu@gmail.com> 1762529502 +0800	commit: refactor: optimize lazy.nvim config for better performance and maintainability
 97f16f1baec16bde08ff13935bcabae86a35c033 5d5b8d0e5886b1e02fa0a54c0cd01e6feba7f887 morain <morain.fu@gmail.com> 1762531247 +0800	commit: fix: simplify Esc key behavior in blink-cmp
+5d5b8d0e5886b1e02fa0a54c0cd01e6feba7f887 c8e08e9d58eba4afa1bf6da96d4b9c0ab7558e9b morain <morain.fu@gmail.com> 1768291753 +0800	commit: feat: add LSP navigation keymaps for VSCode integration
