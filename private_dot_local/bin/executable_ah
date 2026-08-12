@@ -1,3 +1,24 @@
 #!/usr/bin/env sh
 
+sessions_json="$(herdr session list --json)" || exit $?
+session="$(
+    printf '%s\n' "$sessions_json" |
+        jq -er '
+            (if (.sessions | type) != "array" then
+                 error("sessions must be an array")
+             else
+                 [.sessions[].name]
+             end) as $names |
+            if ($names | index("main")) != null then "main"
+            elif ($names | index("default")) != null then "default"
+            elif ($names | length) > 0 then $names[0]
+            else "/create-main"
+            end
+        '
+)" || exit $?
+
+if [ "$session" != "/create-main" ]; then
+    exec herdr session attach "$session"
+fi
+
 exec herdr --session main

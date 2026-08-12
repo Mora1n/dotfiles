@@ -1,5 +1,8 @@
+onboarding = false
 [keys]
-prefix = "alt+z"
+prefix = "alt+h"
+navigate_workspace_up = "shift+k"
+navigate_workspace_down = "shift+j"
 help = "prefix+?"
 settings = "prefix+shift+s"
 detach = "prefix+d"
@@ -30,12 +33,15 @@ resize_mode = "prefix+shift+r"
 toggle_sidebar = "prefix+b"
 
 [ui.sound]
-enabled = false
+enabled = true
 
 [ui]
 show_agent_labels_on_pane_borders = false
-agent_panel_sort = "spaces"
+agent_panel_sort = "priority"
 
 [theme]
 name = "dracula"
 auto_switch = false
+
+[ui.toast]
+delivery = "herdr"

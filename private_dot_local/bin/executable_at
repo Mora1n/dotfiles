@@ -1,18 +1,8 @@
 #!/usr/bin/env sh
 
-session="$(
-    tmux list-sessions -F '#{session_name}' 2>/dev/null |
-        awk '
-            /^[0-9]+$/ { used[$1] = 1 }
-            END {
-                session = 0
-                while (used[session]) {
-                    session++
-                }
-                print session
-            }
-        '
-)"
+if tmux list-sessions -F '#{session_name}' >/dev/null 2>&1; then
+    exec tmux attach-session
+fi
 
-# Create a dedicated session for this terminal and keep it after detach.
-exec tmux new-session -d -s "$session" \; attach-session -t "$session"
+# Create the initial session only when no tmux server/session exists.
+exec tmux new-session -d -s 0 \; attach-session -t 0

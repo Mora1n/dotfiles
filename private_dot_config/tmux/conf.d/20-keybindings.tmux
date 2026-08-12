@@ -4,9 +4,11 @@
 
 # Prefix keys
 unbind C-b
-set -g prefix M-z
+unbind M-z
+unbind M-Z
+set -g prefix M-t
 set -g prefix2 C-\\
-bind M-Z send-prefix
+bind M-T send-prefix
 bind C-\\ send-prefix -2
 
 # Session management
