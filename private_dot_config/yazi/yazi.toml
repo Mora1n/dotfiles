@@ -1,0 +1,187 @@
+# ╭─────────────────────────────────────────────────────────╮
+# │                    Yazi Main Config                     │
+# ╰─────────────────────────────────────────────────────────╯
+
+# ═══════════════════════════════════════════════════════════
+#  Plugin Config
+# ═══════════════════════════════════════════════════════════
+
+[plugin]
+# Archive previewer - preview compressed files using ouch
+prepend_previewers = [
+	{ mime = "application/*zip",            run = "ouch" },
+	{ mime = "application/x-tar",           run = "ouch" },
+	{ mime = "application/x-bzip2",         run = "ouch" },
+	{ mime = "application/x-7z-compressed", run = "ouch" },
+	{ mime = "application/x-rar",           run = "ouch" },
+	{ mime = "application/vnd.rar",         run = "ouch" },
+	{ mime = "application/x-xz",            run = "ouch" },
+	{ mime = "application/xz",              run = "ouch" },
+	{ mime = "application/x-zstd",          run = "ouch" },
+	{ mime = "application/zstd",            run = "ouch" },
+	{ mime = "application/java-archive",    run = "ouch" },
+	# Directory previewer - show tree structure using eza
+	{ url = "*/", run = 'piper -- eza -TL=3 --color=always --icons=always --group-directories-first --no-quotes "$1"' },
+]
+
+# ═══════════════════════════════════════════════════════════
+#  Opener Config
+# ═══════════════════════════════════════════════════════════
+
+[opener]
+# Text editor
+edit = [
+	{ run = 'nvim "$@"', block = true, desc = "Edit with Neovim", for = "unix" },
+]
+
+# Extract archives
+extract = [
+	{ run = 'ouch d -y %*',   desc = "Extract here with ouch", for = "windows" },
+	{ run = 'ouch d -y "$@"', desc = "Extract here with ouch", for = "unix" },
+]
+
+# Open with system default
+open_with_default = [
+	{ run = 'xdg-open "$@"', desc = "Open with default app", for = "unix" },
+	{ run = 'open "$@"', desc = "Open with default app", for = "macos" },
+	{ run = 'start "" %*', desc = "Open with default app", for = "windows" },
+]
+
+# Open in browser
+open_in_browser = [
+	{ run = 'xdg-open "$@"', desc = "Open in browser", for = "unix" },
+	{ run = 'open "$@"', desc = "Open in browser", for = "macos" },
+	{ run = 'start "" %*', desc = "Open in browser", for = "windows" },
+]
+
+# Image viewer
+image_viewer = [
+	{ run = 'qview "$@"', orphan = true, desc = "Open with qview", for = "unix" },
+]
+
+# ═══════════════════════════════════════════════════════════
+#  Default Opener Rules
+# ═══════════════════════════════════════════════════════════
+
+[open]
+rules = [
+	# Text files
+	{ mime = "text/*", use = "edit" },
+	{ mime = "application/json", use = "edit" },
+	{ mime = "application/x-yaml", use = "edit" },
+	{ mime = "text/yaml", use = "edit" },
+	{ mime = "text/x-yaml", use = "edit" },
+	{ mime = "application/toml", use = "edit" },
+	{ mime = "application/xml", use = "edit" },
+	{ mime = "application/javascript", use = "edit" },
+	{ mime = "application/x-sh", use = "edit" },
+	{ mime = "application/x-shellscript", use = "edit" },
+	{ mime = "inode/x-empty", use = "edit" },
+
+	# YAML files by name
+	{ url = "*.yml", use = "edit" },
+	{ url = "*.yaml", use = "edit" },
+
+	# TOML files by name
+	{ url = "*.toml", use = "edit" },
+
+	# Markdown files
+	{ url = "*.md", use = "edit" },
+	{ url = "*.markdown", use = "edit" },
+	{ mime = "text/markdown", use = "edit" },
+
+	# PDF files
+	{ url = "*.pdf", use = "open_with_default" },
+	{ mime = "application/pdf", use = "open_with_default" },
+
+	# Image files
+	{ mime = "image/*", use = "image_viewer" },
+	{ url = "*.jpg", use = "image_viewer" },
+	{ url = "*.jpeg", use = "image_viewer" },
+	{ url = "*.png", use = "image_viewer" },
+	{ url = "*.gif", use = "image_viewer" },
+	{ url = "*.bmp", use = "image_viewer" },
+	{ url = "*.webp", use = "image_viewer" },
+	{ url = "*.svg", use = "image_viewer" },
+	{ url = "*.ico", use = "image_viewer" },
+	{ url = "*.tiff", use = "image_viewer" },
+	{ url = "*.tif", use = "image_viewer" },
+
+	# Common text formats
+	{ url = "*.txt", use = "edit" },
+	{ url = "*.conf", use = "edit" },
+	{ url = "*.config", use = "edit" },
+	{ url = "*.ini", use = "edit" },
+	{ url = "*.log", use = "edit" },
+	{ url = "*.sh", use = "edit" },
+	{ url = "*.bash", use = "edit" },
+	{ url = "*.zsh", use = "edit" },
+	{ url = "*.fish", use = "edit" },
+	{ url = "*.py", use = "edit" },
+	{ url = "*.js", use = "edit" },
+	{ url = "*.ts", use = "edit" },
+	{ url = "*.jsx", use = "edit" },
+	{ url = "*.tsx", use = "edit" },
+	{ url = "*.rs", use = "edit" },
+	{ url = "*.go", use = "edit" },
+	{ url = "*.c", use = "edit" },
+	{ url = "*.cpp", use = "edit" },
+	{ url = "*.h", use = "edit" },
+	{ url = "*.hpp", use = "edit" },
+	{ url = "*.java", use = "edit" },
+	{ url = "*.css", use = "edit" },
+	{ url = "*.scss", use = "edit" },
+	{ url = "*.html", use = "edit" },
+	{ url = "*.htm", use = "edit" },
+	{ url = "*.vue", use = "edit" },
+	{ url = "*.svelte", use = "edit" },
+	{ url = "*.lua", use = "edit" },
+	{ url = "*.vim", use = "edit" },
+	{ url = "*.sql", use = "edit" },
+	{ url = "Makefile", use = "edit" },
+	{ url = "Dockerfile", use = "edit" },
+	{ url = ".gitignore", use = "edit" },
+	{ url = ".gitattributes", use = "edit" },
+	{ url = "README", use = "edit" },
+	{ url = "LICENSE", use = "edit" },
+	{ url = "*.json", use = "edit" },
+	{ url = "*.xml", use = "edit" },
+	{ url = "*.csv", use = "edit" },
+	{ url = "*.env", use = "edit" },
+	{ url = ".env*", use = "edit" },
+	{ url = "*.properties", use = "edit" },
+	{ url = "*.gradle", use = "edit" },
+	{ url = "*.cmake", use = "edit" },
+	{ url = "CMakeLists.txt", use = "edit" },
+	{ url = "*.gitconfig", use = "edit" },
+	{ url = ".gitmodules", use = "edit" },
+	{ url = "*.editorconfig", use = "edit" },
+	{ url = ".editorconfig", use = "edit" },
+
+	# Archive files by MIME
+	{ mime = "application/*zip", use = "extract" },
+	{ mime = "application/x-tar", use = "extract" },
+	{ mime = "application/x-bzip2", use = "extract" },
+	{ mime = "application/x-7z-compressed", use = "extract" },
+	{ mime = "application/x-rar", use = "extract" },
+	{ mime = "application/vnd.rar", use = "extract" },
+	{ mime = "application/x-xz", use = "extract" },
+	{ mime = "application/xz", use = "extract" },
+	{ mime = "application/x-zstd", use = "extract" },
+	{ mime = "application/zstd", use = "extract" },
+	{ mime = "application/java-archive", use = "extract" },
+
+	# Archive files by name
+	{ url = "*.zip", use = "extract" },
+	{ url = "*.tar", use = "extract" },
+	{ url = "*.tar.gz", use = "extract" },
+	{ url = "*.tgz", use = "extract" },
+	{ url = "*.tar.bz2", use = "extract" },
+	{ url = "*.tbz2", use = "extract" },
+	{ url = "*.tar.xz", use = "extract" },
+	{ url = "*.txz", use = "extract" },
+	{ url = "*.tar.zst", use = "extract" },
+	{ url = "*.7z", use = "extract" },
+	{ url = "*.rar", use = "extract" },
+	{ url = "*.jar", use = "extract" },
+]

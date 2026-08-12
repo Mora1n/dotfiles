@@ -1,0 +1,89 @@
+[
+  {
+    "bindings": {
+      "f11": "zed::ToggleFullScreen"
+    },
+    "context": "!debugger_running"
+  },
+  {
+    "bindings": {
+      "a": "project_panel::NewFile",
+      "d": [
+        "project_panel::Trash",
+        {
+          "skip_prompt": false
+        }
+      ],
+      "p": "project_panel::Paste",
+      "r": "project_panel::Rename",
+      "shift-a": "project_panel::NewDirectory",
+      "shift-d": [
+        "project_panel::Delete",
+        {
+          "skip_prompt": false
+        }
+      ],
+      "shift-r": null,
+      "x": "project_panel::Cut",
+      "y": "project_panel::Copy",
+      "y y": "project_panel::Duplicate"
+    },
+    "context": "(ProjectPanel && not_editing)"
+  },
+  {
+    "bindings": {
+      "ctrl-k f": "editor::Format",
+      "ctrl-shift-i": null
+    },
+    "context": "Editor"
+  },
+  {
+    "bindings": {
+      "shift-h": "project_panel::CollapseAllEntries",
+      "shift-o": "project_panel::RevealInFileManager"
+    },
+    "context": "ProjectPanel"
+  },
+  {
+    "bindings": {
+      "ctrl-1": "editor::ToggleFocus",
+      "ctrl-`": "terminal_panel::Toggle",
+      "ctrl-alt-b": null,
+      "ctrl-b": null,
+      "ctrl-j": null,
+      "ctrl-k h": "workspace::ToggleLeftDock",
+      "ctrl-k j": "workspace::ToggleBottomDock",
+      "ctrl-k l": "workspace::ToggleRightDock"
+    },
+    "context": "Workspace"
+  },
+  {
+    "bindings": {
+      "f10": "debugger::StepOver",
+      "f11": "debugger::StepInto"
+    }
+  },
+  {
+    "bindings": {
+      "f10": [
+        "app_menu::OpenApplicationMenu",
+        "Zed"
+      ]
+    },
+    "context": "Workspace && !debugger_running"
+  },
+  {
+    "context": "Workspace && !debugger_running"
+  },
+  {
+    "context": "(VimControl && !menu)",
+    "bindings": {
+      "g r": "editor::GoToNextReference"
+    }
+  },
+  {
+    "bindings": {
+      "ctrl-shift-y": "debugger::FocusConsole"
+    }
+  }
+]

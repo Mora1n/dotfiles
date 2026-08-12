@@ -1,0 +1,54 @@
+[
+  {
+    "label": "Python: Run Current File (uv)",
+    "command": "$ZED_WORKTREE_ROOT/.venv/bin/python",
+    "args": ["$ZED_RELATIVE_FILE"],
+    "cwd": "$ZED_WORKTREE_ROOT",
+    "use_new_terminal": false,
+    "allow_concurrent_runs": false,
+    "reveal": "always",
+    "reveal_target": "dock",
+    "hide": "never",
+    "shell": "system",
+    "save": "all"
+  },
+  {
+    "label": "Pytest: Current File (uv)",
+    "command": "$ZED_WORKTREE_ROOT/.venv/bin/python",
+    "args": ["-m", "pytest", "$ZED_RELATIVE_FILE", "-q"],
+    "cwd": "$ZED_WORKTREE_ROOT",
+    "use_new_terminal": false,
+    "allow_concurrent_runs": false,
+    "reveal": "always",
+    "reveal_target": "dock",
+    "hide": "never",
+    "shell": "system",
+    "save": "all"
+  },
+  {
+    "label": "uv: Sync Project",
+    "command": "uv",
+    "args": ["sync"],
+    "cwd": "$ZED_WORKTREE_ROOT",
+    "use_new_terminal": false,
+    "allow_concurrent_runs": false,
+    "reveal": "always",
+    "reveal_target": "dock",
+    "hide": "never",
+    "shell": "system",
+    "save": "all"
+  },
+  {
+    "label": "Zed: Generate Project Config",
+    "command": "python3",
+    "args": ["/home/morain/.config/zed/templates/debug.py"],
+    "cwd": "$ZED_WORKTREE_ROOT",
+    "use_new_terminal": true,
+    "allow_concurrent_runs": false,
+    "reveal": "always",
+    "reveal_target": "dock",
+    "hide": "never",
+    "shell": "system",
+    "save": "all"
+  }
+]

@@ -1,0 +1,170 @@
+{
+  "code_lens": "on",
+  "agent_servers": {
+    "codex-acp": {
+      "type": "registry"
+    }
+  },
+  "proxy": "",
+  "title_bar": {
+
+  },
+  "status_bar": {
+
+  },
+  "collaboration_panel": {
+    "button": false,
+    "dock": "left",
+    "default_width": 360.0,
+  },
+  "outline_panel": {
+    "dock": "left",
+    "default_width": 360.0,
+  },
+  "which_key": {
+    "enabled": true,
+  },
+  "edit_predictions": {
+    "open_ai_compatible_api": {
+      "model": "gpt-5.4",
+      "api_url": "http://211.155.226.106:22803/v1"
+    },
+    "provider": "codestral",
+  },
+  "active_pane_modifiers": {
+    "inactive_opacity": 0.9,
+  },
+  "inlay_hints": {
+    "show_value_hints": false,
+    "show_background": false,
+    "enabled": false
+  },
+  "bottom_dock_layout": "full",
+  "debugger": {
+    "button": true,
+    "dock": "bottom",
+    "save_breakpoints": true,
+  },
+  "git_panel": {
+    "dock": "left",
+    "tree_view": true,
+  },
+  "ssh_connections": [
+    {
+      "host": "salome-9.8.0",
+      "args": [],
+      "projects": [],
+    },
+  ],
+  "agent": {
+    "dock": "left",
+    "inline_assistant_model": {
+      "provider": "mistral",
+      "model": "mistral-large-latest",
+    },
+    "default_model": {
+      "effort": "high",
+      "enable_thinking": true,
+      "provider": "copilot_chat",
+      "model": "gpt-5-mini",
+    },
+    "model_parameters": [],
+  },
+  "agent_ui_font_size": 14,
+  "auto_install_extensions": {
+    "comment": true,
+    "csv": true,
+    "dockerfile": true,
+    "docker-compose": true,
+    "fortran": true,
+    "git-firefly": true,
+    "html": true,
+    "lua": true,
+    "make": true,
+    "material-icon-theme": true,
+    "matlab": true,
+    "rainbow-csv": true,
+    "sql": true,
+    "toml": true,
+  },
+  "auto_signature_help": false,
+  "autosave": "on_focus_change",
+  "base_keymap": "VSCode",
+  "buffer_font_fallbacks": [".ZedMono"],
+  "buffer_font_family": "JetBrainsMono Nerd Font Mono",
+  "buffer_font_size": 14,
+  "colorize_brackets": true,
+  "cursor_blink": true,
+  "file_types": {
+    "cpp": ["*.mfront", "*.mtest"],
+    "FortranFixedForm": ["*.umat"],
+    "FortranFreeForm": ["*.F90"],
+    "json": ["*.json"],
+    "plaintext": ["mess", "message"],
+    "python": ["*comm"],
+  },
+  "format_on_save": "off",
+  "icon_theme": "Material Icon Theme",
+  "languages": {
+    "Python": {
+      "language_servers": [
+        "ty",
+        "ruff",
+        "!basedpyright",
+        "!pyrefly",
+        "!pyright",
+        "!pylsp",
+      ],
+    },
+  },
+  "minimap": {
+    "show": "auto",
+  },
+  "project_panel": {
+    "bold_folder_labels": true,
+    "auto_fold_dirs": false,
+    "default_width": 360,
+    "dock": "right",
+  },
+  "relative_line_numbers": "wrapped",
+  "show_signature_help_after_edits": false,
+  "show_whitespaces": "boundary",
+  "sticky_scroll": {
+    "enabled": true,
+  },
+  "tabs": {
+    "git_status": false,
+    "file_icons": true,
+    "close_position": "left",
+  },
+  "telemetry": {
+    "diagnostics": false,
+    "metrics": false,
+  },
+  "terminal": {
+    "detect_venv": {
+      "on": {
+        "directories": [".venv"],
+      },
+    },
+    "env": {},
+    "font_family": "JetBrainsMono Nerd Font Mono",
+    "shell": {
+      "program": "zsh",
+    },
+  },
+  "theme": {
+    "dark": "Dracula Pro",
+    "light": "Dracula Pro (Alucard)",
+    "mode": "system",
+  },
+  "ui_font_fallbacks": [".ZedSans"],
+  "ui_font_family": "Noto Sans CJK SC",
+  "vim_mode": true,
+  "language_models": {
+    "openai_compatible": {},
+    "anthropic": {
+      "api_url": "http://localhost:5000",
+    },
+  },
+}

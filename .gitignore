@@ -1,0 +1,42 @@
+# Nested repository metadata
+**/.git/
+**/dot_git/
+
+# Runtime files
+*.log
+*.sock
+*.pid
+*.pid.lock
+
+# Temporary, backup, and editor files
+*~
+*.tmp
+*.temp
+*.bak
+*.orig
+*.rej
+*.swp
+*.swo
+.#*
+\#*\#
+
+# Python caches
+**/__pycache__/
+*.py[cod]
+**/.pytest_cache/
+**/.mypy_cache/
+**/.ruff_cache/
+
+# Node and package-manager caches
+**/node_modules/
+**/.npm/
+**/.yarn/cache/
+**/.pnpm-store/
+
+# Operating-system metadata
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Machine-local SSH configuration
+private_dot_ssh/

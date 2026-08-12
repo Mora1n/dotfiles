@@ -1,0 +1,5 @@
+python-downloads = "manual"
+
+[[index]]
+url = "https://mirrors.aliyun.com/pypi/simple"
+default = true

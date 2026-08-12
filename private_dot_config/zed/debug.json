@@ -1,0 +1,23 @@
+[
+  {
+    "label": "Python: Current File (uv)",
+    "adapter": "Debugpy",
+    "request": "launch",
+    "python": "$ZED_WORKTREE_ROOT/.venv/bin/python",
+    "program": "$ZED_RELATIVE_FILE",
+    "cwd": "$ZED_WORKTREE_ROOT",
+    "console": "integratedTerminal",
+    "justMyCode": true
+  },
+  {
+    "label": "Pytest: Current File (uv)",
+    "adapter": "Debugpy",
+    "request": "launch",
+    "python": "$ZED_WORKTREE_ROOT/.venv/bin/python",
+    "module": "pytest",
+    "args": ["$ZED_RELATIVE_FILE", "-q"],
+    "cwd": "$ZED_WORKTREE_ROOT",
+    "console": "integratedTerminal",
+    "justMyCode": true
+  }
+]

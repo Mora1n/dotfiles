@@ -1,0 +1,168 @@
+# ╭─────────────────────────────────────────────────────────╮
+# │                   Yazi Keymap Config                    │
+# ╰─────────────────────────────────────────────────────────╯
+
+# ═══════════════════════════════════════════════════════════
+#  Navigation
+# ═══════════════════════════════════════════════════════════
+
+[[mgr.prepend_keymap]]
+on   = "K"
+run  = "plugin parent-arrow -1"
+desc = "Parent directory up"
+
+[[mgr.prepend_keymap]]
+on   = "J"
+run  = "plugin parent-arrow 1"
+desc = "Parent directory down"
+
+[[mgr.prepend_keymap]]
+on   = "l"
+run  = "plugin smart-enter"
+desc = "Enter the child directory, or open the file"
+
+# ═══════════════════════════════════════════════════════════
+#  File Operations
+# ═══════════════════════════════════════════════════════════
+
+[[mgr.prepend_keymap]]
+on   = [ "c", "m" ]
+run  = "plugin chmod"
+desc = "Chmod on selected files"
+
+[[mgr.prepend_keymap]]
+on   = "C"
+run  = "plugin ouch"
+desc = "Compress with ouch"
+
+[[mgr.prepend_keymap]]
+on   = "p"
+run  = "plugin smart-paste"
+desc = "Paste into the hovered directory or CWD"
+
+[[mgr.prepend_keymap]]
+on   = "F"
+run  = "plugin smart-filter"
+desc = "Smart filter"
+
+[[mgr.prepend_keymap]]
+on   = "O"
+run  = "open --interactive"
+desc = "Open with..."
+
+[[mgr.prepend_keymap]]
+on   = [ "g", "o" ]
+for  = "unix"
+run  = 'shell xdg-open "$@" --confirm'
+desc = "Open with default app"
+
+[[mgr.prepend_keymap]]
+on   = [ "g", "o" ]
+for  = "macos"
+run  = 'shell open "$@" --confirm'
+desc = "Open with default app"
+
+[[mgr.prepend_keymap]]
+on   = [ "g", "o" ]
+for  = "windows"
+run  = 'shell start "" %* --confirm'
+desc = "Open with default app"
+
+# ═══════════════════════════════════════════════════════════
+#  Shell Integration
+# ═══════════════════════════════════════════════════════════
+
+[[mgr.prepend_keymap]]
+on   = "!"
+for  = "unix"
+run  = 'shell "$SHELL" --block'
+desc = "Open $SHELL here"
+
+[[mgr.prepend_keymap]]
+on   = "!"
+for  = "windows"
+run  = 'shell "powershell.exe" --block'
+desc = "Open PowerShell here"
+
+# ═══════════════════════════════════════════════════════════
+#  Input Control
+# ═══════════════════════════════════════════════════════════
+
+[[input.prepend_keymap]]
+on   = "<Esc>"
+run  = "close"
+desc = "Cancel input"
+
+# ═══════════════════════════════════════════════════════════
+#  Quit Control
+# ═══════════════════════════════════════════════════════════
+
+[[mgr.prepend_keymap]]
+on   = "q"
+run  = "plugin confirm-quit"
+desc = "Quit with confirmation"
+
+[[mgr.prepend_keymap]]
+on   = "T"
+run  = "close"
+desc = "Close current tab"
+
+# ═══════════════════════════════════════════════════════════
+#  Vim-style Relative Motions
+# ═══════════════════════════════════════════════════════════
+# Usage: Press number keys to trigger vim-style relative motions
+# Examples: 3j (down 3), 5k (up 5), 2t (create 2 tabs), gg (go to line)
+
+[[mgr.prepend_keymap]]
+on = [ "1" ]
+run = "plugin relative-motions 1"
+desc = "Move in relative steps"
+
+[[mgr.prepend_keymap]]
+on   = [ "2" ]
+run  = "plugin relative-motions 2"
+desc = "Move in relative steps"
+
+[[mgr.prepend_keymap]]
+on   = [ "3" ]
+run  = "plugin relative-motions 3"
+desc = "Move in relative steps"
+
+[[mgr.prepend_keymap]]
+on   = [ "4" ]
+run  = "plugin relative-motions 4"
+desc = "Move in relative steps"
+
+[[mgr.prepend_keymap]]
+on   = [ "5" ]
+run  = "plugin relative-motions 5"
+desc = "Move in relative steps"
+
+[[mgr.prepend_keymap]]
+on   = [ "6" ]
+run  = "plugin relative-motions 6"
+desc = "Move in relative steps"
+
+[[mgr.prepend_keymap]]
+on   = [ "7" ]
+run  = "plugin relative-motions 7"
+desc = "Move in relative steps"
+
+[[mgr.prepend_keymap]]
+on   = [ "8" ]
+run  = "plugin relative-motions 8"
+desc = "Move in relative steps"
+
+[[mgr.prepend_keymap]]
+on   = [ "9" ]
+run  = "plugin relative-motions 9"
+desc = "Move in relative steps"
+
+# ═══════════════════════════════════════════════════════════
+#  Device Mounting
+# ═══════════════════════════════════════════════════════════
+
+[[mgr.prepend_keymap]]
+on   = "M"
+run  = "plugin mount"
+desc = "Mount/unmount devices"
