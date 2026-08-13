@@ -16,8 +16,10 @@ ZDOTDIR=${HOME}
 ZIM_HOME=${HOME}/.config/zsh/.zim
 ZIM_CONFIG_FILE=${HOME}/.config/zsh/.zimrc
 
-# Add custom completions directory to fpath
-fpath=(${HOME}/.config/zsh/completions $fpath)
+# Keep completion paths unique and load available site/custom completions.
+typeset -gU fpath
+[[ -d /usr/share/zsh/site-functions ]] && fpath=(/usr/share/zsh/site-functions $fpath)
+[[ -d ${HOME}/.config/zsh/completions ]] && fpath=(${HOME}/.config/zsh/completions $fpath)
 
 # zsh-autosuggestions performance optimizations (must be set before Zim init)
 ZSH_AUTOSUGGEST_MANUAL_REBIND=1                   # Skip automatic rebinding
@@ -49,21 +51,6 @@ fi
 
 # Initialize modules
 source ${ZIM_HOME}/init.zsh
-
-# ----------------------------------------------------------------------------
-# Completion Cache Compilation
-# ----------------------------------------------------------------------------
-# Compile zcompdump in background for faster loading on next startup
-# Note: Zim's completion module already handles compinit initialization
-
-{
-  local zcompdump="${ZDOTDIR:-$HOME}/.zcompdump"
-
-  # Compile cache in background for next startup
-  if [[ -s "$zcompdump" && (! -s "${zcompdump}.zwc" || "$zcompdump" -nt "${zcompdump}.zwc") ]]; then
-    zcompile "$zcompdump" &!
-  fi
-} &!
 
 # ----------------------------------------------------------------------------
 # Vi-mode Configuration
@@ -250,8 +237,13 @@ bindkey -M viins '^[[1;2F' visual-select-end-of-line        # Shift+End
 # PATH Configuration
 # ----------------------------------------------------------------------------
 
-export PATH="${HOME}/phacility/arcanist/bin:${PATH}"  # Arcanist
-export PATH="/usr/local/go/bin:${PATH}"               # Go
+# Keep PATH unique while preserving the existing priority: Go before Arcanist.
+typeset -gU path PATH
+path=(
+  /usr/local/go/bin
+  ${HOME}/phacility/arcanist/bin
+  $path
+)
 
 # ----------------------------------------------------------------------------
 # Tool Initialization
@@ -263,15 +255,29 @@ export PATH="/usr/local/go/bin:${PATH}"               # Go
 # uv environment - conditional loading
 [[ -f "$HOME/.local/bin/env" ]] && source "$HOME/.local/bin/env"
 
-# uv completions - only if command exists
-command -v uv &>/dev/null && eval "$(uv generate-shell-completion zsh)"
-command -v uvx &>/dev/null && eval "$(uvx --generate-shell-completion zsh)"
+# Generate uv completions only when they are first requested in this shell.
+if command -v uv &>/dev/null; then
+  _uv_lazy_completion() {
+    local completion
+    completion=$(uv generate-shell-completion zsh) || return
+    eval "$completion" || return
+    _uv "$@"
+  }
+  compdef _uv_lazy_completion uv
+fi
+
+if command -v uvx &>/dev/null; then
+  _uvx_lazy_completion() {
+    local completion
+    completion=$(uvx --generate-shell-completion zsh) || return
+    eval "$completion" || return
+    _uvx "$@"
+  }
+  compdef _uvx_lazy_completion uvx
+fi
 
 # zoxide - only if command exists
 command -v zoxide &>/dev/null && eval "$(zoxide init zsh)"
-
-# sing-box completions - only if command exists
-command -v sing-box &>/dev/null && eval "$(sing-box completion zsh)"
 
 # ----------------------------------------------------------------------------
 # nvm - Lazy Loading (Performance Optimization)
@@ -284,20 +290,25 @@ export NVM_DIR="$HOME/.nvm"
 # Add nvm's current version bin to PATH immediately (no performance cost)
 # This allows globally installed npm packages to work without loading nvm
 if [[ -d "$NVM_DIR/versions/node" ]]; then
-  local nvm_version_path
+  local nvm_default nvm_version_path
+  local -a nvm_versions
 
-  # Read default version and find matching directory
-  local nvm_default=$([[ -f "$NVM_DIR/alias/default" ]] && cat "$NVM_DIR/alias/default" 2>/dev/null || [[ -f "$HOME/.nvmrc" ]] && cat "$HOME/.nvmrc" 2>/dev/null)
+  # Read the preferred version without spawning external processes.
+  if [[ -r "$NVM_DIR/alias/default" ]]; then
+    IFS= read -r nvm_default < "$NVM_DIR/alias/default"
+  elif [[ -r "$HOME/.nvmrc" ]]; then
+    IFS= read -r nvm_default < "$HOME/.nvmrc"
+  fi
 
-  # Find version directory: match default or use latest
-  nvm_version_path=$([[ -n "$nvm_default" ]] &&
-    printf '%s\n' "$NVM_DIR/versions/node/v${nvm_default}"* 2>/dev/null | sort -V | tail -1 ||
-    printf '%s\n' "$NVM_DIR/versions/node/v"* 2>/dev/null | sort -V | tail -1)
+  # Prefer the requested version prefix, otherwise use the highest installed version.
+  [[ -n "$nvm_default" ]] && nvm_versions=("$NVM_DIR/versions/node"/v${~nvm_default}*(Nn))
+  (( ${#nvm_versions} )) || nvm_versions=("$NVM_DIR/versions/node"/v*(Nn))
+  nvm_version_path=${nvm_versions[-1]}
 
   # Add to PATH if found
-  [[ -d "$nvm_version_path/bin" ]] && export PATH="$nvm_version_path/bin:$PATH"
+  [[ -d "$nvm_version_path/bin" ]] && path=("$nvm_version_path/bin" $path)
 
-  unset nvm_version_path nvm_default
+  unset nvm_default nvm_version_path nvm_versions
 fi
 
 # Lazy load nvm - only load when actually needed
@@ -372,34 +383,17 @@ y() {
 }
 
 # ----------------------------------------------------------------------------
-# Prompt (Async Starship Loading)
+# Prompt
 # ----------------------------------------------------------------------------
 
 # Starship configuration file location
 export STARSHIP_CONFIG="${HOME}/.config/starship/starship.toml"
 
 if command -v starship &>/dev/null; then
-  # Set a temporary minimal prompt first (instant)
-  PS1='%F{cyan}%~%f %# '
-
-  # Cache starship init for faster loading
-  local starship_cache="${XDG_CACHE_HOME:-$HOME/.cache}/starship_init.zsh"
-
-  # Check if cache exists and is fresh (less than 1 day old)
-  if [[ ! -f "$starship_cache" ]] || [[ $(find "$starship_cache" -mtime +1 2>/dev/null) ]]; then
-    mkdir -p "${starship_cache:h}"
-    starship init zsh >| "$starship_cache" 2>/dev/null &
-  fi
-
-  # Load from cache immediately (fast)
-  if [[ -f "$starship_cache" && -s "$starship_cache" ]]; then
-    source "$starship_cache"
-  else
-    # Fallback: direct init if cache doesn't exist
-    eval "$(starship init zsh)"
-  fi
-
-  unset starship_cache
+  local starship_init
+  starship_init=$(starship init zsh) || return
+  eval "$starship_init" || return
+  unset starship_init
 fi
 
 # ----------------------------------------------------------------------------
