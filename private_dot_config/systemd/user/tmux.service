@@ -8,7 +8,7 @@ RemainAfterExit=yes
 Environment=DISPLAY=:0
 ExecStart=/usr/local/bin/tmux start-server
 
-ExecStop=/home/morain/.config/tmux/tmux-service-stop.sh
+ExecStop=/home/morain/.config/tmux/scripts/tmux-service-stop.sh
 
 [Install]
 WantedBy=default.target

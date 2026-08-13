@@ -13,12 +13,17 @@ machine-specific paths.
 The repository contains configuration for:
 
 - shells and command-line tools
-- terminals, editors, and desktop applications
+- terminals and desktop applications
 - user services
 - local helper scripts
 
 SSH configuration and credentials are intentionally machine-local and are not
 managed by this repository.
+
+Neovim configuration is managed by the standalone
+[`mora1n/nvim`](https://github.com/mora1n/nvim) repository. tmux plugin sources
+are installed by TPM from the declarations in `40-plugins.tmux`; this repository
+only manages tmux's own configuration and plugin bootstrap script.
 
 ## Bootstrap
 
@@ -65,3 +70,6 @@ scripts/             -> ~/scripts/
 Files prefixed with `executable_` are rendered with executable permissions;
 files or directories prefixed with `private_` are rendered with private
 permissions according to chezmoi's source-state conventions.
+
+The repository configures chezmoi with `umask = 0o22`, so ordinary managed
+files and executable files are rendered as `0644` and `0755`, respectively.

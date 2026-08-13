@@ -1,2 +1,2 @@
 #!/bin/bash 
-apptainer shell ${HOME}/containers/code_aster-14.6.0.sif
+apptainer shell ${HOME}/SifImages/code_aster_14.6.0.sif

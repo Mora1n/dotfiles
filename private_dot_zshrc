@@ -325,7 +325,7 @@ nvm() {
 # Environment Variables
 # ----------------------------------------------------------------------------
 
-# IBus input method settings
+# Input method settings
 export GTK_IM_MODULE=ibus
 export QT_IM_MODULE=ibus
 export XMODIFIERS=@im=ibus
@@ -400,6 +400,3 @@ fi
 # Performance Profiling Results (Uncomment to display)
 # ----------------------------------------------------------------------------
 # zprof
-
-# Proxy settings (managed by proxy-toggle)
-[ -f "/etc/profile.d/proxy.sh" ] && . "/etc/profile.d/proxy.sh"

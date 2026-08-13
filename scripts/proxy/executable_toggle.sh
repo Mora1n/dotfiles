@@ -30,7 +30,7 @@ readonly LOG_FILE="/var/log/proxy-toggle.log"
 # Default proxy settings
 readonly DEFAULT_IP="127.0.0.1"
 readonly DEFAULT_PORT="7890"
-readonly DEFAULT_NO_PROXY="10.10.0.0/24,localhost,127.0.0.1,localaddress,.localdomain.com"
+readonly DEFAULT_NO_PROXY="10.10.0.0/24,localhost,127.0.0.1,localaddress,.localdomain.com,.ts.net,100.64.0.0/10"
 
 # ============================================================================
 # Logging Functions

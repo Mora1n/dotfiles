@@ -1,2 +1,2 @@
 #!/bin/bash
-apptainer run --nv ~/containers/salome-9.8.0.sif shell
+apptainer run --nv ~/SifImages/salome-9.8.0.sif shell

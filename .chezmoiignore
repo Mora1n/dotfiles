@@ -1,0 +1,10 @@
+# Repository documentation is not a home-directory target.
+README.md
+
+# Managed by the standalone mora1n/nvim Git repository.
+.config/nvim
+.config/nvim/**
+
+# Installed and updated by TPM and the plugins' own Git repositories.
+.config/tmux/plugins
+.config/tmux/plugins/**
