@@ -13,6 +13,8 @@ set -ga update-environment TERM_PROGRAM
 set -g mouse on
 set -g mode-keys vi
 set -g repeat-time 600
+set -g base-index 1
+setw -g pane-base-index 1
 set -g renumber-windows on
 
 # tmux 3.6 UI refinements
