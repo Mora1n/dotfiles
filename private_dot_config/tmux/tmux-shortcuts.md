@@ -16,7 +16,7 @@
 | 快捷键 | 功能 |
 |---|---|
 | `prefix + a` | 打开原生 session tree 和布局预览 |
-| `prefix + s` | 使用 tmux-sessionizer 创建或切换到当前项目 session |
+| `prefix + s` | 打开 sesh popup；当前项目默认选中 |
 | `prefix + S` | 使用 fzf 选择并删除 session |
 | `prefix + Backspace` | 切换到上一个使用的 session |
 | `prefix + (` | 上一个 session |
@@ -47,9 +47,9 @@
 
 ### 项目 session
 
-`prefix + s` 解析当前 pane 的 Git 根目录；不在 Git 仓库中时使用当前目录。session 默认使用项目目录名，遇到同名但路径不同的 session 时自动添加父目录前缀。成功时直接切换且不显示 popup；失败时在当前 pane 的 tmux view mode 中显示错误和退出状态。
+`prefix + s` 打开 sesh + fzf popup。当前 pane 的 Git 根目录固定为第一项并默认选中；不在 Git 仓库中时使用当前目录。因此直接按 `Enter` 会创建或切换到当前项目 session。`Ctrl-a/t/g/x/f` 分别显示全部来源、tmux sessions、sesh 配置、zoxide 目录和 `fd` 查找结果，`Ctrl-d` 仅删除选中的 tmux session，`Esc` 取消且不产生副作用。
 
-命令行使用 `at [directory]` 执行相同的项目直达逻辑；直接运行 `tmux-sessionizer` 可通过 fzf 从已有 session 和配置的项目目录中选择。
+命令行裸 `at` 会优先进入最近使用的现有 tmux session；只有一个 session 都没有时，才按当前 Git 根目录创建 session。`at <directory>` 不显示 popup，直接通过 sesh 创建或切换到指定项目。
 
 ## Window 管理
 

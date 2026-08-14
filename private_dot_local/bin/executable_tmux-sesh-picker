@@ -1,0 +1,136 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+die() {
+  printf 'tmux-sesh-picker: %s\n' "$*" >&2
+  exit 1
+}
+
+for required_command in fd fzf fzf-tmux git jq realpath sesh tmux; do
+  command -v "$required_command" >/dev/null 2>&1 || die "required command not found: $required_command"
+done
+
+project_root() {
+  local requested_dir=$1
+  local resolved_dir git_root
+
+  [[ -d "$requested_dir" ]] || die "directory does not exist: $requested_dir"
+  resolved_dir=$(realpath -- "$requested_dir")
+  if git_root=$(git -C "$resolved_dir" rev-parse --show-toplevel 2>/dev/null); then
+    resolved_dir=$(realpath -- "$git_root")
+  fi
+  printf '%s\n' "$resolved_dir"
+}
+
+print_sesh_records() {
+  local source=$1
+  local -a args=(--json)
+
+  case "$source" in
+    all) ;;
+    tmux) args+=(--tmux) ;;
+    config) args+=(--config) ;;
+    zoxide) args+=(--zoxide) ;;
+    *) die "unknown sesh source: $source" ;;
+  esac
+
+  sesh list "${args[@]}" | jq -r '
+    def icon:
+      if .Src == "tmux" then ""
+      elif .Src == "config" then ""
+      elif .Src == "zoxide" then ""
+      elif .Src == "tmuxinator" then ""
+      else "•"
+      end;
+    def target:
+      if .Src == "zoxide" then .Path else .Name end;
+    (. // [])[] | [(icon + "  " + .Name), target, .Src] | @tsv
+  '
+}
+
+print_records() {
+  local source=$1
+  local root=$2
+  local path
+
+  case "$source" in
+    all)
+      printf '  current  %s\t%s\tcurrent\n' "$root" "$root"
+      print_sesh_records all
+      ;;
+    tmux|config|zoxide)
+      print_sesh_records "$source"
+      ;;
+    find)
+      while IFS= read -r path; do
+        printf '  %s\t%s\tfind\n' "$path" "$path"
+      done < <(fd --absolute-path -H -d 2 -t d -E .Trash . "$HOME")
+      ;;
+    *) die "unknown list source: $source" ;;
+  esac
+}
+
+kill_session() {
+  local target=$1
+  local source=$2
+
+  if [[ "$source" != tmux ]]; then
+    tmux display-message "sesh: only tmux session entries can be killed"
+    return 0
+  fi
+  tmux kill-session -t "=$target"
+}
+
+open_picker() {
+  local root=$1
+  local self self_q root_q selection status target
+  self=$(realpath -- "$0")
+  printf -v self_q '%q' "$self"
+  printf -v root_q '%q' "$root"
+
+  set +e
+  selection=$(print_records all "$root" | fzf-tmux -p 80%,70% \
+    --no-sort --ansi --layout=reverse --delimiter=$'\t' --with-nth=1 --nth=1 \
+    --border-label ' sesh ' --prompt '⚡  ' \
+    --header '  ^a all ^t tmux ^g configs ^x zoxide ^d tmux kill ^f find' \
+    --bind 'tab:down,btab:up' \
+    --bind "ctrl-a:change-prompt(⚡  )+reload($self_q --list all $root_q)" \
+    --bind "ctrl-t:change-prompt(🪟  )+reload($self_q --list tmux $root_q)" \
+    --bind "ctrl-g:change-prompt(⚙️  )+reload($self_q --list config $root_q)" \
+    --bind "ctrl-x:change-prompt(📁  )+reload($self_q --list zoxide $root_q)" \
+    --bind "ctrl-f:change-prompt(🔎  )+reload($self_q --list find $root_q)" \
+    --bind "ctrl-d:execute-silent($self_q --kill {2} {3})+reload($self_q --list all $root_q)" \
+    --preview-window 'right:55%' \
+    --preview 'sesh preview {2}')
+  status=$?
+  set -e
+
+  if (( status == 1 || status == 130 )); then
+    return 0
+  fi
+  (( status == 0 )) || die "fzf exited with status $status"
+  IFS=$'\t' read -r _ target _ <<< "$selection"
+  [[ -n "$target" ]] || die "selected record has no connection target"
+  exec sesh connect "$target"
+}
+
+case ${1:-} in
+  --list)
+    (( $# == 3 )) || die "usage: $0 --list <all|tmux|config|zoxide|find> <directory>"
+    root=$(project_root "$3")
+    print_records "$2" "$root"
+    ;;
+  --kill)
+    (( $# == 3 )) || die "usage: $0 --kill <target> <source>"
+    kill_session "$2" "$3"
+    ;;
+  '')
+    die "usage: $0 <directory>"
+    ;;
+  *)
+    (( $# == 1 )) || die "usage: $0 <directory>"
+    root=$(project_root "$1")
+    open_picker "$root"
+    ;;
+esac

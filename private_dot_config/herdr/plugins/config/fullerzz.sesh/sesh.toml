@@ -1,0 +1,8 @@
+cache = true
+strict_mode = true
+sort_order = ["herdr", "config", "zoxide", "dir"]
+separator_aware = true
+
+[tui]
+show_icons = true
+default_sort = "recent"

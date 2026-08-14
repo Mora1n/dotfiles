@@ -1,31 +1,36 @@
-# Dracula for [Yazi](https://yazi-rs.github.io)
+<div align="center">
+  <img src="https://github.com/sxyazi/yazi/blob/main/assets/logo.png?raw=true" alt="Yazi logo" width="20%">
+</div>
 
-> A dark theme for [Yazi](https://yazi-rs.github.io).
+<h3 align="center">
+	Dracula Flavor for <a href="https://github.com/sxyazi/yazi">Yazi</a>
+</h3>
 
-![Screenshot](./screenshot.png)
+## 👀 Preview
 
-## Install
+<img src="preview.png" width="600" />
 
-All instructions can be found at [draculatheme.com/yazi](https://draculatheme.com/yazi).
+## 🎨 Installation
 
-## Team
+```sh
+ya pkg add yazi-rs/flavors:dracula
+```
 
-This theme is maintained by the following person(s) and a bunch of [awesome contributors](https://github.com/dracula/foobar/graphs/contributors).
+## ⚙️ Usage
 
-| [![Raghav](https://github.com/raghavkrish.png?size=100)](https://github.com/raghavkrish) |
-| ---------------------------------------------------------------------------------------- |
-| [Raghav](https://github.com/raghavkrish)                                                 |
+Set the content of your `theme.toml` to enable it as your _dark_ flavor:
 
-## Community
+```toml
+[flavor]
+dark = "dracula"
+```
 
-- [Twitter](https://twitter.com/draculatheme) - Best for getting updates about themes and new stuff.
-- [GitHub](https://github.com/dracula/dracula-theme/discussions) - Best for asking questions and discussing issues.
-- [Discord](https://draculatheme.com/discord-invite) - Best for hanging out with the community.
+Make sure your `theme.toml` doesn't contain anything other than `[flavor]`, unless you want to override certain styles of this flavor.
 
-## Dracula PRO
+See the [Yazi flavor documentation](https://yazi-rs.github.io/docs/flavors/overview) for more details.
 
-[![Dracula PRO](./.github/dracula-pro.png)](https://draculatheme.com/pro)
+## 📜 License
 
-## License
+The flavor is MIT-licensed, and the included tmTheme is also MIT-licensed.
 
-[MIT License](./LICENSE)
+Check the [LICENSE](LICENSE) and [LICENSE-tmtheme](LICENSE-tmtheme) file for more details.

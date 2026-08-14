@@ -1,0 +1,33 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+readonly plugin_id="fullerzz.sesh"
+readonly plugin_ref="b89a3fe04f557e95ec5ef7b6a8ffb7f314006699"
+readonly plugin_version="0.7.0"
+
+for required_command in git go herdr jq; do
+  if ! command -v "$required_command" >/dev/null 2>&1; then
+    printf 'install-herdr-sesh: required command not found: %s\n' "$required_command" >&2
+    exit 1
+  fi
+done
+
+export GOTOOLCHAIN=auto
+herdr plugin install fullerzz/herdr-plugin-sesh --ref "$plugin_ref" --yes
+plugins_json=$(herdr plugin list --json)
+
+if ! jq -e \
+  --arg plugin_id "$plugin_id" \
+  --arg plugin_ref "$plugin_ref" \
+  --arg plugin_version "$plugin_version" '
+  [.result.plugins[] | select(.plugin_id == $plugin_id)] as $matches
+  | ($matches | length) == 1
+    and $matches[0].enabled
+    and $matches[0].version == $plugin_version
+    and $matches[0].source.resolved_commit == $plugin_ref
+    and any($matches[0].actions[]; .id == "open-picker")
+' <<<"$plugins_json" >/dev/null; then
+  printf 'install-herdr-sesh: installed plugin metadata did not match the pinned release\n' >&2
+  exit 1
+fi

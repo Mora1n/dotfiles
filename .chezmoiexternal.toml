@@ -1,5 +1,17 @@
-[".local/bin/tmux-sessionizer"]
-type = "file"
-url = "https://raw.githubusercontent.com/ThePrimeagen/tmux-sessionizer/7edf8211e36368c29ffc0d2c6d5d2d350b4d729b/tmux-sessionizer"
+{{- $repo := "joshmedeski/sesh" -}}
+{{- $asset := "sesh_Linux_x86_64.tar.gz" -}}
+{{- $archiveURL := gitHubLatestReleaseAssetURL $repo $asset -}}
+{{- $checksumsURL := gitHubLatestReleaseAssetURL $repo "sesh_*_checksums.txt" -}}
+{{- $checksums := output "curl" "-fsSL" $checksumsURL -}}
+{{- $checksumLine := regexFind `(?m)^[0-9a-f]{64}  sesh_Linux_x86_64[.]tar[.]gz$` $checksums -}}
+{{- if not $checksumLine -}}
+{{-   fail "sesh Linux x86_64 checksum not found in latest release" -}}
+{{- end -}}
+{{- $sha256 := index (splitList "  " $checksumLine) 0 }}
+
+[".local/bin/sesh"]
+type = "archive-file"
+url = {{ $archiveURL | quote }}
+path = "sesh"
 executable = true
-checksum.sha256 = "9242b732dd46faddeaf41ebed5e27058e9d140761908ab16b61cd6ff3b9b6b1e"
+checksum.sha256 = {{ $sha256 | quote }}

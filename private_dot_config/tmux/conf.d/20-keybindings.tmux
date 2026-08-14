@@ -13,7 +13,7 @@ bind C-\\ send-prefix -2
 
 # Session management
 bind -N "Choose session with native tree and layout" a choose-tree -Zs
-bind -N "Create or switch to the current project session" s run-shell -E -c "#{pane_current_path}" "~/.local/bin/at #{q:pane_current_path}"
+bind -N "Choose a project session with sesh" s run-shell -E -c "#{pane_current_path}" "~/.local/bin/tmux-sesh-picker #{q:pane_current_path}"
 bind -N "Switch to the last session" BSpace switch-client -l
 
 bind -N "Kill a session with fzf" S display-popup -k -E "\

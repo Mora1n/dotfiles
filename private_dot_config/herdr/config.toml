@@ -37,6 +37,12 @@ zoom = "prefix+z"
 resize_mode = "prefix+shift+r"
 toggle_sidebar = "prefix+b"
 
+[[keys.command]]
+key = "prefix+s"
+type = "plugin_action"
+command = "fullerzz.sesh.open-picker"
+description = "open Sesh workspace picker"
+
 [ui.sound]
 enabled = true
 

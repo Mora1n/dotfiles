@@ -372,7 +372,7 @@ rm() {
 # Shell will cd to the last visited directory after exiting yazi
 y() {
     local tmp=$(mktemp -t "yazi-cwd.XXXXXX")
-    yazi "$@" --cwd-file="$tmp"
+    env -u NO_COLOR yazi "$@" --cwd-file="$tmp"
     if [ -s "$tmp" ]; then
         local cwd=$(cat "$tmp")
         if [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
