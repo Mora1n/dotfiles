@@ -16,6 +16,7 @@ set -g repeat-time 600
 set -g base-index 1
 setw -g pane-base-index 1
 set -g renumber-windows on
+set -g detach-on-destroy off
 
 # tmux 3.6 UI refinements
 set -g pane-border-lines heavy

@@ -12,8 +12,21 @@ bind M-T send-prefix
 bind C-\\ send-prefix -2
 
 # Session management
-bind a choose-session
-bind s new-session
+bind a run-shell "sesh connect \"$(
+    sesh list --icons | fzf-tmux -p 80%,70% \
+        --no-sort --ansi --border-label ' sesh ' --prompt '⚡  ' \
+        --header '  ^a all ^t tmux ^g configs ^x zoxide ^d tmux kill ^f find' \
+        --bind 'tab:down,btab:up' \
+        --bind 'ctrl-a:change-prompt(⚡  )+reload(sesh list --icons)' \
+        --bind 'ctrl-t:change-prompt(🪟  )+reload(sesh list -t --icons)' \
+        --bind 'ctrl-g:change-prompt(⚙️  )+reload(sesh list -c --icons)' \
+        --bind 'ctrl-x:change-prompt(📁  )+reload(sesh list -z --icons)' \
+        --bind 'ctrl-f:change-prompt(🔎  )+reload(fd -H -d 2 -t d -E .Trash . ~)' \
+        --bind 'ctrl-d:execute(tmux kill-session -t {2..})+change-prompt(⚡  )+reload(sesh list --icons)' \
+        --preview-window 'right:55%' \
+        --preview 'sesh preview {}'
+)\""
+bind s run-shell "sesh connect --root \"#{pane_current_path}\""
 bind BSpace switch-client -l
 
 bind S display-popup -k -E "\
