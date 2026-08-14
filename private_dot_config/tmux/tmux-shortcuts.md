@@ -8,7 +8,7 @@
 |---|---|
 | `Alt-t` | 主前缀 |
 | `Ctrl-\` | 次前缀 |
-| `prefix + Alt-t` | 向内部程序发送主前缀 |
+| `prefix + Alt-Shift-t` | 向内部程序发送主前缀 |
 | `prefix + Ctrl-\` | 向内部程序发送次前缀 |
 
 ## Session 管理
@@ -128,7 +128,7 @@ Pane 从 `1` 开始编号。
 | `v` | 开始选择 |
 | `V` | 选择整行 |
 | `Ctrl-v` | 切换矩形选择 |
-| `y` | 复制到 X11 clipboard，并保持 copy mode |
+| `y` | 复制到 X11 clipboard，并退出 copy mode |
 | `Enter` | 复制到 X11 clipboard，并保持 copy mode |
 | `!` | 去除换行后复制 |
 | `q` | 退出 copy mode |
