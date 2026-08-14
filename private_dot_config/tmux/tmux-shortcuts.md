@@ -6,9 +6,9 @@
 
 | 按键 | 功能 |
 |---|---|
-| `Alt-t` | 主前缀 |
+| `Alt-m` | 主前缀 |
 | `Ctrl-\` | 次前缀 |
-| `prefix + Alt-Shift-t` | 向内部程序发送主前缀 |
+| `prefix + Alt-Shift-m` | 向内部程序发送主前缀 |
 | `prefix + Ctrl-\` | 向内部程序发送次前缀 |
 
 ## Session 管理
