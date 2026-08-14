@@ -3,11 +3,11 @@
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 # Plugin manager and plugin list
-set -g @plugin "tmux-plugins/tpm"
-set -g @plugin "tmux-plugins/tmux-resurrect"
-set -g @plugin "tmux-plugins/tmux-continuum"
-set -g @plugin "laktak/extrakto"
-set -g @plugin "dracula/tmux"
+set -g @plugin "https://github.com/tmux-plugins/tpm.git"
+set -g @plugin "https://github.com/tmux-plugins/tmux-resurrect.git"
+set -g @plugin "https://github.com/tmux-plugins/tmux-continuum.git"
+set -g @plugin "https://github.com/laktak/extrakto.git"
+set -g @plugin "https://github.com/dracula/tmux.git"
 
 # Session persistence
 set -g @resurrect-strategy-vim "session"
