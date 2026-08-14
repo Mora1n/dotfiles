@@ -12,24 +12,11 @@ bind M-T send-prefix
 bind C-\\ send-prefix -2
 
 # Session management
-bind a run-shell "sesh connect \"$(
-    sesh list --icons | fzf-tmux -p 80%,70% \
-        --no-sort --ansi --border-label ' sesh ' --prompt '⚡  ' \
-        --header '  ^a all ^t tmux ^g configs ^x zoxide ^d tmux kill ^f find' \
-        --bind 'tab:down,btab:up' \
-        --bind 'ctrl-a:change-prompt(⚡  )+reload(sesh list --icons)' \
-        --bind 'ctrl-t:change-prompt(🪟  )+reload(sesh list -t --icons)' \
-        --bind 'ctrl-g:change-prompt(⚙️  )+reload(sesh list -c --icons)' \
-        --bind 'ctrl-x:change-prompt(📁  )+reload(sesh list -z --icons)' \
-        --bind 'ctrl-f:change-prompt(🔎  )+reload(fd -H -d 2 -t d -E .Trash . ~)' \
-        --bind 'ctrl-d:execute(tmux kill-session -t {2..})+change-prompt(⚡  )+reload(sesh list --icons)' \
-        --preview-window 'right:55%' \
-        --preview 'sesh preview {}'
-)\""
-bind s run-shell "sesh connect --root \"#{pane_current_path}\""
-bind BSpace switch-client -l
+bind -N "Choose session with native tree and layout" a choose-tree -Zs
+bind -N "Create or switch to the current project session" s run-shell "sesh connect --root \"#{pane_current_path}\""
+bind -N "Switch to the last session" BSpace switch-client -l
 
-bind S display-popup -k -E "\
+bind -N "Kill a session with fzf" S display-popup -k -E "\
     (tmux list-sessions -F '#{?session_attached,* ,  }#{session_name}' | grep '^\*'; \
      tmux list-sessions -F '#{?session_attached,* ,  }#{session_name}' | grep -v '^\*') |\
     fzf --reverse --header kill-session |\
@@ -37,9 +24,13 @@ bind S display-popup -k -E "\
     xargs -r tmux kill-session -t"
 
 # Window management
-bind -r Tab last-window
+bind -r -N "Switch to the last window" Tab last-window
+bind -N "Create a window in the current directory" c new-window -c "#{pane_current_path}"
+bind -N "Switch to the next window" C-n next-window
+bind -r -N "Move the current window left" < swap-window -d -t -1
+bind -r -N "Move the current window right" > swap-window -d -t +1
 
-bind W display-popup -k -E "\
+bind -N "Kill a window with fzf" W display-popup -k -E "\
     (tmux list-windows -F '#{?window_active,* ,  }#{window_index} #{window_name}' | grep '^\*'; \
      tmux list-windows -F '#{?window_active,* ,  }#{window_index} #{window_name}' | grep -v '^\*') |\
     fzf --reverse --header kill-window |\
@@ -47,24 +38,45 @@ bind W display-popup -k -E "\
     xargs -r tmux kill-window -t"
 
 # Pane management
-bind = setw synchronize-panes
+bind -N "Focus the pane on the left" h select-pane -L
+bind -N "Focus the pane below" j select-pane -D
+bind -N "Focus the pane above" k select-pane -U
+bind -N "Focus the pane on the right" l select-pane -R
+bind -N "Focus the pane on the left" C-h select-pane -L
+bind -N "Focus the pane below" C-j select-pane -D
+bind -N "Focus the pane above" C-k select-pane -U
+bind -N "Focus the pane on the right" C-l select-pane -R
+
+bind -r -N "Resize the pane left" H resize-pane -L 5
+bind -r -N "Resize the pane down" J resize-pane -D 5
+bind -r -N "Resize the pane up" K resize-pane -U 5
+bind -r -N "Resize the pane right" L resize-pane -R 5
+
+bind -N "Split the pane to the right" | split-window -h -c "#{pane_current_path}"
+bind -N "Split the pane to the left" \\ split-window -fh -c "#{pane_current_path}"
+bind -N "Split the pane below" - split-window -v -c "#{pane_current_path}"
+bind -N "Split the pane above" _ split-window -fv -c "#{pane_current_path}"
+bind -N "Split the pane horizontally" % split-window -h -c "#{pane_current_path}"
+bind -N "Split the pane vertically" '"' split-window -v -c "#{pane_current_path}"
+bind -N "Toggle synchronized input" = setw synchronize-panes
 
 # Copy mode
-bind v copy-mode
-bind P choose-buffer
+bind -N "Enter copy mode" v copy-mode
+bind -N "Choose a paste buffer" P choose-buffer
 bind -T copy-mode-vi v send-keys -X begin-selection
 bind -T copy-mode-vi g send-keys -X top-line
 bind -T copy-mode-vi G send-keys -X bottom-line
 
 # Clipboard integration
-bind C-c run "tmux save-buffer - | xsel -i -b"
-bind C-v run "tmux set-buffer \"$(xsel -o -b)\"; tmux paste-buffer"
+bind -N "Copy the tmux buffer to the clipboard" C-c run "tmux save-buffer - | xsel -i -b"
+bind -N "Paste from the clipboard" C-v run "tmux set-buffer \"$(xsel -o -b)\"; tmux paste-buffer"
+bind -N "Copy the current pane directory" Y run-shell 'tmux set-buffer -- #{q:pane_current_path} && printf %s #{q:pane_current_path} | xsel -i --clipboard && tmux display-message "PWD copied to clipboard"'
 
 # Utilities
-bind r source-file ~/.config/tmux/tmux.conf \; display "✓ Config reloaded!"
-bind R run-shell 'eval $(tmux show-environment -s DBUS_SESSION_BUS_ADDRESS); eval $(tmux show-environment -s DISPLAY); tmux display-message "✓ Environment refreshed"'
-bind b set status
+bind -N "Reload the tmux configuration" r source-file ~/.config/tmux/tmux.conf \; display "✓ Config reloaded!"
+bind -N "Refresh the desktop environment" R run-shell 'eval $(tmux show-environment -s DBUS_SESSION_BUS_ADDRESS); eval $(tmux show-environment -s DISPLAY); tmux display-message "✓ Environment refreshed"'
+bind -N "Toggle the status bar" b set status
 
 # Popups
-bind C-p display-popup -k -E -w 80% -h 80% -d "#{pane_current_path}"
-bind B display-popup -k -E -w 90% -h 90% "btm"
+bind -N "Open a shell popup" C-p display-popup -k -E -w 80% -h 80% -d "#{pane_current_path}"
+bind -N "Open btm in a popup" B display-popup -k -E -w 90% -h 90% "btm"

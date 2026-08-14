@@ -4,12 +4,9 @@
 
 # Plugin manager and plugin list
 set -g @plugin "tmux-plugins/tpm"
-set -g @plugin "tmux-plugins/tmux-sensible"
 set -g @plugin "tmux-plugins/tmux-resurrect"
 set -g @plugin "tmux-plugins/tmux-continuum"
-set -g @plugin "tmux-plugins/tmux-pain-control"
-set -g @plugin "tmux-plugins/tmux-yank"
-set -g @plugin "wfxr/tmux-fzf-url"
+set -g @plugin "laktak/extrakto"
 set -g @plugin "dracula/tmux"
 
 # Session persistence
@@ -26,9 +23,18 @@ set -g @continuum-save-interval "30"
 set -g @continuum-boot "on"
 set -g @continuum-systemd-start-cmd "start-server"
 
-# Copy enhancement
-set -g @yank_selection_mouse 'clipboard'
-set -g @yank_action 'copy-pipe-no-clear'
+# Text, path, and URL extraction
+set -g @extrakto_key "none"
+set -g @extrakto_grab_area "window 500"
+set -g @extrakto_filter_order "all url path line word"
+set -g @extrakto_clip_mode "bg"
+set -g @extrakto_clip_mode_order "bg buffer"
+set -g @extrakto_clip_tool "xsel -i --clipboard"
+set -g @extrakto_editor "nvim"
+set -g @extrakto_fzf_layout "reverse"
+set -g @extrakto_fzf_header "i c o e f g h m"
+set -g @extrakto_split_direction "p"
+set -g @extrakto_popup_size "80%,70%"
 
 # Theme
 set -g @dracula-plugins "ssh-session synchronize-panes time"

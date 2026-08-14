@@ -1,226 +1,183 @@
 # Tmux 快捷键速查表
 
-> 基于 `~/.config/tmux/tmux.conf` 的快捷键参考
+> 基于 `~/.config/tmux/tmux.conf`、tmux 3.6 和当前有效按键表。
 
-## 前缀键 (Prefix)
-- **主前缀**: `Alt-z` (M-z)
-- **次前缀**: `Ctrl-a` (C-a)
+## 前缀键
 
----
+| 按键 | 功能 |
+|---|---|
+| `Alt-t` | 主前缀 |
+| `Ctrl-\` | 次前缀 |
+| `prefix + Alt-t` | 向内部程序发送主前缀 |
+| `prefix + Ctrl-\` | 向内部程序发送次前缀 |
 
-## 会话管理 (Session)
-
-| 快捷键 | 功能 |
-|--------|------|
-| `prefix + s` | 新建会话 |
-| `prefix + d` | 分离会话 |
-| `prefix + Backspace` | 切换到上一个会话 |
-| `prefix + (` | 上一个会话 (可重复) |
-| `prefix + )` | 下一个会话 (可重复) |
-| `prefix + S` | fzf 选择并删除会话 |
-| `prefix + Ctrl-s` | 保存会话 (resurrect) |
-| `prefix + Ctrl-r` | 恢复会话 (resurrect) |
-
----
-
-## 窗口管理 (Window)
+## Session 管理
 
 | 快捷键 | 功能 |
-|--------|------|
-| `prefix + c` | 创建新窗口 |
-| `prefix + n` | 下一个窗口 (可重复) |
-| `prefix + p` | 上一个窗口 (可重复) |
-| `prefix + Tab` | 切换到上一个窗口 (可重复) |
-| `prefix + 0-9` | 切换到指定窗口 |
-| `prefix + ,` | 重命名当前窗口 |
-| `prefix + &` | 关闭当前窗口 |
-| `prefix + W` | fzf 选择并删除窗口 |
-| `prefix + <` | 向左移动窗口 (可重复) |
-| `prefix + >` | 向右移动窗口 (可重复) |
+|---|---|
+| `prefix + a` | 打开原生 session tree 和布局预览 |
+| `prefix + s` | 使用 sesh 创建或切换到当前 Git 根目录 session |
+| `prefix + S` | 使用 fzf 选择并删除 session |
+| `prefix + Backspace` | 切换到上一个使用的 session |
+| `prefix + (` | 上一个 session |
+| `prefix + )` | 下一个 session |
+| `prefix + $` | 重命名当前 session |
+| `prefix + d` | 分离当前客户端 |
+| `prefix + Ctrl-s` | 使用 Resurrect 保存 session |
+| `prefix + Ctrl-r` | 使用 Resurrect 恢复 session |
 
----
+### 原生 tree 模式
 
-## 窗格管理 (Pane)
+`prefix + a` 和 `prefix + w` 进入 tmux 原生 tree 模式：
+
+| 模式内按键 | 功能 |
+|---|---|
+| `Enter` | 切换到选中的 session、window 或 pane |
+| `+` / `-` | 展开或折叠当前项目 |
+| `Alt-+` / `Alt--` | 展开或折叠全部项目 |
+| `x` | 删除选中项目并要求确认 |
+| `t` | 标记或取消标记项目 |
+| `X` | 删除所有已标记项目 |
+| `Ctrl-s` | 按名称搜索 |
+| `n` / `N` | 下一个或上一个搜索结果 |
+| `O` | 更换排序字段 |
+| `r` | 反转排序 |
+| `v` | 显示或隐藏布局预览 |
+| `q` | 退出 tree 模式 |
+
+## Window 管理
 
 | 快捷键 | 功能 |
-|--------|------|
-| `prefix + %` | 垂直分割 |
-| `prefix + "` | 水平分割 |
-| `prefix + Space` | 循环布局 (可重复) |
-| `prefix + z` | 最大化/还原窗格 |
-| `prefix + x` | 关闭窗格 |
-| `prefix + !` | 将窗格分离为窗口 |
-| `prefix + q` | 显示窗格编号 |
-| `prefix + o` | 循环切换窗格 |
-| `prefix + =` | 同步所有窗格输入 |
+|---|---|
+| `prefix + c` | 在当前 pane 目录创建 window |
+| `prefix + n` / `prefix + Ctrl-n` | 下一个 window |
+| `prefix + p` | 上一个 window |
+| `prefix + Tab` | 切换到上一个使用的 window |
+| `prefix + 1..9` | 切换到指定编号的 window |
+| `prefix + w` | 打开原生 window tree 和布局预览 |
+| `prefix + f` | 按名称查找 window |
+| `prefix + ,` | 重命名当前 window |
+| `prefix + &` | 删除当前 window并要求确认 |
+| `prefix + W` | 使用 fzf 选择并删除 window |
+| `prefix + <` / `prefix + >` | 向左或向右移动当前 window，可重复 |
 
----
+Window 从 `1` 开始编号，删除后自动重新编号。
 
-## 复制模式 (Copy Mode)
+## Pane 管理
 
-### 进入/退出
+### 创建与关闭
+
 | 快捷键 | 功能 |
-|--------|------|
-| `prefix + v` | 进入复制模式 |
-| `prefix + [` | 进入复制模式 (默认) |
-| `q` | 退出复制模式 |
-| `Escape` | 清除选择 (不退出) |
+|---|---|
+| `prefix + \|` / `prefix + %` | 在右侧创建 pane，继承当前目录 |
+| `prefix + \` | 在左侧创建 pane，继承当前目录 |
+| `prefix + -` / `prefix + "` | 在下方创建 pane，继承当前目录 |
+| `prefix + _` | 在上方创建 pane，继承当前目录 |
+| `prefix + x` | 删除 pane并要求确认 |
+| `prefix + !` | 将当前 pane 分离成 window |
 
-### 选择操作
+### 导航与布局
+
 | 快捷键 | 功能 |
-|--------|------|
+|---|---|
+| `prefix + h/j/k/l` | 向左/下/上/右切换 pane |
+| `prefix + Ctrl-h/j/k/l` | 向左/下/上/右切换 pane |
+| `prefix + o` | 循环切换 pane |
+| `prefix + ;` | 切换到上一个使用的 pane |
+| `prefix + q` | 显示 pane 编号 |
+| `prefix + z` | 最大化或还原当前 pane |
+| `prefix + Space` | 循环切换预设布局 |
+| `prefix + {` / `prefix + }` | 与上一个或下一个 pane 交换 |
+| `prefix + =` | 切换当前 window 的同步输入 |
+
+### 调整大小
+
+| 快捷键 | 功能 |
+|---|---|
+| `prefix + H` | 向左调整 5 cells，可重复 |
+| `prefix + J` | 向下调整 5 cells，可重复 |
+| `prefix + K` | 向上调整 5 cells，可重复 |
+| `prefix + L` | 向右调整 5 cells，可重复 |
+
+Pane 从 `1` 开始编号。
+
+## Extrakto：提取文本、路径和 URL
+
+`prefix + u` 从当前 window 所有 pane 的最近 500 行中提取内容；`prefix + y` 直接进入完整行过滤模式。
+
+| 快捷键 | 功能 |
+|---|---|
+| `prefix + u` | 打开全部过滤器，匹配 URL、路径、文本和完整行 |
+| `prefix + y` | 直接按完整行提取 |
+| `prefix + Y` | 直接复制当前 pane 工作目录 |
+| `Enter` | 将选中内容复制到系统剪贴板和 tmux buffer |
+| `Tab` | 将选中内容插入当前 pane |
+| `Ctrl-o` | 使用 `xdg-open` 打开选中内容 |
+| `Ctrl-e` | 使用 Neovim 编辑选中路径 |
+| `Ctrl-f` | 切换 all/url/path/line/word 过滤器 |
+| `Ctrl-g` | 切换抓取范围 |
+| `Ctrl-t` | 切换系统剪贴板和 tmux buffer 模式 |
+| `Ctrl-l` | 显示 Extrakto 帮助 |
+| `Escape` / `Ctrl-c` | 退出 Extrakto |
+
+## Copy mode 与剪贴板
+
+| 快捷键 | 功能 |
+|---|---|
+| `prefix + v` / `prefix + [` | 进入 copy mode |
 | `v` | 开始选择 |
 | `V` | 选择整行 |
-| `Ctrl-v` | 矩形选择 |
-| `y` | 复制并退出 |
-| `Y` | 复制到行尾 |
+| `Ctrl-v` | 切换矩形选择 |
+| `y` | 复制到 X11 clipboard，并保持 copy mode |
+| `Enter` | 复制到 X11 clipboard，并保持 copy mode |
+| `!` | 去除换行后复制 |
+| `q` | 退出 copy mode |
+| `Escape` | 清除选择 |
+| `h/j/k/l` | 移动光标 |
+| `g` / `G` | 跳到顶部或底部 |
+| `/` / `?` | 向下或向上搜索 |
+| `n` / `N` | 下一个或上一个匹配 |
+| `Ctrl-u` / `Ctrl-d` | 向上或向下半页 |
+| `Ctrl-b` / `Ctrl-f` | 向上或向下整页 |
+| 鼠标拖拽 | 选择并复制到 X11 clipboard |
+| 双击 / 三击 | 复制单词或整行，并保持 viewport 位置 |
 
-### 行内导航
-| 快捷键 | 功能 |
-|--------|------|
-| `h/j/k/l` | 左/下/上/右 |
-| `0` | 行首 |
-| `^` | 第一个非空字符 |
-| `$` | 行尾 |
-| `g` | 文件顶部 |
-| `G` | 文件底部 |
-
-### 单词导航
-| 快捷键 | 功能 |
-|--------|------|
-| `w` | 下一个单词 |
-| `W` | 下一个空格分隔单词 |
-| `e` | 单词结尾 |
-| `E` | 空格分隔单词结尾 |
-| `b` | 上一个单词 |
-| `B` | 上一个空格分隔单词 |
-
-### 段落导航
-| 快捷键 | 功能 |
-|--------|------|
-| `{` | 上一段 |
-| `}` | 下一段 |
-
-### 页面导航
-| 快捷键 | 功能 |
-|--------|------|
-| `Ctrl-u` | 向上半页 |
-| `Ctrl-d` | 向下半页 |
-| `Ctrl-b` | 向上整页 |
-| `Ctrl-f` | 向下整页 |
-| `Ctrl-e` | 向下滚动一行 |
-| `Ctrl-y` | 向上滚动一行 |
-
-### 搜索
-| 快捷键 | 功能 |
-|--------|------|
-| `/` | 向下搜索 |
-| `?` | 向上搜索 |
-| `n` | 下一个匹配 |
-| `N` | 上一个匹配 |
-
-### 字符跳转
-| 快捷键 | 功能 |
-|--------|------|
-| `f{char}` | 向前跳到字符 |
-| `F{char}` | 向后跳到字符 |
-| `t{char}` | 向前跳到字符前 |
-| `T{char}` | 向后跳到字符前 |
-| `;` | 重复跳转 |
-| `,` | 反向跳转 |
-
-### 屏幕位置
-| 快捷键 | 功能 |
-|--------|------|
-| `H` | 屏幕顶部 |
-| `M` | 屏幕中间 |
-| `L` | 屏幕底部 |
-
----
-
-## 剪贴板集成
+其他剪贴板操作：
 
 | 快捷键 | 功能 |
-|--------|------|
-| `prefix + ]` | 粘贴 |
-| `prefix + P` | 选择缓冲区 |
-| `prefix + Ctrl-c` | 复制到系统剪贴板 |
-| `prefix + Ctrl-v` | 从系统剪贴板粘贴 |
+|---|---|
+| `prefix + P` | 选择 tmux paste buffer |
+| `prefix + ]` | 粘贴 tmux buffer |
+| `prefix + Ctrl-c` | 将 tmux buffer 写入系统剪贴板 |
+| `prefix + Ctrl-v` | 从系统剪贴板读取并粘贴 |
 
----
-
-## 实用工具
+## Popup 与实用工具
 
 | 快捷键 | 功能 |
-|--------|------|
-| `prefix + r` | 重新加载配置 |
-| `prefix + ?` | 显示所有快捷键 |
-| `prefix + :` | 命令提示符 |
-| `prefix + b` | 切换状态栏 |
+|---|---|
+| `prefix + Ctrl-p` | 在当前目录打开 80% shell popup |
+| `prefix + B` | 在 90% popup 中打开 btm |
+| `prefix + r` | 重新加载 tmux 配置 |
+| `prefix + R` | 从桌面会话刷新 DISPLAY 和 DBus 环境 |
+| `prefix + b` | 显示或隐藏状态栏 |
+| `prefix + ?` | 显示带说明的完整按键列表 |
+| `prefix + /` | 按键说明搜索 |
+| `prefix + :` | 打开 tmux command prompt |
 
----
+## 插件与持久化
 
-## 插件快捷键
+TPM 管理以下插件目录：
 
-### tmux-yank
+- `tmux-plugins/tpm`
+- `tmux-plugins/tmux-resurrect`
+- `tmux-plugins/tmux-continuum`
+- `laktak/extrakto`
+- `dracula/tmux`
+
 | 快捷键 | 功能 |
-|--------|------|
-| `prefix + y` | 复制当前行 |
-| `prefix + Y` | 复制当前工作目录 |
-
-### tmux-fzf-url
-| 快捷键 | 功能 |
-|--------|------|
-| `prefix + u` | fzf 选择并打开 URL |
-
-### TPM (插件管理)
-| 快捷键 | 功能 |
-|--------|------|
-| `prefix + I` | 安装插件 |
+|---|---|
+| `prefix + I` | 安装缺失插件 |
 | `prefix + U` | 更新插件 |
-| `prefix + Alt-u` | 卸载插件 |
+| `prefix + Alt-u` | 清理未配置插件 |
 
----
-
-## 鼠标支持
-
-启用了完整的鼠标支持：
-
-| 操作 | 功能 |
-|------|------|
-| 点击窗格 | 切换到该窗格 |
-| 拖拽边界 | 调整窗格大小 |
-| 滚轮 | 滚动历史记录 |
-| 双击 | 选择单词 |
-| 拖拽选择 | 选择文本并复制 |
-
----
-
-## 配置特性
-
-- **Vi 模式**: 复制模式使用 Vim 风格键绑定
-- **自动重编号**: 关闭窗口后自动重新编号
-- **状态栏**: 顶部显示，Dracula 主题
-- **会话持久化**: 每 5 分钟自动保存
-- **剪贴板同步**: 自动与系统剪贴板同步
-- **零延迟**: Escape 键无延迟响应
-
----
-
-## 状态栏模块 (Dracula)
-
-| 模块 | 显示内容 |
-|------|----------|
-| SSH 会话 | 连接状态和端口 |
-| 同步窗格 | 󰌹 (启用时显示) |
-| 时间 | 📅 日期 🕒 时间 |
-
----
-
-## 快速提示
-
-1. 使用 `prefix + ?` 查看所有键绑定
-2. 使用 `prefix + I` 安装插件
-3. 使用 `prefix + r` 重新加载配置
-4. 复制模式中按 `q` 退出，`Escape` 只清除选择
-5. 大部分快捷键支持重复按键 (标记为"可重复")
+Continuum 每 30 分钟调用安全 Resurrect wrapper 保存一次；启动 tmux server 时自动恢复。状态栏位于顶部，Dracula 每 10 秒刷新 SSH、同步输入和时间模块。

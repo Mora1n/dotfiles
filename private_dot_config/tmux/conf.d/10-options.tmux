@@ -12,7 +12,13 @@ set -ga update-environment TERM_PROGRAM
 # Input and navigation
 set -g mouse on
 set -g mode-keys vi
+set -g status-keys emacs
+set -s escape-time 10
 set -g repeat-time 600
+set -g display-time 4000
+set -g history-limit 50000
+set -g focus-events on
+setw -g aggressive-resize on
 set -g base-index 1
 setw -g pane-base-index 1
 set -g renumber-windows on
@@ -31,3 +37,4 @@ set -g status-position top
 
 # Clipboard
 set -s set-clipboard on
+set -s copy-command "xsel -i --clipboard"
