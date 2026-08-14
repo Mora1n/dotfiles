@@ -16,7 +16,7 @@
 | 快捷键 | 功能 |
 |---|---|
 | `prefix + a` | 打开原生 session tree 和布局预览 |
-| `prefix + s` | 使用 sesh 创建或切换到当前 Git 根目录 session |
+| `prefix + s` | 使用 tmux-sessionizer 创建或切换到当前项目 session |
 | `prefix + S` | 使用 fzf 选择并删除 session |
 | `prefix + Backspace` | 切换到上一个使用的 session |
 | `prefix + (` | 上一个 session |
@@ -44,6 +44,12 @@
 | `r` | 反转排序 |
 | `v` | 显示或隐藏布局预览 |
 | `q` | 退出 tree 模式 |
+
+### 项目 session
+
+`prefix + s` 解析当前 pane 的 Git 根目录；不在 Git 仓库中时使用当前目录。session 默认使用项目目录名，遇到同名但路径不同的 session 时自动添加父目录前缀。命令成功后 popup 自动关闭，失败时保留错误信息。
+
+命令行使用 `at [directory]` 执行相同的项目直达逻辑；直接运行 `tmux-sessionizer` 可通过 fzf 从已有 session 和配置的项目目录中选择。
 
 ## Window 管理
 

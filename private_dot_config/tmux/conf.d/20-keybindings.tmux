@@ -13,7 +13,7 @@ bind C-\\ send-prefix -2
 
 # Session management
 bind -N "Choose session with native tree and layout" a choose-tree -Zs
-bind -N "Create or switch to the current project session" s run-shell "sesh connect --root \"#{pane_current_path}\""
+bind -N "Create or switch to the current project session" s display-popup -EE -w 70% -h 30% -d "#{pane_current_path}" -T "Project session" "~/.local/bin/at #{q:pane_current_path}"
 bind -N "Switch to the last session" BSpace switch-client -l
 
 bind -N "Kill a session with fzf" S display-popup -k -E "\
