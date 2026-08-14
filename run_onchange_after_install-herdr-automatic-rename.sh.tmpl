@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+readonly plugin_id="herdr-automatic-rename"
+readonly plugin_ref="855f999159de674197650baf6fdc6f348c8f1afb"
+
+for required_command in bash git herdr jq; do
+  if ! command -v "$required_command" >/dev/null 2>&1; then
+    printf 'install-herdr-automatic-rename: required command not found: %s\n' "$required_command" >&2
+    exit 1
+  fi
+done
+
+herdr plugin install qu8n/herdr-automatic-rename --ref "$plugin_ref" --yes
+plugins_json=$(herdr plugin list --json)
+
+if ! jq -e --arg plugin_id "$plugin_id" --arg plugin_ref "$plugin_ref" '
+  [.result.plugins[] | select(.plugin_id == $plugin_id)] as $matches
+  | ($matches | length) == 1
+    and $matches[0].enabled
+    and $matches[0].version == "0.6.0"
+    and $matches[0].source.resolved_commit == $plugin_ref
+' <<<"$plugins_json" >/dev/null; then
+  printf 'install-herdr-automatic-rename: installed plugin metadata did not match the pinned release\n' >&2
+  exit 1
+fi

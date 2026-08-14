@@ -396,6 +396,14 @@ if command -v starship &>/dev/null; then
   unset starship_init
 fi
 
+# Keep Herdr tab names aligned with the foreground command. The hook is a no-op
+# outside Herdr panes and self-locates the pinned managed plugin checkout.
+for _har_hook in ${HOME}/.config/herdr/plugins/github/herdr-automatic-rename-*/shell/hook.zsh(N); do
+  source "$_har_hook"
+  break
+done
+unset _har_hook
+
 # ----------------------------------------------------------------------------
 # Performance Profiling Results (Uncomment to display)
 # ----------------------------------------------------------------------------

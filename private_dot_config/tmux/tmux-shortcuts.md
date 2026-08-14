@@ -47,7 +47,7 @@
 
 ### 项目 session
 
-`prefix + s` 解析当前 pane 的 Git 根目录；不在 Git 仓库中时使用当前目录。session 默认使用项目目录名，遇到同名但路径不同的 session 时自动添加父目录前缀。命令成功后 popup 自动关闭，失败时保留错误信息。
+`prefix + s` 解析当前 pane 的 Git 根目录；不在 Git 仓库中时使用当前目录。session 默认使用项目目录名，遇到同名但路径不同的 session 时自动添加父目录前缀。成功时直接切换且不显示 popup；失败时在当前 pane 的 tmux view mode 中显示错误和退出状态。
 
 命令行使用 `at [directory]` 执行相同的项目直达逻辑；直接运行 `tmux-sessionizer` 可通过 fzf 从已有 session 和配置的项目目录中选择。
 

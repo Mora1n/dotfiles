@@ -19,6 +19,7 @@ rename_tab = "prefix+comma"
 previous_tab = "prefix+p"
 next_tab = "prefix+n"
 switch_tab = "prefix+1..9"
+switch_workspace = "prefix+shift+1..9"
 close_tab = "prefix+ampersand"
 edit_scrollback = ["prefix+v", "prefix+["]
 focus_pane_left = ["prefix+h", "prefix+ctrl+h", "prefix+left"]
@@ -42,6 +43,7 @@ enabled = true
 [ui]
 show_agent_labels_on_pane_borders = true
 agent_panel_sort = "priority"
+prompt_new_tab_name = false
 
 [theme]
 name = "dracula"
@@ -49,3 +51,6 @@ auto_switch = false
 
 [ui.toast]
 delivery = "system"
+
+[update]
+channel = "preview"
