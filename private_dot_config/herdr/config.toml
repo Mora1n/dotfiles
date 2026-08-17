@@ -49,7 +49,6 @@ enabled = true
 [ui]
 show_agent_labels_on_pane_borders = true
 agent_panel_sort = "priority"
-prompt_new_tab_name = false
 
 [ui.sidebar.agents]
 rows = [
@@ -58,8 +57,8 @@ rows = [
     { token = "agent", fg = "#8be9fd", bold = true, dim = false },
   ],
   [
-    { token = "workspace", fg = "#f8f8f2", bold = true, dim = false },
-    { token = "tab", fg = "#bd93f9", bold = false, dim = false },
+    { token = "workspace", fg = "#f8f8f2" },
+    { token = "tab", fg = "#bd93f9" },
   ],
 ]
 
