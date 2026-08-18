@@ -2,6 +2,10 @@
 # Options
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
+# Keep the systemd-started zero-session server alive so continuum can auto-restore
+# sessions after reboot (exit-empty "on" is the default and kills it immediately).
+set -g exit-empty off
+
 # Terminal
 set -s default-terminal "tmux-256color"
 set -g terminal-overrides "linux*:AX@,*256col*:Tc,xterm*:Tc"
