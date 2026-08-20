@@ -7,9 +7,10 @@ unbind C-b
 unbind M-z
 unbind M-Z
 unbind M-T
-set -g prefix M-m
+set -g prefix M-j
 set -g prefix2 C-\\
-bind M-M send-prefix
+unbind -T prefix M-M
+bind M-J send-prefix
 bind C-\\ send-prefix -2
 
 # Session management
