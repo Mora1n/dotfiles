@@ -25,6 +25,22 @@ project_root() {
   printf '%s\n' "$resolved_dir"
 }
 
+has_sessions() {
+  local session_ids
+
+  session_ids=$(tmux list-sessions -F '#{session_id}' 2>/dev/null) || return 1
+  [[ -n "$session_ids" ]]
+}
+
+start_project_session() {
+  local project_dir=$1 session_name
+
+  session_name=$(basename -- "$project_dir")
+  [[ "$session_name" == / ]] && session_name=root
+  session_name=${session_name//[.:]/_}
+  exec tmux new-session -s "$session_name" -c "$project_dir"
+}
+
 switch_to_previous_session() {
   local current_session record candidate
   current_session=$(tmux display-message -p '#{session_name}')
@@ -39,10 +55,13 @@ switch_to_previous_session() {
 
 if (( $# == 1 )); then
   project_dir=$(project_root "$1")
-  exec sesh connect "$project_dir"
+  if has_sessions; then
+    exec sesh connect "$project_dir"
+  fi
+  start_project_session "$project_dir"
 fi
 
-if tmux list-sessions >/dev/null 2>&1; then
+if has_sessions; then
   if [[ -n ${TMUX:-} ]]; then
     switch_to_previous_session
     exit 0
@@ -51,4 +70,4 @@ if tmux list-sessions >/dev/null 2>&1; then
 fi
 
 project_dir=$(project_root "$PWD")
-exec sesh connect "$project_dir"
+start_project_session "$project_dir"
