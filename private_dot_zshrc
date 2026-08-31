@@ -237,12 +237,15 @@ bindkey -M viins '^[[1;2F' visual-select-end-of-line        # Shift+End
 # PATH Configuration
 # ----------------------------------------------------------------------------
 
-# Keep PATH unique while preserving the existing priority: Go before Arcanist.
+# Keep the managed PATH prefix ordered and unique.
 typeset -gU path PATH
 path=(
+  "$HOME/.local/bin"
+  "$HOME/.cargo/bin"
   /usr/local/go/bin
-  ${HOME}/phacility/arcanist/bin
-  $path
+  "$HOME/phacility/arcanist/bin"
+  "$HOME/.npm-global/bin"
+  "${path[@]}"
 )
 
 # ----------------------------------------------------------------------------

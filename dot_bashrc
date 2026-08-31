@@ -112,14 +112,27 @@ if ! shopt -oq posix; then
   fi
 fi
 
-# >>> arc >>>
-export PATH=$PATH:${HOME}/phacility/arcanist/bin
-# <<< arc <<<
+# >>> path >>>
+_path_prepend_unique() {
+  local target=$1 entry normalized=
+  local IFS=:
 
-# >>> go >>>
-export PATH=$PATH:/usr/local/go/bin
-# <<< go <<<
-    
+  for entry in $PATH; do
+    [[ $entry == "$target" ]] && continue
+    normalized="${normalized:+${normalized}:}${entry}"
+  done
+  PATH="${target}${normalized:+:${normalized}}"
+}
+
+_path_prepend_unique "$HOME/.npm-global/bin"
+_path_prepend_unique "$HOME/phacility/arcanist/bin"
+_path_prepend_unique /usr/local/go/bin
+_path_prepend_unique "$HOME/.cargo/bin"
+_path_prepend_unique "$HOME/.local/bin"
+export PATH
+unset -f _path_prepend_unique
+# <<< path <<<
+
 # >>> cargo >>>
 . "$HOME/.cargo/env"
 # <<< cargo <<<
@@ -129,10 +142,6 @@ export PATH=$PATH:/usr/local/go/bin
 eval "$(uv generate-shell-completion bash)"
 eval "$(uvx --generate-shell-completion bash)"
 # <<< uv <<<
-
-# >>> npm >>>
-export PATH=$PATH:${HOME}/.npm-global/bin
-# <<< npm <<<
 
 # >>> starship >>>
 eval "$(starship init bash)"

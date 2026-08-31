@@ -5,6 +5,7 @@ Documentation=man:tmux(1)
 [Service]
 Type=oneshot
 RemainAfterExit=yes
+Environment=PATH=%h/.cargo/bin:%h/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin
 ExecStart=/usr/local/bin/tmux start-server
 
 ExecStop=/home/morain/.config/tmux/scripts/tmux-service-stop.sh
